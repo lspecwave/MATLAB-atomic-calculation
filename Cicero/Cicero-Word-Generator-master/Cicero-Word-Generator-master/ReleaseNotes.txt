@@ -1,0 +1,140 @@
+1.56
+-----
+Use new version of FrontPanel API. This comes in both x86 and x64 flavors,
+so there are now two flavors of the Atticus binary.
+
+
+
+1.57
+-----
+
+Code cleanup.
+Renamed AtticusServerRuntime to AtticusServerCommunicator.
+Created some subdirectories in DataStructures for organizational purposes.
+Variety of small code changes, renames, deletions.
+
+Fix to minor bugs regarding naming of default settings file in Cicero 
+(inconsistent presence or absence of the .set file extension). NOTE: You may 
+need to copy your default settings file to SettingsData.set when migrating 
+from a previous version.
+
+
+1.58
+-----
+
+Integrating MySql database support for Cicero. (Run information can be exported
+to a MySql database?). Reference implementation of the database is in the 
+clinamen/ directory, written by Ed Joe Su.
+
+Recategorizing some Cicero Settings fields in the UI as part of the "Paris fork"
+(these are features that are unsupported and not well integrated, but left in 
+for compatability purposes).
+
+
+1.59
+-----
+
+Eliminated a large number of unnecessary NI dependencies in Cicero and 
+DataStructures projects, which will make compiling and running this suite 
+substantially easier.
+
+Cicero no longer uses NI WaveformGraph, thus no licensed copy of Measurement 
+Studio is required to compile it.
+
+DataStructures no longer references NI GPIB Address structure, but rather a 
+new clone of the same functionality.
+
+
+1.60
+-----
+
+Streamlined the build-for-distribution process, which will help avoid future
+errors in producing a working Cicero build.
+
+
+1.61
+-----
+
+Internal changes -- version number tracking in saved Sequence and Settings
+files. This will allow for future improvements to backward compatibility
+should it be necessary to make radical changes to these objects which
+would break compatability without special conversion attention.
+
+Significant UI Optimizations when adding or removing variables or pulses.
+
+Bug fix to floating point numbers in equations. When Cicero was installed
+on computers in French language mode, neither "," nor "." worked as decimal
+seperators in floating numbers (ie 1.34). Now, when parsing equations,
+we default to US-style seperators and ONLY "." will work.
+
+
+1.62
+-----
+
+Internal changes / code improvements: better seperation of Timestep Editor
+UI element from the mechanics of outputting a single timestep. Many name 
+changes of objects to improve code readability. Changes to timestep
+hotkey handling. New buffer snapshot testing to ensure that any future
+cleanups of buffer generation code do not affect behavior.
+
+Visible changes: Bug fix to analog preview pane not always being correctly
+cleared.
+
+Bug fix to RFSG tasks -- Initiate is no longer called on each run even if
+AutoInitiate for that device is set to true. Instead, an internal flag is
+used to keep track of whether the given RFSG device is supposed to be in 
+Iniated mode already. This should fix a previous bug in which calling
+Initiate if the card was already initiated was actually DISABLING the card. 
+hopefully it does not introduce a new Issue, though if the state of this
+internal flag gets invalidly set to true, it may require a reset of Atticus
+to have Initiate called again.
+
+Pulse autonaming feature -- helps you to enforce a Pulse naming convention
+by coming up with descriptive Pulse names for you.
+
+Timestep drag&drop support. Individual timesteps can be dragged and dropped
+to reorder them.
+
+1.63
+-----
+
+Changes to Analog Input channel configuration. Note -- your old Atticus
+settings will no longer correctly configure your analog inputs (if you
+are using this feature).
+
+Bugfix to Cicero occasionally failing to load old settings file (platform-
+dependent).
+
+Major changes to FPGA feature set, and how it interacts with software-timed
+tasks:
+  a) FPGA "Wait For Retrigger" words now support a wait timeout, after which
+the sequence will continue to run even if a retrigger edge was never received.
+  b) Wait for retrigger can now retrigger on positive or negative edge or value,
+depending on user selectable flag for that word.
+  c) A much more sophisticated way of sharing software clocks allows for software
+timed tasks (ie GPIB, RFSG, RS232) to be synchronized to FPGA clock, even if there
+are long retrigger waits. The software clock can also be broadcast over the network
+to Cicero (to make the UI reflect any retrigger waits) and other Atticus servers
+(to synchronize their software tasks to the FPGA as well).
+
+
+1.64
+-----
+
+New feature: Cicero "always use network clock" checkbox.
+
+New feature: FPGA retrigger debounce (accessible through Atticus device settings
+for FPGA).
+
+Bugfix: fixed unpredictable behaviour when combining looped timestep groups
+with retrigger waits.
+
+Rename "Wait-for-retrigger" to "Hold-then-retrigger" to better reflect its actual
+behavior (the beginning of the hold word will be output, THEN the sequence will wait,
+and THEN the sequence will continue running the rest of the word once a retrigger is received).
+
+[rev6] Fix to major memory leaks which could cause Cicero to crash after prolonged
+operation. (timestep editors, variable editors, and pulse editors were not being
+properly disposed of. bugs introduced in version 1.61 and 1.62)
+
+[rev7] Add citation information and initial startup message.
