@@ -1,4 +1,4 @@
-# MATLAB-atomic-calculation
-useful matlab package and code
+# MATLAB Atomic Calculation
+Useful matlab package and code
 
 Written by lspecwave@mail.ustc.edu.cn
