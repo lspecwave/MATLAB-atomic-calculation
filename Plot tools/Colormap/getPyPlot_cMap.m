@@ -1,4 +1,5 @@
 function cmp = getPyPlot_cMap(nam,n,keepAlpha,pyCmd)
+% see: https://matplotlib.org/stable/tutorials/colors/colormaps.html
 % cmp = getPyPlot_cMap(nam [, n, keepAlpha, pyCmd])
 %
 %

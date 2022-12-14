@@ -15,7 +15,8 @@ for m2_index=1:dim
             if abs(m1-m2)>small_j
                 addition=0;
             else
-                addition=sqrt(4*pi)*sqrt(2*small_j+1)/(dim)*Wigner3j(J,small_j,J,m2,(m1-m2),m1,1,1)*harmonicY(small_j,(m1-m2),theta,phi,1);       
+                addition=sqrt(4*pi)*sqrt(2*small_j+1)/(dim)*Wigner3j(J,small_j,J,m2,(m1-m2),m1,1,1)*harmonicY(small_j,(m1-m2),theta,phi,1)...
+                        /sqrt(4*pi)*sqrt(dim); % Normalization
             end
             operator(m2_index,m1_index)=operator(m2_index,m1_index)+addition;
         end
