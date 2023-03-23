@@ -1,1 +1,2 @@
 *.mlx linguist-language=MATLAB
+*.mat linguist-language=MATLAB DATA
