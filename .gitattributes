@@ -1,0 +1,3 @@
+*.mlx linguist-language=MATLAB
+*.mat linguist-detectable=false
+*.m linguist-language=MATLAB
