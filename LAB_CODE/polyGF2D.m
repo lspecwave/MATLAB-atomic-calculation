@@ -1,0 +1,43 @@
+function [A,cx,cy,sx,sy,sita]=polyGF2D(x,y,z,h)
+%用于快速拟合二维高斯分布的实验数据，方法是对x,y,ln(z)做二次多项式拟合。
+%适用于那些无偏置，相对噪声小于阈值h的准二维高斯分布数据
+%Luo xinyu  from iphy
+%2008.8.17
+%MatlabR2007a
+
+%% 平滑图像,尽量消除造成拟合不稳定的凹陷.取那些大于阈值的点带入拟合
+f=[1 2 1;2 4 2;1 2 1]/16; 
+z=filter2(f,z);    
+for k=1:1    
+    z=filter2(f,z);
+end
+zmax=max(max(z));        
+xnew=x(find(z>(zmax*h)));
+ynew=y(find(z>(zmax*h)));
+znew=z(find(z>(zmax*h)));
+%% 将图像取对数，进行二次多项式拟合
+zlognew=log(znew);
+a = zeros(max(size(xnew)),6);
+n=1;
+for i1= 0:2
+   for j1=0:2-i1
+       a(:,n) = (xnew.^i1).*(ynew.^j1);
+       n=n+1;
+   end
+end
+p = (a\zlognew);
+%% 由拟合出的多项式系数求出A,cx,cy,sx,sy, sita
+c(1)=-p(6);c(2)=-p(3);c(3)=-p(5);c(4)=-p(4);c(5)=-p(2); c(6)=p(1);
+sitap=0.5*acot((c(1)-c(2))/c(3));
+sxp=sqrt(1/((c(1)-c(2))/cos(2*sitap)+c(1)+c(2)));
+syp=sqrt(1/(-(c(1)-c(2))/cos(2*sitap)+c(1)+c(2)));
+
+MA=([-2*(cos(sitap)^2/sxp^2+sin(sitap)^2/syp^2),sin(2*sitap)*(1/syp^2-1/sxp^2);...
+    sin(2*sitap)*(1/syp^2-1/sxp^2),-2*(sin(sitap)^2/sxp^2+cos(sitap)^2/syp^2)]);
+MB=2*[c(4),c(5)]';
+cp=MA\MB;
+cxp=cp(1);
+cyp=cp(2);
+Ap=exp(c(6)+(cos(sitap)*cxp+sin(sitap)*cyp).^2/2/sxp^2+...
+  (-sin(sitap)*cxp+cos(sitap)*cyp).^2/2/syp^2);
+A=Ap;cx=cxp;cy=cyp;sx=sxp;sy=syp;sita=sitap;
