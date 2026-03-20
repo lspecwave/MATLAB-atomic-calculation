@@ -1,7 +1,7 @@
 %clear all;
 %for numberbg=1:60
 %% Fringe reduction
-function [OD,noise_OD,SNRGain]=FringeReduction(raw_folder,ODnumber,numberofbg,atomphoto,roi_xmin,roi_ymin,roi_xmax,roi_ymax)
+function [OD,OD_original,noise_OD,SNRGain]=FringeReduction(raw_folder,ODnumber,numberofbg,atomphoto,roi_xmin,roi_ymin,roi_xmax,roi_ymax)
 %% Input Area
 
 %background_folder='E:\Data\2021-11-25\Background';
@@ -12,46 +12,113 @@ function [OD,noise_OD,SNRGain]=FringeReduction(raw_folder,ODnumber,numberofbg,at
 %roi_xmax=140;
 %roi_ymax=140;
 %ODscale=0.3;
-showoriginalOD=0;
+
+tic;
+
+% Background image
+imagebg=double(imread([raw_folder,'\',num2str(atomphoto+numberofbg+1),'.tif']));
+
+% Atom image
+imageatom=log(double(imread([raw_folder,'\',num2str(ODnumber),'.tif']))-imagebg);
+
+[size_A,size_B]=size(imageatom);
+imagelight=zeros(size_A,size_B,numberofbg);
 
 %% Read image
-for i=1:numberofbg
-imagelight(:,:,i)=double(imread([raw_folder,'\',num2str(i+atomphoto),'.tif']));
-end
-imageatom=double(imread([raw_folder,'\',num2str(ODnumber),'.tif']));
 
-imagelight_raw=double(imread([raw_folder,'\',num2str(atomphoto+1),'.tif']));
-imagebg=0*double(imread([raw_folder,'\',num2str(atomphoto+numberofbg+1),'.tif']));
+% Light image
+imagelight_raw=log(double(imread([raw_folder,'\',num2str(atomphoto+1),'.tif']))-imagebg);
+
+
+for i=1:numberofbg
+imagelight(:,:,i)=log(double(imread([raw_folder,'\',num2str(i+atomphoto),'.tif']))-imagebg);
+end
+
+
+
+
+% toc_t=toc;
+% disp([datestr(now, 'yyyy-mm-dd HH:MM:SS '),'FringeReduction.m, ', num2str(toc_t),'s'])
+
 %% Generate Mask
 x1=roi_xmin;x2=roi_xmax;y1=roi_ymin;y2=roi_ymax;
 [M,N]=size(imagelight(:,:,1));
 mask=ones(M,N);      
-mask(y1:y2,x1:x2)=0;
+mask(x1:x2,y1:y2)=0;
 A=mask.*imageatom;
 B=mask.*imagelight;
+%toc_t=toc;
+%disp([datestr(now, 'yyyy-mm-dd HH:MM:SS '),'FringeReduction.m, ', num2str(toc_t),'s'])
+
 %% Calculating coefficient
- for i=1:1:numberofbg
-        for j=1:1:numberofbg
+%  for i=1:1:numberofbg
+%         for j=1:1:numberofbg
+%             Bmatrix(i,j)=sum(sum(B(:,:,i).*B(:,:,j)));
+%         end
+%  end
+%  
+% toc_t=toc;
+% disp([datestr(now, 'yyyy-mm-dd HH:MM:SS '),'FringeReduction.m, ', num2str(toc_t),'s'])
+%  
+% for i=1:1:numberofbg
+%     b(i)=sum(sum(A.*B(:,:,i)));
+% end
+% c=Bmatrix\b';
+% for i=1:1:numberofbg
+%     q(:,:,i)=c(i)*imagelight(:,:,i);
+% end
+% lightbackground=sum(q,3);
+%% Calculating coefficient
+
+% check if .mat file exists
+
+try
+    load([raw_folder,'Bmatrix.mat'],'Bmatrix');
+catch
+    
+     Bmatrix=zeros(numberofbg,numberofbg);
+ 
+for i=1:1:numberofbg
+        for j=1:1:i
             Bmatrix(i,j)=sum(sum(B(:,:,i).*B(:,:,j)));
+            Bmatrix(j,i)=Bmatrix(i,j);
         end
- end
-        for i=1:1:numberofbg
-            b(i)=sum(sum(A.*B(:,:,i)));
-        end
-        c=Bmatrix\b';
-        for i=1:1:numberofbg
-            q(:,:,i)=c(i)*imagelight(:,:,i);
-        end
+end
+%save([raw_folder,'Bmatrix.mat'],'Bmatrix')
+
+end
+
+
+
+ 
+ 
+% toc_t=toc;
+% disp([datestr(now, 'yyyy-mm-dd HH:MM:SS '),'FringeReduction.m, ', num2str(toc_t),'s'])
+%  
+
+
+for i=1:1:numberofbg
+    b(i)=sum(sum(A.*B(:,:,i)));
+end
+c=Bmatrix\b';
+for i=1:1:numberofbg
+    q(:,:,i)=c(i)*imagelight(:,:,i);
+end
 lightbackground=sum(q,3);
+
+% toc_t=toc;
+% disp([datestr(now, 'yyyy-mm-dd HH:MM:SS '),'FringeReduction.m, ', num2str(toc_t),'s'])
+%  
+
 %% OD Calculate       
-OD=log((lightbackground-imagebg)./(imageatom-imagebg));
+OD=(lightbackground)-(imageatom);
 OD(isnan(OD))=0;
-OD(isinf(OD))=5.4;
+OD(isinf(OD))=0;
 countperpixel=mean(mean(lightbackground(y1:y2,x1:x2)));
 
-OD_original=log((imagelight_raw-imagebg)./(imageatom-imagebg));
+OD_original=(imagelight_raw)-(imageatom);
 OD(isnan(OD))=0;
-OD(isinf(OD))=5.4;
+OD(isinf(OD))=0;
 
 
 %h1=figure(1);
@@ -71,6 +138,9 @@ OD(isinf(OD))=5.4;
 noise_OD=sqrt(sum(sum((mask.*OD).^2))/(M*N-(y2-y1)*(x2-x1)));
 noise_ODraw=sqrt(sum(sum((mask.*OD_original).^2))/(M*N-(y2-y1)*(x2-x1)));
 SNRGain=noise_ODraw/noise_OD;
+
+toc_t=toc;
+%disp([datestr(now, 'yyyy-mm-dd HH:MM:SS '),'FringeReduction.m, ', num2str(toc_t),'s'])
 end
 %noise_OD(numberbg)=sqrt(sum(sum((mask.*OD).^2))/(M*N-(y2-y1)*(x2-x1)));
 %noise_ODraw(numberbg)=sqrt(sum(sum((mask.*OD_original).^2))/(M*N-(y2-y1)*(x2-x1)));

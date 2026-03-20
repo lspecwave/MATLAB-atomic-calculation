@@ -1,0 +1,107 @@
+clear all;
+close all;
+colors=npg(100); 
+init=[ 1 0 0 0 0 0 ];
+% init=[0.2310 - 0.0957i
+%    0.0000 + 0.0000i
+%   -0.7304 + 0.3025i
+%    0.0000 + 0.0000i
+%    0.5165 - 0.2139i
+%    0.0000 + 0.0000i]';
+init=init';
+sigmax=spinOp(5/2,'x');
+sigmay=spinOp(5/2,'y');
+sigmaz=spinOp(5/2,'z');
+
+time_resolution=0.02;
+
+%ham=3.3744*sigmax+0.46524*sigmay^2;
+ham_0=1.0*sigmax+2.0*sigmax^2;
+ham=1.0*sigmaz+0*sigmay+0*sigmaz^2;
+ham=2*pi*12.84/5*sigmaz+2*pi*7.3/2*(sigmaz^2);
+%ham=0.0*sigmaz+0*sigmay+1*sigmax^2;
+%ham=sigmax+1*sigmax^2+1*sigmax+0*sigmaz;
+%ham=sigmax+0.2*sigmaz^2;
+timelist=[2:time_resolution:(12-0.02)]+0.006;
+
+%%
+k=1;
+for t=timelist
+    evo=ham.*t.*1i;
+    evo_0=ham_0.*(pi/2.05).*1i;
+    %finalstate(:,k)=expm(-evo_0)*expm(-evo)*expm(-evo_0*2)*expm(-evo)*expm(-evo_0)*init;
+    finalstate(:,k)=expm(-evo_0)*expm(-evo)*expm(-evo_0)*init;
+    %finalstate(:,k)=expm(-evo)*init;
+    k=k+1;
+end
+%% Plot
+finalpop(:,:)=abs(finalstate(:,:)).^2;
+figure
+for state=1:6
+    plot(timelist,finalpop(state,:),'DisplayName',num2str(state));
+    hold on;
+end
+ylim([0 1])
+xlabel('Pulse length');
+ylabel('Pouplation')
+grid off
+set(gca,'FontSize',16)
+legend
+main_dir='\\Artemis-pc\e\Data\2022-10-18\Abs-9887';
+
+%%
+finalphase=(finalpop(1,:)-finalpop(6,:))./(finalpop(1,:)+finalpop(6,:));
+% final_state_1=finalpop(1,:)+finalpop(2,:);
+% final_state_2=finalpop(6,:)+finalpop(5,:);
+% finalphase=(final_state_1-final_state_2)./(final_state_1+final_state_2);
+%finalphase=finalpop(1,:);
+
+figure
+plot(timelist,finalphase);
+randn_phase=0.0*randn(1,length(finalphase));
+xxx=finalphase+randn_phase;
+T = time_resolution;             % Sampling period  
+Fs = 1/T;            % Sampling frequency                         
+L = length(xxx);             % Length of signal
+t = (0:L-1)*T;        % Time vector
+
+Y = fft(xxx);
+P2 = abs(Y/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
+f = Fs*(0:(L/2))/L;
+h0=figure
+plot(f,P1+0.000,'Linewidth',2,'Color',colors(5,:)) 
+hold on
+%plot(f,P1,'.','Color',colors(1,:),'MarkerSize',10) 
+%title('Single-Sided Amplitude Spectrum of X(t)')
+xlabel('f (Hz)')
+ylabel('FFT arb. unit')
+set(gca,'FontSize',16)
+xlim([0 25])
+ylim([0 1.05])
+set(gca,'YScale','log')
+ylim([0.001 1])
+
+%%
+main_dir='\\Artemis-pc\e\Data\2022-10-16\Abs-3453';
+load([main_dir,'\FFT.mat'],'f','P1');
+f_1=f;
+P_1=P1;
+hold on
+plot(f_1,P_1,'Linewidth',1,'Color',colors(12,:)) 
+hold on
+plot(f_1,P_1,'.','Color',colors(31,:),'MarkerSize',2) 
+
+xlim([0 20])
+ylim([0.001 2])
+set(gca,'FontSize',10)
+set(gca,'YScale','log')
+xlabel('Frequency (Hz)')
+%ylabel('Fourier spectrum')
+
+set(gca,'XLabel',[])
+set(gca,'XTickLabel',[])
+
+yticks([0.01,0.1,1])
+yticklabels({'10^{-2}','10^{-1}','10^{0}'})

@@ -1,0 +1,137 @@
+clear all;
+close all;
+colors=npg(10);
+init=[ 1 0 0 0 0 0 ];
+init=init';
+sigmax=spinOp(5/2,'x');
+sigmay=spinOp(5/2,'y');
+sigmaz=spinOp(5/2,'z');
+tensor_freq=14.6;
+
+omega_173_2_v=2*pi*0.2855*1000;
+omega_173_2_t=2*omega_173_2_v;
+ham_4=omega_173_2_v*sigmax+omega_173_2_t*sigmax^2;
+
+%ham_0=2*pi*(1*sigmax+2*sigmax^2);
+
+ham_0=ham_4;
+
+ham=2*pi*12.84/5*sigmaz+2*pi*tensor_freq/4*(sigmaz^2);
+timelist=(0:0.01:20)+0.006; % tau, not 2 tau
+
+atom_number=100;
+%%
+for ii=1:atom_number
+k=1;
+for t=timelist
+    randn_a=randn;
+    evo=(ham+0.03*(randn_a)*2*pi*tensor_freq/4*sigmaz^2).*t.*1i;
+    evo_0=ham_0.*0.00088.*1i;
+    evo_0=ham_0.*0.00088.*1i;
+    %evo_0=(ham_0+ham+0.04*(randn_a)*2*pi*tensor_freq/4*sigmaz^2).*0.00088.*1i; % 考虑 pulse 过程中的tensor 演化
+    
+    %finalstate(ii,:,k)=expm(-evo_0)*expm(-evo)*expm(-evo_0*2)*expm(-evo)*expm(-evo_0)*init;
+    
+    finalstate(ii,:,k)=expm(-evo_0)*expm(-evo)*expm(-evo_0)*init;
+    k=k+1;
+end
+end
+
+finalpop(:,:,:)=abs(finalstate(:,:,:)).^2;
+%%
+figure
+title('Population on +5/2')
+for ii=1:atom_number
+for state=1:1
+    plot(timelist,squeeze(finalpop(ii,state,:)));
+    hold on;
+end
+ylim([0 1])
+end
+figure
+title('Population on +3/2')
+for ii=1:atom_number
+for state=2:2
+    plot(timelist,squeeze(finalpop(ii,state,:)));
+    hold on;
+end
+ylim([0 1])
+end
+%%
+
+figure
+title('Parity of +-5/2')
+p1_average=squeeze(mean(finalpop(:,1,:),1));
+p6_average=squeeze(mean(finalpop(:,6,:),1));
+plot(timelist*2,(p1_average-p6_average)./(p1_average+p6_average));
+figure
+title('Averaged popultion')
+%load(['\\Artemis-pc\e\Data\2022-10-19\Abs-1284','\average.mat'],'xlist','phase_mean','phase_std');
+load(['\\Artemis-pc\e\Data\2022-10-16\Abs-3453','\result.mat'],'xaxis','relativeOD');
+
+plot(xaxis/1000,relativeOD,'.')
+hold on 
+plot(timelist,(p1_average-p6_average)./(p1_average+p6_average));
+% hold on
+% plot(timelist*2,p6_average);
+ylim([-1 1])
+%%
+xxx=(p1_average-p6_average)./(p1_average+p6_average);
+xxx=p1_average
+T = 0.01;             % Sampling period  
+Fs = 1/T;            % Sampling frequency                         
+L = length(xxx);             % Length of signal
+t = (0:L-1)*T;        % Time vector
+
+Y = fft(xxx);
+P2 = abs(Y/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
+f = Fs*(0:(L/2))/L;
+h0=figure
+plot(f,P1./max(P1),'Linewidth',1,'Color',colors(5,:)) 
+hold on
+plot(f,P1./max(P1),'.','Color',colors(1,:),'MarkerSize',10) 
+%title('Single-Sided Amplitude Spectrum of X(t)')
+xlabel('f (Hz)')
+ylabel('FFT arb. unit')
+set(gca,'FontSize',16)
+xlim([0 25])
+ylim([0 1.05])
+%%
+% % Yb-173 1\sigma_x+2\sigma_x^2
+% 
+% % Yb-173 1\sigma_x+2\sigma_x^2
+% main_dir='\\Artemis-pc\e\Data\2022-10-17\Abs-7616';
+% load([main_dir,'\average.mat'],'phase_mean','phase_std','xlist');
+% t_173_2=xlist;
+% P_173_2=phase_mean;
+% P_173_2_std=phase_std;
+% clear main_dir phase_mean phase_std xlist
+% 
+% clear init finalstate finalpop
+% init=[ 1 0 0 0 0 0 ];
+% init=init';
+% sigmax=spinOp(5/2,'x');
+% sigmay=spinOp(5/2,'y');
+% sigmaz=spinOp(5/2,'z');
+% 
+% omega_173_2_v=2*pi*0.286/1000;
+% omega_173_2_t=2*omega_173_2_v;
+% ham_4=omega_173_2_v*sigmax+omega_173_2_t*sigmax^2;
+% 
+% timelist_173_2=(0:25:10000);
+% finalstate=zeros(length(init),length(timelist_173_2));
+% k=1;
+% for t=timelist_173_2
+%     evo=ham_4.*t.*1i;
+%     finalstate(:,k)=expm(-evo)*init;
+%     k=k+1;
+% end
+% finalpop(:,:)=abs(finalstate(:,:)).^2;
+% finalpop_173_2=finalpop(:,:);
+% figure
+% plot(timelist_173_2,finalpop(1,:)+0.0*finalpop(2,:));
+% hold on
+% errorbar(t_173_2,P_173_2,P_173_2_std,'o');
+% ylim([0 1])

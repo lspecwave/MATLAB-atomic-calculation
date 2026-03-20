@@ -1,0 +1,103 @@
+close all
+clear all
+colors=npg(100); 
+%% simulation - initial state
+init=[ 1 0 0 0 0 0 ];
+init=init';
+sigmax=spinOp(5/2,'x');
+sigmay=spinOp(5/2,'y');
+sigmaz=spinOp(5/2,'z');
+
+tensor_freq=3.7*1;
+
+ham=1*2*pi*13/5*sigmax+2*pi*tensor_freq*(sigmax^2); % Zeeman H + lattice H
+
+ham_0=1*(1.0*sigmax+0.0*sigmay^2);
+timelist=(0:0.01:20)+0.006; % tau, not 2 tau
+
+atom_number=25; % number of atoms for simulation
+%% simulation - evolution
+for ii=1:atom_number
+k=1;
+for t=timelist
+    randn_a=randn;
+    evo=(ham+0.02*(randn_a)*2*pi*tensor_freq*sigmax^2).*t.*1i;
+    evo_0=ham_0.*(pi).*1i;
+    %evo_0=(ham_0+ham+0.04*(randn_a)*2*pi*tensor_freq/4*sigmaz^2).*0.00088.*1i; % 考虑 pulse 过程中的tensor 演化
+    finalstate(ii,:,k)=expm(-evo)*init;
+    finalstate(ii,:,k)=expm(-evo/2)*expm(evo_0)*expm(-evo/2)*init;
+    k=k+1;
+end
+end
+
+finalpop(:,:,:)=abs(finalstate(:,:,:)).^2;
+%% State population
+figure
+title('Population on +5/2')
+for ii=1:atom_number
+for state=1:1
+    plot(timelist,squeeze(finalpop(ii,state,:)));
+    hold on;
+end
+xlim([0 10])
+ylim([0 1])
+end
+set(gca,'FontSize',16)
+xlabel('Interrogation time (s)')
+ylabel('$+5/2\ Population$','Interpreter','latex')
+
+figure
+title('Population on +3/2')
+for ii=1:atom_number
+for state=2:2
+    plot(timelist,squeeze(finalpop(ii,state,:)));
+    hold on;
+end
+xlim([0 10])
+ylim([0 1])
+end
+set(gca,'FontSize',16)
+xlabel('Interrogation time (s)')
+ylabel('$+3/2\ Population$','Interpreter','latex')
+%%
+
+p1_average=squeeze(mean(finalpop(:,1,:),1));
+p2_average=squeeze(mean(finalpop(:,2,:),1));
+p6_average=squeeze(mean(finalpop(:,6,:),1));
+figure
+plot(timelist,p1_average);
+ylabel('Population on +5/2')
+figure
+plot(timelist,p6_average);
+ylabel('Population on -5/2')
+
+figure
+plot(timelist,p1_average+p6_average);
+ylabel('Population on +-5/2')
+%%
+figure
+plot(timelist,(p1_average-p6_average)./(p1_average+p6_average))
+
+%%
+xxx=(p1_average-p6_average)./(p1_average+p6_average);
+xxx=p1_average
+T = 0.01;             % Sampling period  
+Fs = 1/T;            % Sampling frequency                         
+L = length(xxx);             % Length of signal
+t = (0:L-1)*T;        % Time vector
+
+Y = fft(xxx);
+P2 = abs(Y/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
+f = Fs*(0:(L/2))/L;
+h0=figure
+plot(f,P1./max(P1),'Linewidth',1,'Color',colors(5,:)) 
+hold on
+plot(f,P1./max(P1),'.','Color',colors(1,:),'MarkerSize',10) 
+%title('Single-Sided Amplitude Spectrum of X(t)')
+xlabel('f (Hz)')
+ylabel('FFT arb. unit')
+set(gca,'FontSize',16)
+xlim([0 25])
+ylim([0 1.05])
