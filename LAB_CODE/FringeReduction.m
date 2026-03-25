@@ -1,7 +1,7 @@
 %clear all;
 %for numberbg=1:60
 %% Fringe reduction
-function [OD,OD_original,noise_OD,SNRGain]=FringeReduction(raw_folder,ODnumber,numberofbg,atomphoto,roi_xmin,roi_ymin,roi_xmax,roi_ymax)
+function [OD,noise_OD,SNRGain]=FringeReduction(raw_folder,ODnumber,numberofbg,atomphoto,roi_xmin,roi_ymin,roi_xmax,roi_ymax)
 %% Input Area
 
 %background_folder='E:\Data\2021-11-25\Background';
@@ -113,12 +113,12 @@ lightbackground=sum(q,3);
 %% OD Calculate       
 OD=(lightbackground)-(imageatom);
 OD(isnan(OD))=0;
-OD(isinf(OD))=0;
+OD(isinf(OD))=5.4;
 countperpixel=mean(mean(lightbackground(y1:y2,x1:x2)));
 
 OD_original=(imagelight_raw)-(imageatom);
 OD(isnan(OD))=0;
-OD(isinf(OD))=0;
+OD(isinf(OD))=5.4;
 
 
 %h1=figure(1);
