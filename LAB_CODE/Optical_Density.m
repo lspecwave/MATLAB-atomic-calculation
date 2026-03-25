@@ -13,7 +13,7 @@ function [OD,noise_OD,SNRGain,x1,x2,y1,y2,countperpixel]=Optical_Density(dir,ODn
     image2=im2double(image2);
     OD=log(image2./image1);
     OD(isnan(OD))=0;
-    OD(isinf(OD))=0;
+    OD(isinf(OD))=5.4;
     [M,N]=size(OD);
     
    
