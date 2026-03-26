@@ -1,0 +1,117 @@
+/*
+#@AUTOEXEC
+// Call your Auto Exec Function Here
+main()
+
+*/
+//---------------------------------------------------------------------
+// Global Variables
+
+//---------------------------------------------------------------------
+// Main Function (also the default entry point)
+function main()
+
+MO=1
+PA=370*51200
+BG
+AC=500*51200
+DC=500*51200
+while 1
+	
+end
+return
+
+//---------------------------------------------------------------------
+// User Functions
+
+
+
+//---------------------------------------------------------------------
+//AUTO ROUTINES Functions
+
+#@AUTO_I1
+float duration
+float time
+float amplitude
+float VelCoeff
+float pi, x0, v0, t0, start_posi, end_posi
+
+
+pi=3.14159265
+duration=3400*1000
+start_posi=370*51200
+end_posi=708*51200
+x0=(end_posi-start_posi)/(2*pi)
+t0=duration/(2*pi)
+v0=x0/t0
+
+TM=0
+
+while 1
+time=TM
+if time>duration
+ST
+break
+end
+
+JP=(v0-abs(x0)/t0*cos(time/t0))*1000*1000
+SF=63
+BG
+end
+
+
+
+wait(3000) //3s
+PA=start_posi
+BG
+
+
+
+/*
+TM=0
+while 1
+time=TM
+if time>duration
+ST
+break
+end
+JP=-(v0-abs(x0)/t0*cos(time/t0))*1000*1000
+SF=63
+BG
+end
+*/
+
+
+return
+
+
+/*
+#@AUTO_I2
+// Enter your code here
+return
+*/
+
+/*
+#@AUTO_I3
+// Enter your code here
+return
+*/
+
+/*
+#@AUTO_I4
+// Enter your code here
+return
+*/
+
+/*
+#@AUTO_I5
+// Enter your code here
+return
+*/
+
+/*
+#@AUTO_I6
+// Enter your code here
+return
+*/
+
