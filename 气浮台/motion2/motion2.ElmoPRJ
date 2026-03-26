@@ -1,0 +1,16 @@
+﻿<DriveProjectModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  ProjectID="-8584682243650904554"
+  ProjectName="motion2"
+  EntryPoint="main()"
+  Mode="Debug"
+  HexView="false"
+  ActiveProgramPath="motion2.ehl"
+  BreakpointsChangeTime="2024-12-05T15:08:40.3881231+08:00"
+  ModificationTime="2024-12-05T15:08:40.3881231+08:00">
+  <WatchModel>
+    <WacthList />
+  </WatchModel>
+  <PathesToProgram />
+  <Breakpoints />
+  <ProjectPath>C:\Users\USTC\Documents\Elmo Application Studio\Drive User Projects\motion2\motion2.ElmoPRJ</ProjectPath>
+</DriveProjectModel>
