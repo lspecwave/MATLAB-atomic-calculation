@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\Artemis-pc\e\Data\2025-06-27' ...
+maindir=['\\ARTEMIS-PC\Data\2026-03-27' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -23,8 +23,8 @@ dual_species = 0; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 0; %是否差分探测
 
-first = ; %第一个文件夹序号
-last = ; %最后一个文件夹序号
+first = 2; %第一个文件夹序号
+last = 3; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
 intercept = 1; %第一组数据的自变量`
@@ -69,7 +69,7 @@ xaxis=(0:last-first)*coeff+intercept;
 %xaxis=[0.01 0.03 0.05 0.1 0.3 0.5 0.7 1 2 3 5 7 10]*1e3;
 %xaxis=[0.1 0.5 1:1:20];
 %xaxis=floor(10.^(1.0:0.2:5));
-xaxis= [1 2 3 4 6 8 10 14 18 20:5:60];
+%xaxis= [1 2 3 4 6 8 10 14 18 20:5:60];
 
 
 % Preallocation
@@ -199,7 +199,7 @@ if plotnumber==1
     hold on;
     plot(xaxis,numberofatoms2,'.','Color',colors(4,:),'MarkerSize',20);
     legend('Atom_1','Atom_2','Location','best');
-    axis([min(xaxis) max(xaxis) 0 max(numberofatoms1)*1.1]);
+    axis([min(xaxis) max(xaxis) 0 max( max(numberofatoms1)*1.1 , 1)]);
     %axis([min(xaxis) max(xaxis) min(numberofatoms1)*0.9 max(numberofatoms1)*1.1])
     title('Number of Atoms','FontName','Arial','FontWeight','bold');
     xlabel(setXlabel);
@@ -229,7 +229,7 @@ if plotODsum==1
     plot(xaxis,ODsum1_mod,'.','Color',colors(1,:),'MarkerSize',20);
     hold on
     plot(xaxis,ODsum2_mod,'.','Color',colors(2,:),'MarkerSize',20);
-    axis([min(xaxis) max(xaxis) 0 1.1*max( [max(ODsum1_mod),max(ODsum2_mod)] ) ]);
+    axis([min(xaxis) max(xaxis) 0 max( [1.1*max(ODsum1_mod),1.1*max(ODsum2_mod),1] ) ]);
     title('OD Sum Modified','FontName','Arial','FontWeight','bold');
     xlabel(setXlabel);
     legend('OD_1','OD_2','Location','best');
@@ -255,7 +255,7 @@ if plotODsum==1
     ODsum12_mod=ODsum1_mod+ODsum2_mod;
     plot(xaxis,ODsum12_mod,'.','Color',colors(1,:),'MarkerSize',20);
     hold on
-    axis([min(xaxis) max(xaxis) 0 max(ODsum12_mod)*1.1])
+    axis([min(xaxis) max(xaxis) 0 max([ODsum12_mod*1.1 ; 1])])
     title('OD Sum','FontName','Arial','FontWeight','bold');
     xlabel(setXlabel);
     grid on;
