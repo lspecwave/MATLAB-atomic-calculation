@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-03-31' ...
+maindir=['\\ARTEMIS-PC\Data\2026-04-02' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -13,22 +13,22 @@ plotODsum = 1; %是否画OD求和
 plotSNRGain = 0; %是否画SNR Gain
 plotnoise_FR = 0; %是否画Fringe removal后的noise OD
 plotcountperpixel = 0; %是否画countperpixel
-plotprecession = 1; %是否画进动
+plotprecession = 0; %是否画进动
 plot2D = 0; %二维形式比较数据，常用于二维扫描
 plotCatRatio = 0; %是否画cat state占比，并计算平均值
 
 rabi = 0; %是否为Rabi曲线
-ramsey = 1; %是否为Ramsey曲线
+ramsey = 0; %是否为Ramsey曲线
 dual_species = 0; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 119; %第一个文件夹序号
-last = 150; %最后一个文件夹序号
+first = 105; %第一个文件夹序号
+last = 140; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 1; %第一组数据的自变量`
-coeff = 1; %各组数据自变量间隔
+intercept = -0.2; %第一组数据的自变量`
+coeff = 0.02; %各组数据自变量间隔
 
 
 if rabi == 1
@@ -40,7 +40,7 @@ else
     % setXlabel='MOT Hold s';%横坐标label
     % setXlabel='MOT Lold s';%横坐标label
     % setXlabel='Ramsey Interrogation Time ms';%横坐标label
-    % setXlabel='556 FM V';%横坐标label
+    setXlabel='556 FM V';%横坐标label
     % setXlabel='556 Freq kHz';%横坐标label
     % setXlabel='399 FM V';%横坐标label
     % setXlabel='399 Freq MHz';%横坐标label
@@ -56,7 +56,7 @@ else
     % setXlabel='Shim V';%横坐标label
     % setXlabel='Lattice AM V';%横坐标label
     % setXlabel='MOT Freq (V)';%横坐标label
-    setXlabel='No.';%横坐标label
+    % setXlabel='No.';%横坐标label
     % setXlabel='173 Polar Pulse us';%横坐标label
 end
 
@@ -491,9 +491,10 @@ end
 
 %% Plot 2D
 if plot2D==1
-    first_para = [-0.55:0.01:-0.5];
-    second_para = [-0.8:-0.01:-1];
-    xlabel_2D= 'MOT\_556\_Freq (V)'; % first_para
+    first_para = [-0.35:0.02:-0.25];
+    second_para = [0.1 0.09 0.07 0.05 0.03 0.02 0.01 0];
+    xlabel_2D= 'GMOT\_173\_ODT\_F (V)'; % first_para
+    %xlabel_2D= 'MOT\_556\_Freq (V)'; % first_para
     ylabel_2D='ShimC\_ODT (V)'; % second_para
 
     data_2D=reshape(numberofatoms1,length(second_para),length(first_para));% 数据竖列重排
