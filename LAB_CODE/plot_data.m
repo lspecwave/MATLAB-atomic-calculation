@@ -23,12 +23,12 @@ dual_species = 0; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 105; %第一个文件夹序号
-last = 140; %最后一个文件夹序号
+first = 198; %第一个文件夹序号
+last = 208; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = -0.2; %第一组数据的自变量`
-coeff = 0.02; %各组数据自变量间隔
+intercept = -0.45; %第一组数据的自变量`
+coeff = 0.01; %各组数据自变量间隔
 
 
 if rabi == 1
@@ -40,7 +40,8 @@ else
     % setXlabel='MOT Hold s';%横坐标label
     % setXlabel='MOT Lold s';%横坐标label
     % setXlabel='Ramsey Interrogation Time ms';%横坐标label
-    setXlabel='556 FM V';%横坐标label
+    % setXlabel='556 AM V';%横坐标label
+    % setXlabel='556 FM V';%横坐标label
     % setXlabel='556 Freq kHz';%横坐标label
     % setXlabel='399 FM V';%横坐标label
     % setXlabel='399 Freq MHz';%横坐标label
@@ -53,7 +54,7 @@ else
     % setXlabel='TOF s';%横坐标label
     % setXlabel='Current V';%横坐标label
     % setXlabel='power exponent';%横坐标label
-    % setXlabel='Shim V';%横坐标label
+    setXlabel='Shim V';%横坐标label
     % setXlabel='Lattice AM V';%横坐标label
     % setXlabel='MOT Freq (V)';%横坐标label
     % setXlabel='No.';%横坐标label
