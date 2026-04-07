@@ -7,7 +7,7 @@ function [OD,noise_OD,SNRGain,x1,x2,y1,y2,countperpixel]=Optical_Density(dir,ODn
     image3=imread([dir,'\',num2str(atomphoto+lightphoto+1),'.tif']);
     image1=image1(:,:,1)-image3(:,:,1);
     image2=image2(:,:,1)-image3(:,:,1);
-    countperpixel=mean(mean(image2(y11:y22,x11:x22)));
+    countperpixel=mean(mean(image1(y11:y22,x11:x22)));
     
     image1=im2double(image1);
     image2=im2double(image2);
