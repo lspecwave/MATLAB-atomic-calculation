@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-04-02' ...
+maindir=['\\ARTEMIS-PC\Data\2026-04-08' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -23,12 +23,12 @@ dual_species = 0; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 198; %第一个文件夹序号
-last = 208; %最后一个文件夹序号
+first = 379-16; %第一个文件夹序号
+last = 379; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = -0.45; %第一组数据的自变量`
-coeff = 0.01; %各组数据自变量间隔
+intercept = 0; %第一组数据的自变量`
+coeff = 0.005; %各组数据自变量间隔
 
 
 if rabi == 1
@@ -38,7 +38,7 @@ elseif ramsey == 1
 else
     % setXlabel='BusODT Hold s';%横坐标label
     % setXlabel='MOT Hold s';%横坐标label
-    % setXlabel='MOT Lold s';%横坐标label
+    setXlabel='MOT Lold s';%横坐标label
     % setXlabel='Ramsey Interrogation Time ms';%横坐标label
     % setXlabel='556 AM V';%横坐标label
     % setXlabel='556 FM V';%横坐标label
@@ -54,7 +54,7 @@ else
     % setXlabel='TOF s';%横坐标label
     % setXlabel='Current V';%横坐标label
     % setXlabel='power exponent';%横坐标label
-    setXlabel='Shim V';%横坐标label
+    % setXlabel='Shim V';%横坐标label
     % setXlabel='Lattice AM V';%横坐标label
     % setXlabel='MOT Freq (V)';%横坐标label
     % setXlabel='No.';%横坐标label
@@ -65,12 +65,12 @@ end
 %% read data
 datalength=last-first+1;
 xaxis=(0:last-first)*coeff+intercept;
-%xaxis=xaxis.*(-64); % 399 Scan (-64MHz/V)
+%xaxis=xaxis.*(320); % 399 Scan (+320MHz/V)
 %xaxis=[0.18:0.01:0.26, 0.32:0.01:0.42];
 %xaxis=[0.01 0.03 0.05 0.1 0.3 0.5 0.7 1 2 3 5 7 10]*1e3;
 %xaxis=[0.1 0.5 1:1:20];
 %xaxis=floor(10.^(1.0:0.2:5));
-%xaxis= [-0.08:-0.01:-0.25 0:-0.01:-0.07 0.1:-0.01:0.01];
+xaxis= [0.1:0.1:0.5 0.7 0.9 1 1.1 1.3:0.2:1.9 2.0 2.2 2.5 3.0];
 
 
 % Preallocation
@@ -230,7 +230,7 @@ if plotODsum==1
     plot(xaxis,ODsum1_mod,'.','Color',colors(1,:),'MarkerSize',20);
     hold on
     plot(xaxis,ODsum2_mod,'.','Color',colors(2,:),'MarkerSize',20);
-    axis([min(xaxis) max(xaxis) 0 max( [1.1*max(ODsum1_mod),1.1*max(ODsum2_mod),1] ) ]);
+    axis([min(xaxis) max(xaxis) min([0 min(ODsum1_mod)]) max( [1.1*max(ODsum1_mod),1.1*max(ODsum2_mod),1] ) ]);
     title('OD Sum Modified','FontName','Arial','FontWeight','bold');
     xlabel(setXlabel);
     legend('OD_1','OD_2','Location','best');
@@ -256,7 +256,7 @@ if plotODsum==1
     ODsum12_mod=ODsum1_mod+ODsum2_mod;
     plot(xaxis,ODsum12_mod,'.','Color',colors(1,:),'MarkerSize',20);
     hold on
-    axis([min(xaxis) max(xaxis) 0 max([ODsum12_mod*1.1 ; 1])])
+    axis([min(xaxis) max(xaxis) min([0 min(ODsum12_mod)]) max([ODsum12_mod*1.1 ; 1])])
     title('OD Sum','FontName','Arial','FontWeight','bold');
     xlabel(setXlabel);
     grid on;
