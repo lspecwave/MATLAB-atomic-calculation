@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-04-08' ...
+maindir=['\\ARTEMIS-PC\Data\2026-04-09' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -23,12 +23,12 @@ dual_species = 0; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 379-16; %第一个文件夹序号
-last = 379; %最后一个文件夹序号
+first = 200; %第一个文件夹序号
+last = 250; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 0; %第一组数据的自变量`
-coeff = 0.005; %各组数据自变量间隔
+intercept = -0.5; %第一组数据的自变量`
+coeff = 0.01; %各组数据自变量间隔
 
 
 if rabi == 1
@@ -38,12 +38,12 @@ elseif ramsey == 1
 else
     % setXlabel='BusODT Hold s';%横坐标label
     % setXlabel='MOT Hold s';%横坐标label
-    setXlabel='MOT Lold s';%横坐标label
+    % setXlabel='MOT Lold s';%横坐标label
     % setXlabel='Ramsey Interrogation Time ms';%横坐标label
     % setXlabel='556 AM V';%横坐标label
     % setXlabel='556 FM V';%横坐标label
     % setXlabel='556 Freq kHz';%横坐标label
-    % setXlabel='399 FM V';%横坐标label
+    setXlabel='399 FM V';%横坐标label
     % setXlabel='399 Freq MHz';%横坐标label
     % setXlabel='MOT Ramp s';%横坐标label
     % setXlabel='Spin echo time s';%横坐标label
@@ -70,7 +70,7 @@ xaxis=(0:last-first)*coeff+intercept;
 %xaxis=[0.01 0.03 0.05 0.1 0.3 0.5 0.7 1 2 3 5 7 10]*1e3;
 %xaxis=[0.1 0.5 1:1:20];
 %xaxis=floor(10.^(1.0:0.2:5));
-xaxis= [0.1:0.1:0.5 0.7 0.9 1 1.1 1.3:0.2:1.9 2.0 2.2 2.5 3.0];
+%xaxis= [0.1:0.1:0.5 0.7 0.9 1 1.1 1.3:0.2:1.9 2.0 2.2 2.5 3.0];
 
 
 % Preallocation
