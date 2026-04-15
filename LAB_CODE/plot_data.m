@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-04-09' ...
+maindir=['\\ARTEMIS-PC\Data\2026-04-15' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -13,22 +13,22 @@ plotODsum = 1; %是否画OD求和
 plotSNRGain = 0; %是否画SNR Gain
 plotnoise_FR = 0; %是否画Fringe removal后的noise OD
 plotcountperpixel = 0; %是否画countperpixel
-plotprecession = 0; %是否画进动
+plotprecession = 1; %是否画进动
 plot2D = 0; %二维形式比较数据，常用于二维扫描
 plotCatRatio = 0; %是否画cat state占比，并计算平均值
 
 rabi = 0; %是否为Rabi曲线
-ramsey = 0; %是否为Ramsey曲线
-dual_species = 0; %是否有两种同位素
+ramsey = 1; %是否为Ramsey曲线
+dual_species = 1; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 200; %第一个文件夹序号
-last = 250; %最后一个文件夹序号
+first = 291; %第一个文件夹序号
+last = 301; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = -0.5; %第一组数据的自变量`
-coeff = 0.01; %各组数据自变量间隔
+intercept = 0; %第一组数据的自变量`
+coeff = 7; %各组数据自变量间隔
 
 
 if rabi == 1
@@ -43,13 +43,13 @@ else
     % setXlabel='556 AM V';%横坐标label
     % setXlabel='556 FM V';%横坐标label
     % setXlabel='556 Freq kHz';%横坐标label
-    setXlabel='399 FM V';%横坐标label
+    % setXlabel='399 FM V';%横坐标label
     % setXlabel='399 Freq MHz';%横坐标label
     % setXlabel='MOT Ramp s';%横坐标label
     % setXlabel='Spin echo time s';%横坐标label
     % setXlabel='Polar Pulse us';%横坐标label
     % setXlabel='Probe Pulse us';%横坐标label
-    % setXlabel='Hold Time s';%横坐标label
+    setXlabel='Hold Time s';%横坐标label
     % setXlabel='Ramp Time s';%横坐标label
     % setXlabel='TOF s';%横坐标label
     % setXlabel='Current V';%横坐标label
@@ -70,7 +70,7 @@ xaxis=(0:last-first)*coeff+intercept;
 %xaxis=[0.01 0.03 0.05 0.1 0.3 0.5 0.7 1 2 3 5 7 10]*1e3;
 %xaxis=[0.1 0.5 1:1:20];
 %xaxis=floor(10.^(1.0:0.2:5));
-%xaxis= [0.1:0.1:0.5 0.7 0.9 1 1.1 1.3:0.2:1.9 2.0 2.2 2.5 3.0];
+%xaxis= [0.1 0.5 1 2:2:80];
 
 
 % Preallocation
@@ -339,7 +339,7 @@ if plotprecession==1
         relativeOD=ODsum2_mod./ODsum1_mod;
         %relativeOD=ODsum1_mod./ODsum2_mod;
         
-        plot(xaxis,relativeOD,'.','Color',colors(8,:),'MarkerSize',16);
+        plot(xaxis,relativeOD,'.-','Color',colors(8,:),'MarkerSize',16);
 
         %plot(xaxis,relativeOD./relativeOD(1),'.-','Color',colors(8,:),'MarkerSize',16);
 
