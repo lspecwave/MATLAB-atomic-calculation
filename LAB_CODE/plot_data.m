@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-04-17' ...
+maindir=['\\ARTEMIS-PC\Data\2026-04-20' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -18,17 +18,17 @@ plot2D = 0; %二维形式比较数据，常用于二维扫描
 plotCatRatio = 0; %是否画cat state占比，并计算平均值
 
 rabi = 0; %是否为Rabi曲线
-ramsey = 1; %是否为Ramsey曲线
+ramsey = 0; %是否为Ramsey曲线
 dual_species = 1; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 27; %第一个文件夹序号
-last = 70; %最后一个文件夹序号
+first = 223; %第一个文件夹序号
+last = 298; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
 intercept = 0; %第一组数据的自变量`
-coeff = 7; %各组数据自变量间隔
+coeff = 1; %各组数据自变量间隔
 
 
 if rabi == 1
@@ -49,7 +49,7 @@ else
     % setXlabel='Spin echo time s';%横坐标label
     % setXlabel='Polar Pulse us';%横坐标label
     % setXlabel='Probe Pulse us';%横坐标label
-    setXlabel='Hold Time s';%横坐标label
+    % setXlabel='Hold Time s';%横坐标label
     % setXlabel='Ramp Time s';%横坐标label
     % setXlabel='TOF s';%横坐标label
     % setXlabel='Current V';%横坐标label
@@ -57,7 +57,7 @@ else
     % setXlabel='Shim V';%横坐标label
     % setXlabel='Lattice AM V';%横坐标label
     % setXlabel='MOT Freq (V)';%横坐标label
-    % setXlabel='No.';%横坐标label
+    setXlabel='No.';%横坐标label
     % setXlabel='173 Polar Pulse us';%横坐标label
 end
 

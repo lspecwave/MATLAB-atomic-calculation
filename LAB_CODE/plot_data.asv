@@ -4,30 +4,30 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\Artemis-pc\e\Data\2025-06-18' ...
+maindir=['\\ARTEMIS-PC\Data\2026-04-20' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
 plotradius = 0; %是否画原子团半径
-plotODsum = 0; %是否画OD求和
+plotODsum = 1; %是否画OD求和
 plotSNRGain = 0; %是否画SNR Gain
 plotnoise_FR = 0; %是否画Fringe removal后的noise OD
 plotcountperpixel = 0; %是否画countperpixel
-plotprecession = 0; %是否画进动
-plot2D = 1; %二维形式比较数据，常用于二维扫描
+plotprecession = 1; %是否画进动
+plot2D = 0; %二维形式比较数据，常用于二维扫描
 plotCatRatio = 0; %是否画cat state占比，并计算平均值
 
 rabi = 0; %是否为Rabi曲线
 ramsey = 0; %是否为Ramsey曲线
-dual_species = 0; %是否有两种同位素
+dual_species = 1; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
-differential_detection = 0; %是否差分探测
+differential_detection = 1; %是否差分探测
 
-first = 3; %第一个文件夹序号
-last = 12; %最后一个文件夹序号
+first = 223; %第一个文件夹序号
+last = 298; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 1; %第一组数据的自变量`
+intercept = 0; %第一组数据的自变量`
 coeff = 1; %各组数据自变量间隔
 
 
@@ -40,6 +40,7 @@ else
     % setXlabel='MOT Hold s';%横坐标label
     % setXlabel='MOT Lold s';%横坐标label
     % setXlabel='Ramsey Interrogation Time ms';%横坐标label
+    % setXlabel='556 AM V';%横坐标label
     % setXlabel='556 FM V';%横坐标label
     % setXlabel='556 Freq kHz';%横坐标label
     % setXlabel='399 FM V';%横坐标label
@@ -64,12 +65,12 @@ end
 %% read data
 datalength=last-first+1;
 xaxis=(0:last-first)*coeff+intercept;
-%xaxis=xaxis.*(-64); % 399 Scan (-64MHz/V)
+%xaxis=xaxis.*(320); % 399 Scan (+320MHz/V)
 %xaxis=[0.18:0.01:0.26, 0.32:0.01:0.42];
 %xaxis=[0.01 0.03 0.05 0.1 0.3 0.5 0.7 1 2 3 5 7 10]*1e3;
 %xaxis=[0.1 0.5 1:1:20];
 %xaxis=floor(10.^(1.0:0.2:5));
-%xaxis= [10 20 30 50 70 100 200 300 500 700 1000 2000 3000 5000];
+%xaxis= [0.1 0.5 1 2:2:80];
 
 
 % Preallocation
@@ -199,7 +200,7 @@ if plotnumber==1
     hold on;
     plot(xaxis,numberofatoms2,'.','Color',colors(4,:),'MarkerSize',20);
     legend('Atom_1','Atom_2','Location','best');
-    axis([min(xaxis) max(xaxis) 0 max(numberofatoms1)*1.1]);
+    axis([min(xaxis) max(xaxis) 0 max( max(numberofatoms1)*1.1 , 1)]);
     %axis([min(xaxis) max(xaxis) min(numberofatoms1)*0.9 max(numberofatoms1)*1.1])
     title('Number of Atoms','FontName','Arial','FontWeight','bold');
     xlabel(setXlabel);
@@ -229,7 +230,7 @@ if plotODsum==1
     plot(xaxis,ODsum1_mod,'.','Color',colors(1,:),'MarkerSize',20);
     hold on
     plot(xaxis,ODsum2_mod,'.','Color',colors(2,:),'MarkerSize',20);
-    axis([min(xaxis) max(xaxis) 0 1.1*max( [max(ODsum1_mod),max(ODsum2_mod)] ) ]);
+    axis([min(xaxis) max(xaxis) min([0 min(ODsum1_mod)]) max( [1.1*max(ODsum1_mod),1.1*max(ODsum2_mod),1] ) ]);
     title('OD Sum Modified','FontName','Arial','FontWeight','bold');
     xlabel(setXlabel);
     legend('OD_1','OD_2','Location','best');
@@ -255,7 +256,7 @@ if plotODsum==1
     ODsum12_mod=ODsum1_mod+ODsum2_mod;
     plot(xaxis,ODsum12_mod,'.','Color',colors(1,:),'MarkerSize',20);
     hold on
-    axis([min(xaxis) max(xaxis) 0 max(ODsum12_mod)*1.1])
+    axis([min(xaxis) max(xaxis) min([0 min(ODsum12_mod)]) max([ODsum12_mod*1.1 ; 1])])
     title('OD Sum','FontName','Arial','FontWeight','bold');
     xlabel(setXlabel);
     grid on;
@@ -338,7 +339,7 @@ if plotprecession==1
         relativeOD=ODsum2_mod./ODsum1_mod;
         %relativeOD=ODsum1_mod./ODsum2_mod;
         
-        plot(xaxis,relativeOD,'.','Color',colors(8,:),'MarkerSize',16);
+        plot(xaxis,relativeOD,'.-','Color',colors(8,:),'MarkerSize',16);
 
         %plot(xaxis,relativeOD./relativeOD(1),'.-','Color',colors(8,:),'MarkerSize',16);
 
@@ -491,9 +492,10 @@ end
 
 %% Plot 2D
 if plot2D==1
-    first_para = [-0.48:0.005:-0.44];
-    second_para = [-1.1:-0.01:-1.15];
-    xlabel_2D= 'MOT\_556\_Freq (V)'; % first_para
+    first_para = [-0.35:0.02:-0.25];
+    second_para = [0.1 0.09 0.07 0.05 0.03 0.02 0.01 0];
+    xlabel_2D= 'GMOT\_173\_ODT\_F (V)'; % first_para
+    %xlabel_2D= 'MOT\_556\_Freq (V)'; % first_para
     ylabel_2D='ShimC\_ODT (V)'; % second_para
 
     data_2D=reshape(numberofatoms1,length(second_para),length(first_para));% 数据竖列重排
