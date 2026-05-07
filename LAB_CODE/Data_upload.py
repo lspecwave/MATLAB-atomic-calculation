@@ -131,6 +131,7 @@ def read_rpv_value(port='COM7', baudrate=19200, timeout=2):
         ser = serial.Serial(port, baudrate, timeout=timeout)
         # 发送指令（若设备需要换行符，可将 cmd 改为 "RPV 3\r\n"）
         cmd = "RPV 3\r\n"
+        time.sleep(4)
         ser.write(cmd.encode())
         # 等待并读取一行响应（假设返回以换行结尾）
         response = ser.readline().decode().strip()
@@ -160,6 +161,7 @@ def read_rpv_value(port='COM7', baudrate=19200, timeout=2):
         # 确保关闭串口
         if 'ser' in locals() and ser.is_open:
             ser.close()
+            #time.sleep(1)
 
 if __name__ == "__main__":
     print(f"[{timestamp()}] 开始读取数值，每 5 秒一次，按 Ctrl+C 退出...")
@@ -170,6 +172,14 @@ if __name__ == "__main__":
                 temperature, pressure = send_command_and_calculate()
             except:
                 print(f"[{timestamp()}] 水温压力获取失败")
+            try: 
+                writedata(f"ExpData,location=HFNL,source=Coil_Interlock water_temp={temperature},water_pres={pressure}")
+                print(f"[{timestamp()}] 水冷数据上传成功")
+                    
+            except:
+                print(f"[{timestamp()}] 水冷数据上传失败！！！")
+            time.sleep(1)
+            
             if result is not None:
                 
                 try: 
@@ -177,15 +187,10 @@ if __name__ == "__main__":
                     print(f"[{timestamp()}] 真空数据上传成功")
                 except:
                     print(f"[{timestamp()}] 真空数据上传失败！！！")
-                time.sleep(1)
-                try: 
-                    writedata(f"ExpData,location=HFNL,source=Coil_Interlock water_temp={temperature},water_pres={pressure}")
-                    print(f"[{timestamp()}] 水冷数据上传成功")
-                    
-                except:
-                    print(f"[{timestamp()}] 水冷数据上传失败！！！")
+                
+                
             else:
-                print(f"[{timestamp()}] 本次读取失败")
-            time.sleep(4)   # 等待 5 秒后继续
+                print(f"[{timestamp()}] 本次真空读取失败")
+            time.sleep(1)   # 等待 5 秒后继续
     except KeyboardInterrupt:
         print(f"\n[{timestamp()}] 用户中断，程序退出")
