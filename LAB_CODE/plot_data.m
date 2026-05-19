@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-04-22' ...
+maindir=['\\ARTEMIS-PC\Data\2026-05-18' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -23,8 +23,8 @@ dual_species = 1; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 588; %第一个文件夹序号
-last = 667; %最后一个文件夹序号
+first = 468; %第一个文件夹序号
+last = 480; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
 intercept = 0; %第一组数据的自变量`
@@ -41,7 +41,7 @@ else
     % setXlabel='MOT Lold s';%横坐标label
     % setXlabel='Ramsey Interrogation Time ms';%横坐标label
     % setXlabel='556 AM V';%横坐标label
-    % setXlabel='556 FM V';%横坐标label
+    setXlabel='556 FM V';%横坐标label
     % setXlabel='556 Freq kHz';%横坐标label
     % setXlabel='399 FM V';%横坐标label
     % setXlabel='399 Freq MHz';%横坐标label
@@ -57,7 +57,7 @@ else
     % setXlabel='Shim V';%横坐标label
     % setXlabel='Lattice AM V';%横坐标label
     % setXlabel='MOT Freq (V)';%横坐标label
-    setXlabel='No.';%横坐标label
+    % setXlabel='No.';%横坐标label
     % setXlabel='173 Polar Pulse us';%横坐标label
 end
 
@@ -70,7 +70,7 @@ xaxis=(0:last-first)*coeff+intercept;
 %xaxis=[0.01 0.03 0.05 0.1 0.3 0.5 0.7 1 2 3 5 7 10]*1e3;
 %xaxis=[0.1 0.5 1:1:20];
 %xaxis=floor(10.^(1.0:0.2:5));
-%xaxis= [0.1 0.5 1 2:2:80];
+%xaxis= [18 3 6 7.5 19.5 0 4.5 10.5 15 13.5 12 16.5 9 1.5];
 
 
 % Preallocation
@@ -339,7 +339,7 @@ if plotprecession==1
         relativeOD=ODsum2_mod./ODsum1_mod;
         %relativeOD=ODsum1_mod./ODsum2_mod;
         
-        plot(xaxis,relativeOD,'.-','Color',colors(8,:),'MarkerSize',16);
+        plot(xaxis,relativeOD,'.','Color',colors(8,:),'MarkerSize',16);
 
         %plot(xaxis,relativeOD./relativeOD(1),'.-','Color',colors(8,:),'MarkerSize',16);
 
@@ -407,7 +407,7 @@ if plotprecession==1
         s4=ODsum4_mod;
 
         hold on;
-        plot(xaxis,relativeOD2,'.','Color',colors(2,:),'MarkerSize',16);
+        plot(xaxis,relativeOD2,'.-','Color',colors(2,:),'MarkerSize',16);
         xlim([min(xaxis) max(xaxis)]);
         ylim([-1 1]);
         ylabel('S_z');

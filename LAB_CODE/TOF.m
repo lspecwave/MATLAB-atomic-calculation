@@ -1,17 +1,17 @@
 clear all
 close all
 %% Input Area
-dir_TOF='\\Artemis-pc\Data\2026-04-08\';%文件路径
-TOF_start = 1;    % TOF起始时间
-TOF_interval = 1;   % TOF时间间隔
-hold_time = 35;
-first = 45;   % 第一个文件夹的序号
-last = 54;   % 第二个文件夹的序号
+dir_TOF='\\Artemis-pc\Data\2026-05-12\';%文件路径
+TOF_start = 0.05;    % TOF起始时间
+TOF_interval = 0.05;   % TOF时间间隔
+hold_time = 0;
+first = 172;   % 第一个文件夹的序号
+last = 181;   % 第二个文件夹的序号
 
-pixelsize = 6.5*1.67;   % um
-yposition = 200;   % 水平方向为y方向
-xposition = 200;   % 竖直方向为x方向，这个数值用于拟合的起始点
-fringe_removal = 0;   % 是否使用消条纹
+pixelsize = 6.5/2.5;   % um
+yposition = 75;   % 水平方向为y方向
+xposition = 75;   % 竖直方向为x方向，这个数值用于拟合的起始点
+fringe_removal = 1;   % 是否使用消条纹
 
 %%
 tof=last-first+1;
@@ -33,7 +33,7 @@ for i=(first:1:last)
         load([dir_TOF,'Abs-',num2str(i),'\OD_raw.mat']);
     end
     if fringe_removal==1
-        load([dir_TOF,'Abs-',num2str(i),'\OD_FR_2.mat']);
+        load([dir_TOF,'Abs-',num2str(i),'\OD_FR.mat']);
         OD_raw=OD_FR;
     end
     sigma1=2;
@@ -119,9 +119,9 @@ axis([0 max(timesquared)*1.1 0 min( max(sizesquaredH)*1.1  )])
 xdata = timesquared(1:tof);
 ydata = sizesquaredH(1:tof)';
 wdata = 1./sizesquaredH_err.^2;
-xdata(9) = [];
-ydata(9) = [];
-wdata(9) = [];
+% xdata(9) = [];
+% ydata(9) = [];
+% wdata(9) = [];
 
 [fH,gof,output]=fit(xdata,ydata,'poly1','Weight',wdata);
 %[fH,gof,output]=fit(timesquared(1:tof),sizesquaredH(1:tof)','poly1','Weight',1./sizesquaredH_err.^2);
