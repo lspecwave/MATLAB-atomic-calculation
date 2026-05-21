@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-05-18' ...
+maindir=['\\ARTEMIS-PC\Data\2026-05-21' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -23,8 +23,8 @@ dual_species = 1; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 468; %第一个文件夹序号
-last = 480; %最后一个文件夹序号
+first = 512; %第一个文件夹序号
+last = 5; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
 intercept = 0; %第一组数据的自变量`
@@ -41,7 +41,7 @@ else
     % setXlabel='MOT Lold s';%横坐标label
     % setXlabel='Ramsey Interrogation Time ms';%横坐标label
     % setXlabel='556 AM V';%横坐标label
-    setXlabel='556 FM V';%横坐标label
+    % setXlabel='556 FM V';%横坐标label
     % setXlabel='556 Freq kHz';%横坐标label
     % setXlabel='399 FM V';%横坐标label
     % setXlabel='399 Freq MHz';%横坐标label
@@ -57,7 +57,7 @@ else
     % setXlabel='Shim V';%横坐标label
     % setXlabel='Lattice AM V';%横坐标label
     % setXlabel='MOT Freq (V)';%横坐标label
-    % setXlabel='No.';%横坐标label
+    setXlabel='No.';%横坐标label
     % setXlabel='173 Polar Pulse us';%横坐标label
 end
 
@@ -358,7 +358,7 @@ if plotprecession==1
     elseif differential_detection == 1 && normalized_detection == 0
 
         relativeOD=(ODsum1_mod-ODsum2_mod)./(ODsum1_mod+ODsum2_mod);
-        plot(xaxis,relativeOD,'.','Color',colors(8,:),'MarkerSize',16);
+        plot(xaxis,relativeOD,'.-','Color',colors(8,:),'MarkerSize',16);
         ylabel('S_z');
         axis([min(xaxis) max(xaxis) -1 1]);
 
@@ -573,5 +573,5 @@ end
 
 clear main_dir_0
 save([maindir,'Abs-',num2str(last),'\result.mat'])
-save([maindir,'Abs-',num2str(last),'\population.mat'],'s1','s2','s3','s4','s5','n1','n2','n3','n4','n5');
+save([maindir,'Abs-',num2str(last),'\population.mat'],'s1','s2','s3','s4','s5','s6','n1','n2','n3','n4','n5','n6');
 clear Timelist
