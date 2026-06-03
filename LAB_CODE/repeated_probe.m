@@ -4,12 +4,13 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-05-20' ...
+maindir=['\\ARTEMIS-PC\Data\2026-06-03' ...
     '\'];%数据来源路径
 
 repeat = 3;   % 探测组数,照片数的一半
 photo = 2*repeat;
-species = 173;
+species = 171;
+mag = 10;   % 磁场和10mG的比值
 
 plotnumber = 1;   % 是否画原子数
 plotradius = 0;   % 是否画原子团半径
@@ -17,26 +18,24 @@ plotODsum = 1;   % 是否画OD求和
 plotprecession = 1;   % 是否画进动
 
 if_mod = 1;   % OD是否修正
-rabi = 0;   % 是否为Rabi曲线
-ramsey = 1;   % 是否为Ramsey曲线
-dual_species = 1;   % 是否有两种同位素
-normalized_detection = 0;
-%normalized_detection = 21;   % 是否归一化探测，OD_2/OD_1
-%normalized_detection = 12;   % 是否归一化探测，OD_1/OD_2
-differential_detection = 1;   % 是否差分探测
+phase = 0;   % 是否为稳定相位曲线
+if phase == 1
+    load('\\Artemis-pc\Data\2026-06-02\Abs-\repeat_amp.mat');
+end
+ramsey = 1;   % 是否为Ramsey进动曲线
+offset = 0;   % 是否考虑曲线上下不对称
+
 save_data = 1;   % 是否保存
 
-first = 425;   % 第一个文件夹序号
-last = 437;   % 最后一个文件夹序号
+first = 658;   % 第一个文件夹序号
+last = 673;   % 最后一个文件夹序号
 
 % 设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
 intercept = 0;   % 第一组数据的自变量`
-coeff = 10;   % 各组数据自变量间隔
+coeff = 1;   % 各组数据自变量间隔
 
 
-if rabi == 1
-    setXlabel='ROT Pulse us';%横坐标label
-elseif ramsey == 1
+if ramsey == 1
     setXlabel='Precession Time ms';%横坐标label
 else
     setXlabel='No.';%横坐标label
@@ -46,7 +45,7 @@ end
 %% read data
 datalength=last-first+1;
 xaxis = (0:last-first)*coeff+intercept;
-xaxis = [30 165 90 0 75 150 105 180 60 135 15 45 120];
+%xaxis = [0:100:1000 1400:400:2200 3000:800:8000];
 
 % Preallocation
 OD = zeros(photo,datalength);
@@ -173,30 +172,16 @@ if plotprecession==1
     h6=figure('Name','Precession');
     hold on;
     relaOD = zeros(repeat,datalength);
+    mean_sz = zeros(1,datalength);
 
     for k = 1:repeat
 
-        % 归一化探测 %
-        if normalized_detection && differential_detection == 0
-
-            if normalized_detection == 21   % OD2/OD1
-                relaOD(k,:) = OD(2*k,:)./OD(2*k-1,:);
-                ylabel('OD_2/OD_1');
-            elseif normalized_detection == 12   % OD1/OD2
-                relaOD(k,:) = OD(2*k-1,:)./OD(2*k,:);
-                ylabel('OD_1/OD_2');
-            end
-            axis([min(xaxis) max(xaxis) 0 1]);
-            plot(xaxis,relaOD(k,:),'.','Color',colors(k,:),'MarkerSize',16);
-
-        % 差分探测 %
-        elseif differential_detection == 1 && normalized_detection == 0
-
-            relaOD(k,:) = (OD(2*k-1,:)-OD(2*k,:))./(OD(2*k-1,:)+OD(2*k,:));
-            ylabel('S_z');
-            axis([min(xaxis) max(xaxis) -1 1]);
-
-            % 拟和 %
+        relaOD(k,:) = (OD(2*k-1,:)-OD(2*k,:))./(OD(2*k-1,:)+OD(2*k,:));
+        ylabel('S_z');
+        axis([min(xaxis) max(xaxis) -1 1]);
+        % 进动曲线 %
+        if ramsey == 1 && phase == 0
+            % 拟合 %
             if species == 171
                 species_coeff = 1;
             elseif species == 173
@@ -204,23 +189,36 @@ if plotprecession==1
             end
             [xData, yData] = prepareCurveData(xaxis,relaOD(k,:));
             weight = ones(length(xData),1);
-            ft = fittype( 'a*sin(2*pi*x/T+b)+c', 'independent', 'x', 'dependent', 'y' );
-            opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
-            opts.Display = 'Off';
-            opts.Lower = [80*species_coeff 0.01 -2*pi -5];   % T a b c
-            opts.Upper = [140*species_coeff 1 2*pi 5];   % T a b c
-            opts.StartPoint = [108*species_coeff 0.6 0 0];   % T a b c
+            if offset == 1
+                ft = fittype( 'a*sin(2*pi*x/T+b)+c', 'independent', 'x', 'dependent', 'y' );
+                opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
+                opts.Display = 'Off';
+                opts.Lower = [60*species_coeff/mag 0.01 -2*pi -5];   % T a b c
+                opts.Upper = [140*species_coeff/mag 1 2*pi 5];   % T a b c
+                opts.StartPoint = [107*species_coeff/mag 0.6 0 0];   % T a b c
+            elseif offset == 0
+                ft = fittype( 'a*sin(2*pi*x/T+b)', 'independent', 'x', 'dependent', 'y' );
+                opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
+                opts.Display = 'Off';
+                opts.Lower = [60*species_coeff/mag 0.01 -2*pi];   % T a b c
+                opts.Upper = [140*species_coeff/mag 1 2*pi];   % T a b c
+                opts.StartPoint = [107*species_coeff/mag 0.6 0];   % T a b c
+
+            end
             opts.Weights = weight;
 
             % 对数据进行模型拟合 %
             [fitresult, gof] = fit(xData, yData, ft, opts);
             amp(k) = fitresult.a;
             T(k) = fitresult.T;
-            c(k) = fitresult.c;
             interval = confint(fitresult);
             a_sigma(k) = (interval(2,2)-interval(1,2))/4;
             T_sigma(k) = (interval(2,1)-interval(1,1))/4;
-            c_sigma(k) = (interval(2,4)-interval(1,4))/4;
+
+            if offset == 1
+                c(k) = fitresult.c;
+                c_sigma(k) = (interval(2,4)-interval(1,4))/4;
+            end
 
             l = plot(fitresult, xData, yData);
             l(1).Marker = '.';
@@ -230,10 +228,16 @@ if plotprecession==1
             l(2).Color = colors(k,:);
             l(2).LineWidth = 1;
 
-        end
+            ld_str{2*k-1} = ['a',num2str(k),' = ',num2str(roundn(amp(k),-3),'%.3f'),'(',num2str(round(a_sigma(k)*1000)),')'];
+            ld_str{2*k} = '';
 
-        ld_str{2*k-1} = ['a',num2str(k),' = ',num2str(roundn(amp(k),-3),'%.3f'),'(',num2str(round(a_sigma(k)*1000)),')'];
-        ld_str{2*k} = '';
+        elseif ramsey == 0 && phase == 1
+            % l = plot(xaxis,relaOD,'.--');
+            % l.MarkerSize = 16;
+            % l.Color = colors(k,:);
+            % l.LineWidth = 1;
+            mean_sz = mean_sz + (( OD(2*k-1,:)-OD(2*k,:) )/amp(k))./(sum(OD,1));
+        end
 
     end
     xlabel(setXlabel);
@@ -244,9 +248,15 @@ if plotprecession==1
     %set(gca,'XScale','log');
     %set(gca,'YScale','log');
 
-
-    legend(ld_str,'Location','best');
-    clear ld_str;
+    if ramsey == 1 && phase == 0
+        legend(ld_str,'Location','best');
+        clear ld_str;
+    elseif phase == 1 && ramsey == 0
+        l = plot(xaxis,mean_sz,'.--');
+        l.MarkerSize = 16;
+        l.Color = colors(1,:);
+        l.LineWidth = 1;
+    end
 
     if save_data == 1
         saveas(h6,[maindir,'Abs-',num2str(last),'\precession.png']);
@@ -261,6 +271,10 @@ end
 if save_data == 1
     clear main_dir_0
     save([maindir,'Abs-',num2str(last),'\repeat_probe.mat']);
-    save([maindir,'Abs-',num2str(last),'\repeat_amp.mat'],'amp','T');
+    if ramsey == 1 && phase == 0
+        save([maindir,'Abs-',num2str(last),'\repeat_amp.mat'],'amp','T','a_sigma','T_sigma');
+    elseif phase == 1 && ramsey == 0
+        save([maindir,'Abs-',num2str(last),'\repeat_phase.mat'],'mean_sz');
+    end
     clear Timelist
 end
