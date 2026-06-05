@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-06-03' ...
+maindir=['\\ARTEMIS-PC\Data\2026-06-05' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -19,12 +19,12 @@ plotCatRatio = 0; %是否画cat state占比，并计算平均值
 
 rabi = 0; %是否为Rabi曲线
 ramsey = 0; %是否为Ramsey曲线
-dual_species = 1; %是否有两种同位素
+dual_species = 0; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 674; %第一个文件夹序号
-last = 703; %最后一个文件夹序号
+first = 220; %第一个文件夹序号
+last = 269; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
 intercept = 0; %第一组数据的自变量`
@@ -202,7 +202,7 @@ if plotnumber==1
     legend('Atom_1','Atom_2','Location','best');
     axis([min(xaxis) max(xaxis) 0 max( max(numberofatoms1)*1.1 , 1)]);
     %axis([min(xaxis) max(xaxis) min(numberofatoms1)*0.9 max(numberofatoms1)*1.1])
-    title('Number of Atoms','FontName','Arial','FontWeight','bold');
+    title('Number of Atoms','FontName','times new roman','FontWeight','bold');
     xlabel(setXlabel);
     grid on;
     box on;
@@ -219,7 +219,7 @@ if plotnumber==1
 
     end
 
-    set(gca,'FontSize',16,'FontName','Arial','FontWeight','bold');
+    set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
     saveas(h1,[maindir,'Abs-',num2str(last),'\Numberofatoms.png']);
 end
 
@@ -231,12 +231,12 @@ if plotODsum==1
     hold on
     plot(xaxis,ODsum2_mod,'.','Color',colors(2,:),'MarkerSize',20);
     axis([min(xaxis) max(xaxis) min([0 min(ODsum1_mod)]) max( [1.1*max(ODsum1_mod),1.1*max(ODsum2_mod),1] ) ]);
-    title('OD Sum Modified','FontName','Arial','FontWeight','bold');
+    title('OD Sum Modified','FontName','times new roman','FontWeight','bold');
     xlabel(setXlabel);
     legend('OD_1','OD_2','Location','best');
     %legend('Yb-173','Yb-171','Location','best');
     grid on;
-    set(gca,'FontSize',16,'FontName','Arial','FontWeight','bold');
+    set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
 
     if dual_species == 1
 
@@ -257,7 +257,7 @@ if plotODsum==1
     plot(xaxis,ODsum12_mod,'.','Color',colors(1,:),'MarkerSize',20);
     hold on
     axis([min(xaxis) max(xaxis) min([0 min(ODsum12_mod)]) max([ODsum12_mod*1.1 ; 1])])
-    title('OD Sum','FontName','Arial','FontWeight','bold');
+    title('OD Sum','FontName','times new roman','FontWeight','bold');
     xlabel(setXlabel);
     grid on;
     box on;
@@ -272,7 +272,7 @@ if plotODsum==1
     set(gca,'XScale','linear');
     %set(gca,'YScale','log');
 
-    set(gca,'FontSize',16,'FontName','Arial','FontWeight','bold');
+    set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
     saveas(h2_0,[maindir,'Abs-',num2str(last),'\ODsum12.png'])
 
     %% Plot time
@@ -349,7 +349,7 @@ if plotprecession==1
 
         ylabel('OD_2/OD_1');
         %ylabel('OD_1/OD_2');
-        %title('Lattice AM 1V','FontName','Arial','FontWeight','bold');
+        %title('Lattice AM 1V','FontName','times new roman','FontWeight','bold');
 
         %set(gca,'XScale','log','YScale','log');
 
@@ -395,7 +395,7 @@ if plotprecession==1
 
     grid on;
     box on;
-    set(gca,'FontSize',16,'FontName','Arial','FontWeight','bold');
+    set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
     %set(gca,'XScale','log');
     %set(gca,'YScale','log');
 
@@ -513,8 +513,8 @@ if plot2D==1
     ylim([1-0.5,length(second_para)+0.5]);
     xticks([1:length(first_para)]);
     yticks([1:length(second_para)]);
-    set(gca,'XTickLabel',first_para,'FontName','Arial','FontWeight','bold');
-    set(gca,'YTickLabel',second_para,'FontName','Arial','FontWeight','bold');
+    set(gca,'XTickLabel',first_para,'FontName','times new roman','FontWeight','normal');
+    set(gca,'YTickLabel',second_para,'FontName','times new roman','FontWeight','normal');
     xlabel(xlabel_2D);
     ylabel(ylabel_2D);
     view([0 90]);
@@ -533,11 +533,11 @@ if plotCatRatio == 1 && dual_species == 0
     ratio_std = std(ratio);
     plot(xaxis,ratio,'.','Color',colors(1,:),'MarkerSize',20);
     axis([min(xaxis) max(xaxis) 0 1.5])
-    title('Cat Ratio','FontName','Arial','FontWeight','bold');
+    title('Cat Ratio','FontName','times new roman','FontWeight','bold');
     xlabel(setXlabel);
     ylabel('Ratio of Stretched States');
     grid on;
-    set(gca,'FontSize',16,'FontName','Arial','FontWeight','bold');
+    set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
 %     legend(['mean = ',num2str(roundn(ratio_mean,-4)),...
 %         newline 'std = ',num2str(roundn(ratio_std,-4))],...
 %         'Location','best');
@@ -555,11 +555,11 @@ elseif plotCatRatio == 1 && dual_species == 1
     ratio_std = std(ratio);
     plot(xaxis,ratio,'.','Color',colors(1,:),'MarkerSize',20);
     axis([min(xaxis) max(xaxis) 0 min(1.5,max(ratio))]);
-    title('Cat Ratio','FontName','Arial','FontWeight','bold');
+    title('Cat Ratio','FontName','times new roman','FontWeight','bold');
     xlabel(setXlabel);
     ylabel('Ratio of Stretched States');
     grid on;
-    set(gca,'FontSize',16,'FontName','Arial','FontWeight','bold');
+    set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
 %     legend(['mean = ',num2str(roundn(ratio_mean,-4)),...
 %         newline 'std = ',num2str(roundn(ratio_std,-4))],...
 %         'Location','best');
