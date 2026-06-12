@@ -4,12 +4,12 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-06-05' ...
+maindir=['\\ARTEMIS-PC\Data\2026-06-10' ...
     '\'];%数据来源路径
 
-repeat = 3;   % 探测组数,照片数的一半
+repeat = 1;   % 探测组数,照片数的一半
 photo = 2*repeat;
-species = 171;
+species = 173;
 mag = 10;   % 磁场和10mG的比值
 
 plotnumber = 1;   % 是否画原子数
@@ -27,11 +27,11 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 270;   % 第一个文件夹序号
-last = 295;   % 最后一个文件夹序号
+first = 351;   % 第一个文件夹序号
+last = 366;   % 最后一个文件夹序号
 
 % 设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 0;   % 第一组数据的自变量`
+intercept = 984;   % 第一组数据的自变量`
 coeff = 1;   % 各组数据自变量间隔
 
 
@@ -193,16 +193,16 @@ if plotprecession==1
                 ft = fittype( 'a*sin(2*pi*x/T+b)+c', 'independent', 'x', 'dependent', 'y' );
                 opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
                 opts.Display = 'Off';
-                opts.Lower = [60*species_coeff/mag 0.01 -2*pi -5];   % T a b c
-                opts.Upper = [140*species_coeff/mag 1 2*pi 5];   % T a b c
-                opts.StartPoint = [107*species_coeff/mag 0.6 0 0];   % T a b c
+                opts.Lower = [70*species_coeff/mag 0.15 -2*pi -5];   % T a b c
+                opts.Upper = [130*species_coeff/mag 1 2*pi 5];   % T a b c
+                opts.StartPoint = [107*species_coeff/mag 0.7 0 0];   % T a b c
             elseif offset == 0
                 ft = fittype( 'a*sin(2*pi*x/T+b)', 'independent', 'x', 'dependent', 'y' );
                 opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
                 opts.Display = 'Off';
-                opts.Lower = [60*species_coeff/mag 0.01 -2*pi];   % T a b c
+                opts.Lower = [60*species_coeff/mag 0.15 -2*pi];   % T a b c
                 opts.Upper = [140*species_coeff/mag 1 2*pi];   % T a b c
-                opts.StartPoint = [107*species_coeff/mag 0.6 0];   % T a b c
+                opts.StartPoint = [107*species_coeff/mag 0.7 0];   % T a b c
 
             end
             opts.Weights = weight;
