@@ -1,0 +1,697 @@
+%Version 3 December 2023
+% See section 11 of the User Manual for version history
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double line spacing
+
+%%=======================================================%%
+%% to print line numbers in the margin use lineno option %%
+%%=======================================================%%
+
+%%\documentclass[lineno,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%======================================================%%
+%% to compile with pdflatex/xelatex use pdflatex option %%
+%%======================================================%%
+
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+
+%%Note: the following reference styles support Namedate and Numbered referencing. By default the style follows the most common style. To switch between the options you can add or remove Numbered in the optional parenthesis. 
+%%The option is available for: sn-basic.bst, sn-vancouver.bst, sn-chicago.bst%  
+ 
+%%\documentclass[pdflatex,sn-nature]{sn-jnl}% Style for submissions to Nature Portfolio journals
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+\documentclass[pdflatex,sn-nature,centre]{sn-jnl}% Math and Physical Sciences Numbered Reference Style 
+%%\documentclass[pdflatex,sn-mathphys-ay]{sn-jnl}% Math and Physical Sciences Author Year Reference Style
+%%\documentclass[pdflatex,sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
+%%\documentclass[pdflatex,sn-vancouver,Numbered]{sn-jnl}% Vancouver Reference Style
+%%\documentclass[pdflatex,sn-apa]{sn-jnl}% APA Reference Style 
+%%\documentclass[pdflatex,sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
+
+%%%% Standard Packages
+%%<additional latex packages if required can be included here>
+
+\usepackage{graphicx}%
+\usepackage{multirow}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{amsthm}%
+\usepackage{mathrsfs}%
+\usepackage[title]{appendix}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{manyfoot}%
+\usepackage{booktabs}%
+\usepackage{algorithm}%
+\usepackage{algorithmicx}%
+\usepackage{algpseudocode}%
+\usepackage{listings}%
+\usepackage{lmodern}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+%\usepackage{caption}
+\robustify{\cite}
+
+%\usepackage{CJKutf8}
+
+%%%%
+
+%%%%%=============================================================================%%%%
+%%%%  Remarks: This template is provided to aid authors with the preparation
+%%%%  of original research articles intended for submission to journals published 
+%%%%  by Springer Nature. The guidance has been prepared in partnership with 
+%%%%  production teams to conform to Springer Nature technical requirements. 
+%%%%  Editorial and presentation requirements differ among journal portfolios and 
+%%%%  research disciplines. You may find sections in this template are irrelevant 
+%%%%  to your work and are empowered to omit any such section if allowed by the 
+%%%%  journal you intend to submit to. The submission guidelines and policies 
+%%%%  of the journal take precedence. A detailed User Manual is available in the 
+%%%%  template package for technical guidance.
+%%%%%=============================================================================%%%%
+
+%% as per the requirement new theorem styles can be included as shown below
+%\theoremstyle{thmstyleone}%
+%\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
+%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
+%\newtheorem{proposition}[theorem]{Proposition}% 
+%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem and proposition etc.
+
+%\theoremstyle{thmstyletwo}%
+\newtheorem{example}{Example}%
+\newtheorem{remark}{Remark}%
+
+%\theoremstyle{thmstylethree}%
+\newtheorem{definition}{Definition}%
+
+\raggedbottom
+%%\unnumbered% uncomment this for unnumbered level heads
+
+\begin{document}
+
+\title[Article Title]{Cold-atom comagnetometry via optical control of spin states}
+
+%%=============================================================%%
+%% GivenName	-> \fnm{Joergen W.}
+%% Particle	-> \spfx{van der} -> surname prefix
+%% FamilyName	-> \sur{Ploeg}
+%% Suffix	-> \sfx{IV}
+%% \author*[1,2]{\fnm{Joergen W.} \spfx{van der} \sur{Ploeg} 
+%%  \sfx{IV}}\email{iauthor@gmail.com}
+%%=============================================================%%
+
+\author[1]{\fnm{J.-L.} \sur{Zhang}}\email{jielin@mail.ustc.edu.cn}
+\equalcont{These authors contributed equally to this work.}
+
+\author[1]{\fnm{W.-T.} \sur{Luo}}\email{luowt@mail.ustc.edu.cn}
+\equalcont{These authors contributed equally to this work.}
+
+\author[1]{\fnm{Y. A.} \sur{Yang}}\email{yyustcer@mail.ustc.edu.cn}
+
+\author[1]{\fnm{Y.-Q.} \sur{Wang}}\email{wyq0705@mail.ustc.edu.cn}
+
+\author*[2]{\fnm{T.} \sur{Xia}}\email{txia@hfnl.cn}
+
+\author*[1,2]{\fnm{Z.-T.} \sur{Lu}}\email{ztlu@ustc.edu.cn}
+
+\affil[1]{\orgdiv{Hefei National Research Center for Physical Sciences at the Microscale, School of Physical Sciences}, \orgname{University of Science and Technology of China}, \orgaddress{\city{Hefei}, \state{Anhui}, \postcode{230026}, \country{China}}}
+
+\affil[2]{\orgdiv{Hefei National Laboratory}, \orgname{University of Science and Technology of China}, \orgaddress{\city{Hefei}, \state{Anhui}, \postcode{230088}, \country{China}}}
+
+%\affil[3]{\orgdiv{Present address: JILA, National Institute of Standards and Technology and University of Colorado, Department of Physics}, \orgname{University of Colorado, Boulder}, \orgaddress{\state{CO}, \country{USA}}}
+
+
+
+\abstract{
+Atomic spin-based comagnetometers are powerful tools for precision sensing and tests of fundamental physics. Compared with the widely used gas-cell comagnetometer systems, cold-atom systems offer access to much shorter distance scales and allow implementation of optical quantum control techniques. However, in order to realize long spin coherence times with cold atoms, it is necessary to employ diamagnetic atoms and overcome decoherence induced by light shifts. Here we demonstrate a cold-atom comagnetometer based on the nuclear spins of $^{171}$Yb (spin-1/2) and $^{173}$Yb (spin-5/2), jointly trapped in an optical lattice. Vector light shifts are suppressed by enforcing linear polarization of the lattice, while tensor shifts in $^{173}$Yb are suppressed via the use of a Schr\"{o}dinger cat state. This enables simultaneous Ramsey interferometry on both isotopes with a spin coherence time of 60 s. We achieve a magnetic noise suppression factor exceeding $3\times10^4$, and determine the $^{171}$Yb-to-$^{173}$Yb ratio of nuclear magnetic moments to be -0.726076(3) with a 4 ppm precision. Our results establish a new cold-atom platform for spin-based sensing and open pathways toward quantum-enhanced searches for physics beyond the Standard Model.
+}
+
+%%================================%%
+%% Sample for structured abstract %%
+%%================================%%
+
+
+\keywords{optical quantum control, Ytterbium, comagnetometer, suppression of magnetic noise, spin sensor, nuclear magnetic moment}
+
+
+\maketitle
+
+\section*{Introduction}
+
+Atomic-spin-based sensors are indispensable in quantum information science \cite{Luca2018QMetrologyRev} and precision measurement \cite{Budker2007Mag, Lei2025SpinExoticRMP}. Paramagnetic atoms, whose spins carry Bohr magnetons, underpin some of the most sensitive magnetometers \cite{Kominis2003SERF}. In contrast, diamagnetic atoms possess spins originating solely from their nuclei. These nuclear spins, governed by much smaller nuclear magnetons, exhibit significantly longer coherence times \cite{Zheng2022YbEDM}, making them ideal for sensing interactions beyond magnetism. Nuclear magnetic resonance (NMR) is a prominent example of such sensing.
+
+In order to suppress magnetic-field noise, a comagnetometer employs two atomic species with distinct gyromagnetic ratios, colocated and measured simultaneously \cite{Terrano2022ComagNewPhys}. The ratio of their Larmor frequencies is intrinsically insensitive to magnetic-field fluctuations while retaining sensitivity to nonmagnetic interactions. Such systems have demonstrated the exceptional ability to detect energy shifts at the pHz level \cite{Vasilakis2009ComagSpinDependent}.
+
+Room-temperature gas-cell comagnetometers have been extensively developed, with combinations including the $^{85}\mathrm{Rb}$-$^{87}\mathrm{Rb}$ paramagnetic pair \cite{Kimball2013ComagSpinGravity}, paramagnetic-diamagnetic pairs $\mathrm K$-$^3\mathrm{He}$ \cite{Vasilakis2009ComagSpinDependent} and $\mathrm {Rb}$-$^{21}\mathrm{Ne}$ \cite{Almasi2020ComagSpinSpin}, and diamagnetic pairs $^3\mathrm{He}$-$^{129}\mathrm{Xe}$ \cite{Cane2004ComagLorentz&CPT, Allmendinger2014ComagLorentz&CPT, Almasi2020ComagSpinSpin}, 
+Xe isotopes \cite{Bulatowicz2013ComagAxionlike, Feng2022XeComagM-N} and Hg isotopes \cite{Lamoreaux1986ComagLorentz}. These platforms support a wide range of applications, from inertial sensing \cite{Kornack2005ComagGyroscope} to precision tests of fundamental physics, including searches for electric dipole moments (EDMs) \cite{Rosenberry2001ComagEDM, Sachdeva2019ComagEDM, Abel2020ComagnEDM}, monopole–dipole interactions \cite{Bulatowicz2013ComagAxionlike, Tullney2013SpinDependent, Feng2022XeComagM-N}, spin–gravity couplings \cite{Venema1992HgComagSpinGravity, Vasilakis2009ComagSpinDependent, Kimball2013ComagSpinGravity, Zhang2023ComagSpinGravity}, and axion-like dark matter \cite{Wu2019ComagDarkMatter, Alonso2019ComagDarkMatter}. 
+
+When probing for short-range interactions between gas atoms in a cell and a test object outside, the millimeter-thick cell wall imposes a limitation on sensitivity to interactions with ranges below $\sim$ 100 $\mu$m. Moreover, because the atoms are distributed throughout the centimeter-sized cell, only a small fraction are near the wall and thus within the sensing range, which further dilutes the sensitivity to short‑range interactions \cite{Feng2022XeComagM-N}. Cold-atom comagnetometers can overcome this limitation, as the test object can be placed inside the vacuum chamber where the trap resides. The atom cloud confined in a laser trap can be reduced to scales of 1–100 $\mu$m, enabling sensitivity to comparable interaction ranges. Furthermore, the absence of cell walls near the atoms and the test object eliminates related systematic effects.
+
+A prior implementation used two hyperfine states of paramagnetic $^{87}$Rb  with spin coherence times at several milliseconds \cite{Pau2020BECComag}. Signals of the two hyperfine states were combined to generate a single-species magnetometer based on the nuclear spin with a coherence time of 1 s. More recently, a cold-atom system combining paramagnetic $^{87}$Rb with diamagnetic $^{87}$Sr was realized \cite{Thekkeppatt2025ComaggFactor}. Operating under magnetic fields of 100-1000 G, this system enabled ppm-level determination of the nuclear $\mathit g$ factor of $^{87}$Sr, though its coherence time was ultimately limited to milliseconds by the $^{87}$Rb component under strong magnetic fields.
+
+%In contrast, cold atoms in a comagnetometer can be prepared into a cloud spanning only 1–100 $\mu$m, thereby reducing the detectable interaction range by several orders of magnitude. Previously, a cold-atom comagnetometer utilizing two hyperfine states of paramagnetic $^{87}$Rb is realized \cite{Pau2020BECComag}. Coherence time of these two hyperfine states is only several milliseconds, whereas by differencing the gyromagnetic ratios between the two hyperfine states, a magnetometer signal is obtained based on nuclear spin, with a coherence time of up to 1 s. However, if pair it with one of the hyperfine states to form a new comagnetometer, the coherence time would be limited to the millisecond level again. In another research, a comagnetometer is realized using paramagnetic $^{87}$Rb and diamagnetic $^{87}$Sr, which similarly suffers from the millisecond-level coherence limitation of $^{87}$Rb \cite{Thekkeppatt2025ComaggFactor}. With this comagnetometer, the nuclear $\mathit g$ factor of $^{87}$Sr is measured to ppm-level precision under strong magnetic fields (100-1000 G). However, such high fields do not amplify spin-based new physics signals but instead degrade spin coherence.
+
+Here, we realize a comagnetometer based purely on nuclear spins consisting of $^{171}$Yb (spin-1/2) and $^{173}$Yb (spin-5/2), simultaneously confined in a one-dimensional optical lattice under a weak magnetic field (10-100 mG). A key challenge in such systems is the suppression of lattice-induced light shifts. We eliminate vector light shifts by enforcing linear polarization of the lattice beam. Tensor shifts are naturally absent in $^{171}$Yb due to its spin-1/2 character. For the higher-spin $^{173}$Yb, we apply quantum control techniques to prepare a Schr\"{o}dinger cat state, whose precession frequency is rendered insensitive to tensor shifts. Using simultaneous Ramsey interferometry on both isotopes, we measure the Larmor-frequency ratio and demonstrate a spin coherence time of 60 s. We identify a novel systematic effect in the cat state stemming from the interplay between Zeeman and tensor light shifts (see section~\nameref{tensor}). By understanding and controlling both vector and tensor light shifts, we achieve a magnetic-noise suppression factor exceeding $3\times10^4$. We determine the ratio of nuclear magnetic moments between $^{171}$Yb and $^{173}$Yb with a precision of 4 ppm.
+
+
+
+\section*{Results}
+\subsection*{Realization of cold-atom comagnetometer}
+
+In preparation of a cold-atom ensemble, ytterbium atoms containing both $^{171}$Yb and $^{173}$Yb (isotopic abundances: 14\% and 16\%) exit an oven, pass through a Zeeman slower, and are captured by a blue magneto-optical trap (MOT) formed with a laser exciting the broad transition ${6s^2}\ {^{1}\mathrm{S}_0}\rightarrow{6s6p\ ^{1}\mathrm{P}_1}$ at 399 nm. The atoms are subsequently cooled to a temperature of $~\sim20\ \mu$K with a green MOT at 556 nm acting on the narrow transition ${6s^2}\ {^{1}\mathrm{S}_0}\rightarrow{6s6p\ ^{3}\mathrm{P}_1}$, and then transferred to a movable optical dipole trap (Bus ODT) at 1036.4 nm, which is a magic wavelength for the cooling transition \cite{Zheng2020Magic}. Carried by the Bus ODT from the MOT chamber to an adjacent science chamber across 0.35 m, the atoms arrive at their final destination: a horizontally directed, one-dimensional optical lattice also at 1036.4 nm (Fig.~\ref{fig1}a). With a beam power of 30 W and a waist of 25 $\mu$m, the lattice consists of trap sites with a depth of $\sim$ 2 mK. A total of about $2\times10^4$ $^{171}$Yb atoms and $2\times10^4$ $^{173}$Yb atoms are mixed together to form an ellipsoidal cloud with a diameter of 40 $\mu$m and a length of 80 $\mu$m, occupying approximately 160 lattice sites. The lifetime of atoms in the optical lattice is observed to be 50 s.
+
+The science chamber is surrounded by a set of coils and magnetic shields. A uniform magnetic field of 10 - 100 mG in the Z-direction is applied to define the spin quantization axis (Fig.~\ref{fig1}a). In the $^{1}\mathrm S_0,\mathit F=\mathrm 1/2$ ground state of $^{171}$Yb, a transversely polarized state $\left\vert\psi_{t}\right\rangle = \left\vert F=1/2,m_F=+1/2\right\rangle_g+\mathrm{e}^{\mathrm{i}\phi_1}\left\vert\mathit F=\mathrm 1/2,\mathit m_F=\mathrm-1/2\right\rangle_{\mathit g}$ is employed to sense the precession phase $\phi_{1}$. For the ground state of $^{173}$Yb  (I = 5/2), it is necessary to prepare atoms into the cat state, $\left\vert\psi_{c}\right\rangle = \left\vert5/2,+5/2\right\rangle_g+\mathrm{e}^{\mathrm{i}\phi_2}\left\vert5/2,-5/2\right\rangle_g$, in order to achieve immunity to otherwise significant decoherence caused by tensor light shifts in the optical lattice \cite{Yang2024Cat}. We note that, in the SU(n) space, the cat state is structurally analogous to another nonclassical quantum state, the NOON state \cite{Wolfgramm2010NOON}. The cat state cannot simply be prepared with either optical pumping or a rotating magnetic field. Instead, it is generated using a 556 nm Rabi beam, a circularly polarized laser beam traveling in the X-direction to drive the necessary Rabi transitions, with its $\sim$ GHz detunings from the ${6s^2}\ {^{1}\mathrm{S}_0}\rightarrow{6s6p\ ^{3}\mathrm{P}_1}$ transitions designed to induce a specific combination of vector and tensor light shifts \cite{Yang2024Cat}. For convenience, the same Rabi beam is also used to drive Rabi transitions in $^{171}$Yb, where it induces a pure vector shift in the spin-1/2 system. In this work, the induced Rabi transition frequency is $2\pi\times0.4$ kHz for $^{173}$Yb, and $2\pi\times3$ kHz for $^{171}$Yb.
+
+Ramsey interferometry is simultaneously implemented on both isotopes. Its measurement sequence is illustrated in Fig.~\ref{fig1}b. Since all laser pulses are simultaneously shone on atoms of both isotopes, care needs to be taken either to avoid crosstalks between the two isotopes, or to compensate for any crosstalk effects. First, optical pumping at 399 nm along the Z-axis is applied to polarize $^{173}$Yb and $^{171}$Yb successively. Then, a $\pi/2$-pulse of the 556 nm Rabi beam is applied to
+drive the spin state of $^{171}$Yb. The pulse also induces a small rotation ($\sim\pi/16$) on the spin of $^{173}$Yb. After a quarter of the $^{171}$Yb-Larmor period ($\mathrm T_{171}/4$), a $\pi/2$-pulse of the Rabi beam is applied to drive $^{173}$Yb into the cat state, while having little effect on $^{171}$Yb because their spins are pointing along the Rabi beam direction at the time of the pulse. Afterwards, spins of both isotopes are allowed to precess freely and accumulate phases over time. At the readout stage, first on $^{173}$Yb, the phase information is converted into population values by applying a $\pi/2$-pulse to the precessing cat state. The populations are measured as follows (see Methods,~\nameref{readout}): the first probe pulse at 556 nm measures the population of $\left\vert5/2, +5/2\right\rangle_g$, yielding $N_{173+}$; a subsequent $\pi$-pulse exchanges the populations between $\left\vert5/2,+5/2\right\rangle_g$ and $\left\vert5/2,-5/2\right\rangle_g$; the second probe then captures the original population of $\left\vert5/2,-5/2\right\rangle_g$, denoted as $N_{173-}$. The differential signal is derived as $S_{z} = (N_{+}-N_{-})/(N_{+}+N_{-})$. Note that both the second $\pi/2$-pulse and the $\pi$-pulse on $^{173}$Yb unavoidably operate on $^{171}$Yb as well. To compensate their effects on $^{171}$Yb, an additional pulse is introduced so that the three pulses, each successive one delayed by a complete $^{171}$Yb-Larmor period ($\mathrm T_{171}$), combine to rotate the spin of $^{171}$Yb by (12 + 1/2)$\pi$ . Finally, the populations of $^{171}$Yb spin states are read out in a way similar to that of $^{173}$Yb.
+
+The resulting Ramsey fringes are displayed in Fig.~\ref{fig1}c. The contrast of $^{173}$Yb decays due to interspecies collision between $^{173}$Yb and $^{171}$Yb, reducing the coherence time of $^{173}$Yb from thousands of seconds down to 60 s. Meanwhile, the collisions seem to have no degradation effects on $^{171}$Yb. 
+%In order to reduce the collisional effect on $^{173}$Yb, the number of $^{171}$Yb atoms is deliberately controlled to be about 1/3 of $^{173}$Yb, which amplifies the influence of photon shot noise on $^{171}$Yb \cite{Yang2023QND}, resulting in measurement deviations approximately three times larger than those of $^{173}$Yb.
+
+By applying simultaneous Ramsey interferometry on both isotopes, we determine the precession phases, and derived the Larmor frequencies of $^{171}$Yb ($\omega_{171}$) as well as the cat state of $^{173}$Yb ($\omega_{173}$), both with a statistical sensitivity of $\sim\ 2\pi\times2$ mHz in a single-shot measurement, primarily limited by spin-projection noise and residual light-shift fluctuations from the optical trap.
+
+Under ideal conditions, the comagnetometer frequency ratio $R_L = \omega_{171}/\omega_{173}$ is insensitive to magnetic-field fluctuation. However, we find that light shifts induced by the high-power optical lattice could cause a significant perturbation to $R_L$.
+
+
+\subsection*{Dependence on light shift}
+
+%The light shift Hamiltonian is expressed as \cite{LeKien2013Polarizability}:
+
+%\begin{equation}\label{light}
+%\begin{aligned}
+%\mathscr H_{{light}}=-\frac{1}{4}\vert{\boldsymbol{\mathcal{E}}}\vert^2 & \left\{\alpha_{F}^{\mathrm{S}}-\mathrm i \alpha_{F}^{\mathrm{V}} \frac{\left[\boldsymbol{u}^* \times \boldsymbol{u}\right] \cdot \boldsymbol{F}}{2F}\right.\\
+%+&\left.\alpha_{F}^{\mathrm{T}} \frac{3\left[\left(\boldsymbol{u}^* \cdot \boldsymbol{F}\right)(\boldsymbol{u} \cdot \boldsymbol{F})+(\boldsymbol{u} \cdot \boldsymbol{F})\left(\boldsymbol{u}^* \cdot \boldsymbol{F}\right)\right]-2 \boldsymbol{F}^2}{2F(2F-1)} \right\}
+%\end{aligned}
+%\end{equation}
+%where $\alpha_{F}^{\mathrm{S}}$, $\alpha_{F}^{\mathrm{V}}$, $\alpha_{F}^{\mathrm{T}}$, are the dynamical scalar, vector, and tensor polarizabilities, respectively, of the state with a total angular momentum $\boldsymbol{F}\equiv(F_x,F_y,F_z)$. $\boldsymbol{\mathcal{E}}$ and $\boldsymbol{u}\equiv(u_x,u_y,u_z)$ are the complex amplitude and unit polarization vector of the light field, respectively.
+
+The light shift can be decomposed into scalar, vector, and tensor terms, which are respectively proportional to the zeroth, first, and second powers of the magnetic quantum number ${m_F}$ \cite{LeKien2013Polarizability}. The scalar shift causes identical displacements for all ${m_F}$ states, thereby contributing no phase shifts in the evolution of angular momentum states. The vector shift, induced by circularly polarized light, acts as a Zeeman-like shift with its quantization axis along the wave vector of the light field. Given the linearly polarized optical lattice used in this work, the tensor shift aligned along the polarization direction emerges as the predominant effect.
+
+
+\subsubsection*{Tensor shift}\label{tensor}
+
+Tensor shifts are naturally absent in the ground state $^{1}\mathrm{S}_0$ of $^{171}$Yb (I = 1/2). For $^{173}$Yb (I = 5/2), tensor shifts are also expected to be null in the cat state of $^{1}\mathrm S_0$, but instead are found in this work to affect the Larmor frequency in a significant and peculiar way. The tensor operator aligns along the linear polarization direction (z) of the lattice, which, due to imperfection, form a small angle $\theta$ with the bias magnetic field $\mathrm B$ in the Z-direction. =This misalignment causes a twist of the cat state, producing a frequency shift through a mechanism analogous to the alignment-to-orientation conversion (AOC) effect in nonlinear Faraday rotation \cite{Budker2000AOC}. Without loss of generality, assume the magnetic field has a small component in the transverse x-direction, the Hamiltonian $\mathscr H$ arising from the combined magnetic and tensor fields can be expressed as
+
+\begin{equation}\label{Ham}
+    \mathscr H = \Omega_{\mathrm B}(\sigma_{z}+\theta\sigma_{x})+\Omega_{\mathrm T}\sigma_{z}^2\ (\theta\ll1).
+\end{equation}
+Here, $\sigma_{z}$ and $\sigma_{x}$ are the angular momentum matrices, with their terms corresponding to Zeeman effects. The $\sigma_{z}^2$ term describes the tensor effect. $\Omega_{\mathrm B}$ and $\Omega_{\mathrm T}$ are the corresponding coupling parameters.
+
+Under constant optical trapping conditions, we scan the orientation of the bias magnetic field over two dimensions and map the Larmor-frequency ratio $R_L$. First, the magnetic field is set at 50 mG, corresponding to $\Omega_{\mathrm B}/\Omega_{\mathrm T}=2.2$ (see Methods,~\nameref{BtoT}). The measured $R_L$ values fall onto a parabolic surface with a minimum extremum $R_{L,min} = 0.726079(3)$ (Fig.~\ref{fig2}b). Next, at a higher magnetic field of 100 mG, where $\Omega_{\mathrm B}/\Omega_{\mathrm T}=4.3$, the opening direction of the parabolic surface is found to be inverted, yielding a maximum $R_{L,max} = 0.726080(5)$ (Fig.~\ref{fig2}d), with its value consistent with the minimum value obtained at 50 mG. The parabolic surface and its curvature inversion can be attributed to a second-order perturbation effect on the $^{173}$Yb energy levels, with the transverse $\sigma_{x}$ term treated as a perturbation. The resulting shifts on the energy splitting between $\left\vert5/2,+5/2\right\rangle_g$ and $\left\vert5/2,-5/2\right\rangle_g$ can be expressed as 
+
+\begin{equation}\label{perturbation2nd}
+\begin{aligned}
+    \Delta E := \delta E_{+5/2}^{(2)}-\delta E_{-5/2}^{(2)} 
+    = \dfrac{5}{2} \cdot \left(\frac{\Omega_{\mathrm B}}{\Omega_{\mathrm T}}\right)^2 \cdot \dfrac{ \Omega_{\mathrm B} \theta^2}  {(\frac{\Omega_{\mathrm B}}{\Omega_{\mathrm T}} + 4)(\frac{\Omega_{\mathrm B}}{\Omega_{\mathrm T}} - 4)} ,
+\end{aligned}
+\end{equation}
+where $\delta E_{m_F}^{(2)}$ denotes the $2^{nd}$-order perturbation correction to the energy level of $\left\vert5/2,m_F\right\rangle_{g}$. Derivation of Eq.~(\ref{perturbation2nd}) is presented in Methods. It can be seen that, on opposite sides of the critical ratio $\Omega_{\mathrm B}/\Omega_{\mathrm T}=4$, the sign of $\Delta E$ reverses, resulting in
+curvature inversion of the $R_L$ surface. At the critical ratio of $\Omega_{\mathrm B}/\Omega_{\mathrm T}=4$, due to the degeneracy between $\left\vert5/2,-5/2\right\rangle_g$ and $\left\vert5/2,-3/2\right\rangle_g$, the above perturbation treatment is no longer valid, and the cat state can no longer be preserved.
+
+In order to evaluate the robustness of the comagnetometer against environmental magnetic field fluctuations, we define the suppression factor $\eta$ as:
+
+\begin{equation}
+\eta({\mathrm B})=\left\lvert \dfrac{\Delta {\mathrm B}}{\mathrm B} \Big/ \dfrac{\Delta R_L}{R_L} \right\rvert.
+\end{equation}
+From 50 mG to 100 mG, the magnetic field changes by a factor of two, so are the Larmor frequencies of each isotope, yet the Larmor-frequency ratio $R_L$ remains constant at the 10 ppm level. We derive the suppression factor $\eta>3\times10^4$ ($95\%$ confidence level) based on the two $R_L$ values and their corresponding uncertainties. %This is equivalent to a 90 dB reduction in the magnetic-field noise power.
+
+
+\subsubsection*{Residual vector shift}
+
+In order to minimize vector shifts, the optical lattice is tuned to be as close to linearly polarized as possible. This is done by optimizing the coherence of the Ramsey interferometry of $^{171}$Yb. During polarization tuning, the bias magnetic field is temporarily redirected to the horizontal propagation direction of the optical lattice (Y-axis), and its strength lowered to 1 mG, both measures taken to deliberately enhance the decoherence effect due to the inhomogeneous vector shifts in the lattice. In this way, the residual circular polarization component, as measured by the Stokes parameter $S_3$, is tuned to be less than 0.1\%. According to calculated vector polarizabilities of $^{171}$Yb and $^{173}$Yb, the vector shifts due to the residue circular polarization can be regarded as effective magnetic fields less than 100 $\mu$G along the Y-direction. At a bias field of 50 mG in the Z-direction, the relative deviation in $R_L$ due to the residue vector shift is estimated to be less than $3\times10^{-7}$, which is negligible compared to the current measurement uncertainty of $3\times10^{-6}$. When the field is increased to 100 mG, the deviation drops further down to $8\times10^{-8}$.
+
+
+
+\subsection*{Ratio of nuclear magnetic moments}
+
+We have investigated systematic uncertainties in the measurements of the Larmor-frequency ratio $R_L$. After aligning the 100 mG magnetic field to be parallel to the polarization direction of the optical lattice, we measure $R_L$ while varying the lattice power by more than a factor of five. No dependence of $R_L$ on light power is observed within the measurement uncertainties (Fig.~\ref{fig3}a). A weighted average across different lattice powers yields $R_L = 0.726077(2)$.
+Separately, we measure $R_L$ while varying the density ratio of $^{171}$Yb over $^{173}$Yb by a factor of seven. This is to investigate possible collisional shifts that are likely to be density dependent. Again, no dependence of $R_L$ on the density ratio is observed (Fig.~\ref{fig3}b). The average value across different density ratios is 0.726072(4). The Earth’s rotation frequency of $2\pi\times11.6\ \mu\mathrm{Hz}$ is negligible compared to the measurement uncertainty of around $2\pi\times100\ \mu\mathrm{Hz}$ for the Larmor frequencies.
+
+Since the two independently determined $R_L$ values agree, we take a weighted average of the two, yielding a final value of $R_L = 0.726076(3)$ and the ratio of nuclear magnetic moments between $^{171}$Yb and $^{173}$Yb, $R_{NMM} = \mu_{I,171}/\mu_{I,173} = -0.726076(3)$. As shown in Table 1, our result is consistent with the reported values from prior works \cite{Gossard1964RefNMR, Olschewski1972Ref, Stone2005Ref}, while improving the precision by an order of magnitude.
+
+
+\section*{Discussion}
+
+With its strong suppression of magnetic-field noise and tight atom localization within the lattice sites, our cold-atom comagnetometer enables sensitive searches for exotic interactions beyond the Standard Model, particularly at short interaction ranges of 1-100 $\mu$m. Among many new-physics interactions proposed \cite{Safronova2018NewPhys, Lei2025SpinExoticRMP}, we present two examples highlighting the capability of this system.
+
+The comagnetometer is used to search for $\mathit P$- and $\mathit T$-violating spin-mass couplings, also known as monopole-dipole interactions \cite{Moody1984M-N, Bulatowicz2013ComagAxionlike, Tullney2013SpinDependent, Feng2022XeComagM-N}. In this search, with $^{171}$Yb and $^{173}$Yb atoms as spin sources, the Larmor-frequency ratio is monitored as a dense mass source is brought into proximity with the atoms. By using optical tweezers to position the atoms, the atom-mass separation can be precisely controlled down to a few micrometers. For example, with one pair of $^{171}$Yb-$^{173}$Yb atoms, a minimum atom-mass separation of 5 $\mu$m, and 30 days of data accumulation, the sensitivity to spin-mass couplings at the micrometer-scale range can be improved by three orders of magnitude over the current best experimental limits \cite{Guigue2015Spin3HePRD}.
+
+Furthermore, we aim to improve the search sensitivity of electric dipole moments (EDMs) using cold atoms \cite{Bishof2016RaEDM, Zheng2022YbEDM}. The current EDM experiments on $^{171}$Yb \cite{Zheng2022YbEDM} are limited by magnetic-field noises, particularly the Johnson noise in adjacent electrodes. A $^{171}$Yb-$^{173}$Yb cold-atom comagnetometer can effectively suppress such noise effects, thereby boosting the EDM search sensitivity.
+
+
+
+\section*{Acknowledgements}
+We thank D. Sheng for fruitful discussions and critical reading of the manuscript, and thank S.-Z. Wang for contributions to the apparatus during the early stages. 
+
+\section*{Declarations}
+
+%Some journals require declarations to be submitted in a standardised format. Please check the Instructions for Authors of the journal to which you are submitting to see if you need to complete this section. If yes, your manuscript must contain the following sections under the heading `Declarations':
+
+\begin{itemize}
+\item Funding
+
+This work is supported by the National Natural Science Foundation of China (NSFC) through grant no. 12174371, the Innovation Program for Quantum Science and Technology through grant no. 2021ZD0303101, the Strategic Priority Research Program of the Chinese Academy of Sciences through grant no. XDB21010200, and the Major Frontier Research Project of the University of Science and Technology of China through grant no. LS9990000002.
+
+%\item Ethics approval and consent to participate
+%\item Consent for publication
+%\item Data availability 
+%\item Materials availability
+%\item Code availability 
+\item Author contribution
+
+J.-L. Z. and W.-T. L. constructed the experimental apparatus and performed the experiments and simulations. Y. A. Y. contributed to the apparatus during the early stages. Y.-Q. W. made contributions to the theory part. J.-L. Z., W.-T. L., Y.-Q. W., T. X. and Z.-T. L. carried out data analysis and wrote the manuscript.
+
+\item Competing interests
+
+The authors declare no competing interests.
+
+\end{itemize}
+
+
+% table
+\begin{table}[htbp]
+    \centering
+    \caption{\textbf{A compilation of reported values for the nuclear magnetic-moment ratio $\mu_{I,171}/\mu_{I,173}$. Values in parentheses represent one standard uncertainty (1-$\sigma$). }
+    } 
+    \label{Rcompare}
+    \begin{tabular}{l l}
+        \toprule
+        \textbf{Measurment} & $\mathbf{R_{NMM}}$ \\
+        \midrule
+        NMR on solid Yb \cite{Gossard1964RefNMR} & -0.7278(16) \\
+        RF spectroscopy on Yb atoms in a beam \cite{Olschewski1972Ref} & -0.72610(4) \\
+        \addlinespace[0.5em]
+        Comagnetometry on cold Yb atoms in a trap (this work) & -0.726076(3) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\begin{figure}[htbp]
+    \centering
+    %\includegraphics[width=1\textwidth]{Fig1.eps}
+    \caption{
+     $^{171}$Yb-$^{173}$Yb cold-atom comagnetometer. 
+     (a) Atoms of $^{171}$Yb and $^{173}$Yb are mixed and confined together in the optical lattice. A uniform field of 10-100 mG is applied to define the quantization axis in the vertical Z-direction. While $^{171}$Yb (I = 1/2) naturally has no tensor light shifts, $^{173}$Yb (I = 5/2) is prepared into the cat state, which is immune to decoherence caused by the tensor shifts in the optical lattice.
+     (b) Measurement sequence of the simultaneous Ramsey interferometry. The arrangement of the 399 nm pump pulses (solid purple), 556 nm Rabi pulses (solid dark green), and 556 nm probe pulses (hatched light green) are explained in details in the main text.
+     (c) Ramsey signals at 10 s with a bias field at 50 mG, where red circles represent the precession signals of $^{171}$Yb, and blue squares correspond to those of $^{173}$Yb. Error bars: one standard deviation (1-$\sigma$) derived from 3 repeated measurements; solid curves: least-squares fittings with sinusoidal functions.
+     }
+    \label{fig1}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
+    %\includegraphics[width=1\textwidth]{Fig2.eps}
+    \caption{The combined effect of Zeeman and tensor shifts on the Larmor frequency ($\omega_{173}$) of the cat state of $^{173}$Yb, and on the Larmor-frequency ratio $R_L=\omega_{171}/\omega_{173}$. $^{173}$Yb atoms are populated in $\left\vert5/2,\pm5/2\right\rangle_g$ (green dots). 
+    (a) At $\Omega_{\mathrm B}/\Omega_{\mathrm T}=2.2$, where $\left\vert5/2,-5/2\right\rangle_g$ is shifted higher than $\left\vert5/2,-3/2\right\rangle_g$, the $\sigma_x$ term mixes the two states in the rectangle and pushes $\left\vert5/2,-5/2\right\rangle_g$ further up. This results in a lower frequency $\omega_{173}$, and a higher $R_L$ value.
+    (b) Under 50 mG, corresponding to $\Omega_{\mathrm B}/\Omega_{\mathrm T}=2.2$, $R_L$ is mapped as the magnetic-field orientation is scanned around the Z-direction. The higher $R_L$ values in (a) results in a surface with positive curvatures.
+    (c) At $\Omega_{\mathrm B}/\Omega_{\mathrm T}=4.3$, where $\left\vert5/2,-5/2\right\rangle_g$ is shifted below $\left\vert5/2,-3/2\right\rangle_g$, the $\sigma_x$ term pushes $\left\vert5/2,-5/2\right\rangle_g$ further down.
+    (d) Under 100 mG, corresponding to $\Omega_{\mathrm B}/\Omega_{\mathrm T}=4.3$. The curvature of the surface is found to reverse.
+    Error bars: one standard deviation (1-$\sigma$) derived from 50 repeated measurements; surfaces: least-squares fittings with quadratic surface functions.
+    }
+    \label{fig2}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
+    %\includegraphics[width=1\textwidth]{Fig3.eps}
+    \caption{Investigating possible systematic effects.
+    (a) In a magnetic field of 100 mG, the lattice beam power is varied.
+    (b) With both the magnetic field and lattice parameters fixed, the density ratio between $^{171}$Yb and $^{173}$Yb is varied. No dependences on these experimental parameters are observed.
+    Error bars: one standard deviation (1-$\sigma$) derived from 50 repeated measurements; solid lines: weighted averages.
+    }
+    \label{fig3}
+\end{figure}
+
+
+
+
+
+%%===========================================================================================%%
+%% If you are submitting to one of the Nature Portfolio journals, using the eJP submission   %%
+%% system, please include the references within the manuscript file itself. You may do this  %%
+%% by copying the reference list from your .bbl file, paste it into the main manuscript .tex %%
+%% file, and delete the associated \verb+\bibliography+ commands.                            %%
+%%===========================================================================================%%
+
+
+%\bibliography{sn-bibliography}% common bib file
+%\input{outputbbl}
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\burl{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}
+\bibcommenthead
+
+\bibitem{Luca2018QMetrologyRev}
+\bibinfo{author}{Pezz\`e, L.}, \bibinfo{author}{Smerzi, A.}, \bibinfo{author}{Oberthaler, M.~K.}, \bibinfo{author}{Schmied, R.} \& \bibinfo{author}{Treutlein, P.}
+\newblock \bibinfo{title}{Quantum metrology with nonclassical states of atomic ensembles}.
+\newblock \emph{\bibinfo{journal}{Rev. Mod. Phys.}} \textbf{\bibinfo{volume}{90}}, \bibinfo{pages}{035005} (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/RevModPhys.90.035005}.
+
+\bibitem{Budker2007Mag}
+\bibinfo{author}{Budker, D.} \& \bibinfo{author}{Romalis, M.}
+\newblock \bibinfo{title}{Optical magnetometry}.
+\newblock \emph{\bibinfo{journal}{Nat. Phys.}} \textbf{\bibinfo{volume}{3}}, \bibinfo{pages}{227–234} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1038/nphys566}.
+
+\bibitem{Lei2025SpinExoticRMP}
+\bibinfo{author}{Cong, L.} \emph{et~al.}
+\newblock \bibinfo{title}{Spin-dependent exotic interactions}.
+\newblock \emph{\bibinfo{journal}{Rev. Mod. Phys.}} \textbf{\bibinfo{volume}{97}}, \bibinfo{pages}{025005} (\bibinfo{year}{2025}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/RevModPhys.97.025005}.
+
+\bibitem{Kominis2003SERF}
+\bibinfo{author}{Kominis, I.~K.}, \bibinfo{author}{Kornack, T.~W.}, \bibinfo{author}{Allred, J.~C.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{A subfemtotesla multichannel atomic magnetometer}.
+\newblock \emph{\bibinfo{journal}{Nature}} \textbf{\bibinfo{volume}{422}}, \bibinfo{pages}{596–599} (\bibinfo{year}{2003}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1038/nature01484}.
+
+\bibitem{Zheng2022YbEDM}
+\bibinfo{author}{Zheng, T.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{Measurement of the electric dipole moment of $^{171}\rm{Yb}$ atoms in an optical dipole trap}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{129}}, \bibinfo{pages}{083001} (\bibinfo{year}{2022}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.129.083001}.
+
+\bibitem{Terrano2022ComagNewPhys}
+\bibinfo{author}{Terrano, W.~A.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{Comagnetometer probes of dark matter and new physics}.
+\newblock \emph{\bibinfo{journal}{Quantum Sci. Technol.}} \textbf{\bibinfo{volume}{7}}, \bibinfo{pages}{014001} (\bibinfo{year}{2021}).
+\newblock \urlprefix\url{https://dx.doi.org/10.1088/2058-9565/ac1ae0}.
+
+\bibitem{Vasilakis2009ComagSpinDependent}
+\bibinfo{author}{Vasilakis, G.}, \bibinfo{author}{Brown, J.~M.}, \bibinfo{author}{Kornack, T.~W.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{Limits on new long range nuclear spin-dependent forces set with a $\mathrm{K}\mathrm{\text{\ensuremath{-}}}^{3}\mathrm{He}$ comagnetometer}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{103}}, \bibinfo{pages}{261801} (\bibinfo{year}{2009}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.103.261801}.
+
+\bibitem{Kimball2013ComagSpinGravity}
+\bibinfo{author}{Kimball, D. F.~J.} \emph{et~al.}
+\newblock \bibinfo{title}{A dual‐isotope rubidium comagnetometer to search for anomalous long‐range spin‐mass (spin‐gravity) couplings of the proton}.
+\newblock \emph{\bibinfo{journal}{Ann. Phys. (Berlin)}} \textbf{\bibinfo{volume}{525}}, \bibinfo{pages}{514–528} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1002/andp.201300036}.
+
+\bibitem{Almasi2020ComagSpinSpin}
+\bibinfo{author}{Almasi, A.}, \bibinfo{author}{Lee, J.}, \bibinfo{author}{Winarto, H.}, \bibinfo{author}{Smiciklas, M.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{New limits on anomalous spin-spin interactions}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{125}}, \bibinfo{pages}{201802} (\bibinfo{year}{2020}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.125.201802}.
+
+\bibitem{Cane2004ComagLorentz&CPT}
+\bibinfo{author}{Can\`e, F.} \emph{et~al.}
+\newblock \bibinfo{title}{Bound on \rm{L}orentz and $\rm{CPT}$ violating boost effects for the neutron}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{93}}, \bibinfo{pages}{230801} (\bibinfo{year}{2004}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.93.230801}.
+
+\bibitem{Allmendinger2014ComagLorentz&CPT}
+\bibinfo{author}{Allmendinger, F.} \emph{et~al.}
+\newblock \bibinfo{title}{New limit on \rm{L}orentz-invariance- and $\rm{CPT}$-violating neutron spin interactions using a free-spin-precession $^{3}\mathrm{He}$-$^{129}\mathrm{Xe}$ comagnetometer}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{112}}, \bibinfo{pages}{110801} (\bibinfo{year}{2014}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.112.110801}.
+
+\bibitem{Bulatowicz2013ComagAxionlike}
+\bibinfo{author}{Bulatowicz, M.} \emph{et~al.}
+\newblock \bibinfo{title}{Laboratory search for a long-range $\rm{T}$-odd, $\rm{P}$-odd interaction from axionlike particles using dual-species nuclear magnetic resonance with polarized $^{129}\mathrm{Xe}$ and $^{131}\mathrm{Xe}$ gas}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{111}}, \bibinfo{pages}{102001} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.111.102001}.
+
+\bibitem{Feng2022XeComagM-N}
+\bibinfo{author}{Feng, Y.-K.}, \bibinfo{author}{Ning, D.-H.}, \bibinfo{author}{Zhang, S.-B.}, \bibinfo{author}{Lu, Z.-T.} \& \bibinfo{author}{Sheng, D.}
+\newblock \bibinfo{title}{Search for monopole-dipole interactions at the submillimeter range with a $^{129}\mathrm{Xe}\text{\ensuremath{-}}^{131}\mathrm{Xe}\text{\ensuremath{-}}\mathrm{Rb}$ comagnetometer}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{128}}, \bibinfo{pages}{231803} (\bibinfo{year}{2022}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.128.231803}.
+
+\bibitem{Lamoreaux1986ComagLorentz}
+\bibinfo{author}{Lamoreaux, S.~K.}, \bibinfo{author}{Jacobs, J.~P.}, \bibinfo{author}{Heckel, B.~R.}, \bibinfo{author}{Raab, F.~J.} \& \bibinfo{author}{Fortson, E.~N.}
+\newblock \bibinfo{title}{New limits on spatial anisotropy from optically-pumped $^{201}\mathrm{Hg}$ and $^{199}\mathrm{Hg}$}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{57}}, \bibinfo{pages}{3125--3128} (\bibinfo{year}{1986}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.57.3125}.
+
+\bibitem{Kornack2005ComagGyroscope}
+\bibinfo{author}{Kornack, T.~W.}, \bibinfo{author}{Ghosh, R.~K.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{Nuclear spin gyroscope based on an atomic comagnetometer}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{95}}, \bibinfo{pages}{230801} (\bibinfo{year}{2005}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.95.230801}.
+
+\bibitem{Rosenberry2001ComagEDM}
+\bibinfo{author}{Rosenberry, M.~A.} \& \bibinfo{author}{Chupp, T.~E.}
+\newblock \bibinfo{title}{Atomic electric dipole moment measurement using spin exchange pumped masers of ${}^{129}\mathrm{Xe}$ and ${}^{3}\mathrm{He}$}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{86}}, \bibinfo{pages}{22–25} (\bibinfo{year}{2001}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1103/PhysRevLett.86.22}.
+
+\bibitem{Sachdeva2019ComagEDM}
+\bibinfo{author}{Sachdeva, N.} \emph{et~al.}
+\newblock \bibinfo{title}{New limit on the permanent electric dipole moment of $^{129}\mathrm{Xe}$ using $^{3}\mathrm{He}$ comagnetometry and \rm{SQUID} detection}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{123}}, \bibinfo{pages}{143003} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.123.143003}.
+
+\bibitem{Abel2020ComagnEDM}
+\bibinfo{author}{Abel, C.} \emph{et~al.}
+\newblock \bibinfo{title}{Measurement of the permanent electric dipole moment of the neutron}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{124}}, \bibinfo{pages}{081803} (\bibinfo{year}{2020}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.124.081803}.
+
+\bibitem{Tullney2013SpinDependent}
+\bibinfo{author}{Tullney, K.} \emph{et~al.}
+\newblock \bibinfo{title}{Constraints on spin-dependent short-range interaction between nucleons}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{111}}, \bibinfo{pages}{100801} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.111.100801}.
+
+\bibitem{Venema1992HgComagSpinGravity}
+\bibinfo{author}{Venema, B.~J.}, \bibinfo{author}{Majumder, P.~K.}, \bibinfo{author}{Lamoreaux, S.~K.}, \bibinfo{author}{Heckel, B.~R.} \& \bibinfo{author}{Fortson, E.~N.}
+\newblock \bibinfo{title}{Search for a coupling of the earth's gravitational field to nuclear spins in atomic mercury}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{68}}, \bibinfo{pages}{135--138} (\bibinfo{year}{1992}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.68.135}.
+
+\bibitem{Zhang2023ComagSpinGravity}
+\bibinfo{author}{Zhang, S.-B.} \emph{et~al.}
+\newblock \bibinfo{title}{Search for spin-dependent gravitational interactions at earth range}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{130}}, \bibinfo{pages}{201401} (\bibinfo{year}{2023}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.130.201401}.
+
+\bibitem{Wu2019ComagDarkMatter}
+\bibinfo{author}{Wu, T.} \emph{et~al.}
+\newblock \bibinfo{title}{Search for axionlike dark matter with a liquid-state nuclear spin comagnetometer}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{122}}, \bibinfo{pages}{191302} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.122.191302}.
+
+\bibitem{Alonso2019ComagDarkMatter}
+\bibinfo{author}{Alonso, R.}, \bibinfo{author}{Blas, D.} \& \bibinfo{author}{Wolf, P.}
+\newblock \bibinfo{title}{Exploring the ultra-light to sub-\rm{M}ev dark matter window with atomic clocks and co-magnetometers}.
+\newblock \emph{\bibinfo{journal}{J. High Energy Phys.}} \textbf{\bibinfo{volume}{2019}} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1007/JHEP07(2019)069}.
+
+\bibitem{Pau2020BECComag}
+\bibinfo{author}{Gomez, P.} \emph{et~al.}
+\newblock \bibinfo{title}{Bose-\rm{E}instein \rm{C}ondensate comagnetometer}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{124}}, \bibinfo{pages}{170401} (\bibinfo{year}{2020}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.124.170401}.
+
+\bibitem{Thekkeppatt2025ComaggFactor}
+\bibinfo{author}{Thekkeppatt, P.}, \bibinfo{author}{Digvijay}, \bibinfo{author}{Urech, A.}, \bibinfo{author}{Schreck, F.} \& \bibinfo{author}{van Druten, K.}
+\newblock \bibinfo{title}{Measurement of the $g$ factor of ground-state $^{87}\mathrm{Sr}$ at the parts-per-million level using co-trapped ultracold atoms}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{135}}, \bibinfo{pages}{193001} (\bibinfo{year}{2025}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/cjks-9hlp}.
+
+\bibitem{Zheng2020Magic}
+\bibinfo{author}{Zheng, T.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{Magic wavelengths of the \rm{Y}b $(6{s}^{2}$ $^{1}\mathrm{S}_{0}--6s6p$ $^{3}\mathrm{P}_{1})$ intercombination transition}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. A}} \textbf{\bibinfo{volume}{102}}, \bibinfo{pages}{062805} (\bibinfo{year}{2020}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevA.102.062805}.
+
+\bibitem{Yang2024Cat}
+\bibinfo{author}{Yang, Y.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{Minute-scale \rm{S}chr\"{o}dinger-cat state of spin-5/2 atoms}.
+\newblock \emph{\bibinfo{journal}{Nat. Photon.}} \textbf{\bibinfo{volume}{19}}, \bibinfo{pages}{89–94} (\bibinfo{year}{2024}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1038/s41566-024-01555-3}.
+
+\bibitem{Wolfgramm2010NOON}
+\bibinfo{author}{Wolfgramm, F.}, \bibinfo{author}{Cer\`{e}, A.} \& \bibinfo{author}{Mitchell, M.~W.}
+\newblock \bibinfo{title}{Noon states from cavity-enhanced down-conversion: high quality and super-resolution}.
+\newblock \emph{\bibinfo{journal}{J. Opt. Soc. Am. B}} \textbf{\bibinfo{volume}{27}}, \bibinfo{pages}{A25--A29} (\bibinfo{year}{2010}).
+\newblock \urlprefix\url{https://doi.org/10.1364/JOSAB.27.000A25}.
+
+\bibitem{LeKien2013Polarizability}
+\bibinfo{author}{Le~Kien, F.}, \bibinfo{author}{Schneeweiss, P.} \& \bibinfo{author}{Rauschenbeutel, A.}
+\newblock \bibinfo{title}{Dynamical polarizability of atoms in arbitrary light fields: general theory and application to cesium}.
+\newblock \emph{\bibinfo{journal}{Eur. Phys. J. D}} \textbf{\bibinfo{volume}{67}} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1140/epjd/e2013-30729-x}.
+
+\bibitem{Budker2000AOC}
+\bibinfo{author}{Budker, D.}, \bibinfo{author}{Kimball, D.~F.}, \bibinfo{author}{Rochester, S.~M.} \& \bibinfo{author}{Yashchuk, V.~V.}
+\newblock \bibinfo{title}{Nonlinear magneto-optical rotation via alignment-to-orientation conversion}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. Lett.}} \textbf{\bibinfo{volume}{85}}, \bibinfo{pages}{2088--2091} (\bibinfo{year}{2000}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.85.2088}.
+
+\bibitem{Gossard1964RefNMR}
+\bibinfo{author}{Gossard, A.~C.}, \bibinfo{author}{Jaccarino, V.} \& \bibinfo{author}{Wernick, J.~H.}
+\newblock \bibinfo{title}{Ytterbium \rm{NMR}:$\mathrm{Yb}^{171}$ nuclear moment and \rm{Y}b metal knight shift}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev.}} \textbf{\bibinfo{volume}{133}}, \bibinfo{pages}{A881--A884} (\bibinfo{year}{1964}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRev.133.A881}.
+
+\bibitem{Olschewski1972Ref}
+\bibinfo{author}{Olschewski, L.}
+\newblock \bibinfo{title}{Messung der magnetischen \rm{K}erndipolmomente an freien $^{43}\rm{Ca}$-, $^{87}\mathrm{Sr}$-, $^{135}\mathrm{Ba}$-, $^{137}\rm{Ba}$-, $^{171}\mathrm{Yb}$- und$^{173}\mathrm{Yb}$-\rm{A}tomen mit optischem \rm{P}umpen}.
+\newblock \emph{\bibinfo{journal}{Z. Phys.}} \textbf{\bibinfo{volume}{249}}, \bibinfo{pages}{205–227} (\bibinfo{year}{1972}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1007/BF01400226}.
+
+\bibitem{Stone2005Ref}
+\bibinfo{author}{Stone, N.}
+\newblock \bibinfo{title}{Table of nuclear magnetic dipole and electric quadrupole moments}.
+\newblock \emph{\bibinfo{journal}{At. Data Nucl. Data Tables}} \textbf{\bibinfo{volume}{90}}, \bibinfo{pages}{75–176} (\bibinfo{year}{2005}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1016/j.adt.2005.04.001}.
+
+\bibitem{Safronova2018NewPhys}
+\bibinfo{author}{Safronova, M.~S.} \emph{et~al.}
+\newblock \bibinfo{title}{Search for new physics with atoms and molecules}.
+\newblock \emph{\bibinfo{journal}{Rev. Mod. Phys.}} \textbf{\bibinfo{volume}{90}}, \bibinfo{pages}{025008} (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/RevModPhys.90.025008}.
+
+\bibitem{Moody1984M-N}
+\bibinfo{author}{Moody, J.~E.} \& \bibinfo{author}{Wilczek, F.}
+\newblock \bibinfo{title}{New macroscopic forces?}
+\newblock \emph{\bibinfo{journal}{Phys. Rev. D}} \textbf{\bibinfo{volume}{30}}, \bibinfo{pages}{130--138} (\bibinfo{year}{1984}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevD.30.130}.
+
+\bibitem{Guigue2015Spin3HePRD}
+\bibinfo{author}{Guigue, M.}, \bibinfo{author}{Jullien, D.}, \bibinfo{author}{Petukhov, A.~K.} \& \bibinfo{author}{Pignol, G.}
+\newblock \bibinfo{title}{Constraining short-range spin-dependent forces with polarized $^{3}\mathrm{He}$}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. D}} \textbf{\bibinfo{volume}{92}}, \bibinfo{pages}{114001} (\bibinfo{year}{2015}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevD.92.114001}.
+
+\bibitem{Bishof2016RaEDM}
+\bibinfo{author}{Bishof, M.} \emph{et~al.}
+\newblock \bibinfo{title}{Improved limit on the $^{225}\mathrm{Ra}$ electric dipole moment}.
+\newblock \emph{\bibinfo{journal}{Phys. Rev. C}} \textbf{\bibinfo{volume}{94}}, \bibinfo{pages}{025501} (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevC.94.025501}.
+\end{thebibliography}
+
+%% if required, the content of .bbl file can be included here once bbl is generated
+%\input{output.bbl}
+
+
+\section*{Methods}
+\subsection* {Zeeman and tensor light shifts of $^{173}$Yb}\label{CombinedShift}
+
+The Hamiltonian in Eq.~(\ref{Ham}) is rewritten below, treating the $\sigma_x$ term as a perturbation:
+
+\begin{equation}\label{Ham_pur}
+\begin{aligned}
+    \mathscr H & = \mathscr{H}_0+\theta\mathscr{H}' \\
+    & = \Omega_{\mathrm B}\sigma_z + \Omega_{\mathrm T}\sigma_z^2 + \theta\Omega_{\mathrm B}\sigma_x\ (\theta\ll 1).
+\end{aligned}
+\end{equation}
+
+The perturbed eigenenergies are
+
+\begin{equation}\label{perturbation}
+    E_{m_F} = E_{m_F}^{(0)}
+     +\theta\left\langle \psi_{m_F}^{(0)}\right\vert\mathscr{H}'\left\vert\psi_{m_F}^{(0)}\right\rangle
+    +\sum_{i\neq {m_F}}\theta^2    \dfrac{{\left\langle\psi_i^{(0)}\right\vert\mathscr{H}'\left\vert\psi_{m_F}^{(0)} \right\rangle}^2}
+    {E_{m_F}^{(0)}-E_i^{(0)}}
+    +O(\theta^3),
+\end{equation}
+
+\begin{equation}\label{E(0)}
+    E_{m_F}^{(0)}=m_F\Omega_{\mathrm B}+m_F^2\Omega_{\mathrm T},
+\end{equation}
+where the $\theta^2$ term corresponds to $\delta E_{m_F}^{(2)}$ in Eq.~(\ref{perturbation2nd}). When $\Omega_{\mathrm B}/\Omega_{\mathrm T}=4$, the unperturbed energy levels of $\left\vert5/2,-5/2\right\rangle_g$ and $\left\vert5/2,-3/2\right\rangle_g$ are degenerate.
+
+Here the first-order perturbation term is always zero because the $\sigma_x$ term corresponds to a subdiagonal matrix. 
+For the spin-5/2 system in $^{173}$Yb, the $\sigma_x$ matrix is
+
+\begin{equation}
+\sigma_x = 
+    \begin{pmatrix}
+        0 & \frac{\sqrt{5}}{2} & & & & \\
+        \frac{\sqrt{5}}{2} & 0 & \frac{\sqrt{8}}{2} & & & \\
+         & \frac{\sqrt{8}}{2} & 0 & \frac{\sqrt{9}}{2} & & \\
+         & & \frac{\sqrt{9}}{2} & 0 & \frac{\sqrt{8}}{2} & \\
+         & & & \frac{\sqrt{8}}{2} & 0 & \frac{\sqrt{5}}{2}\\
+         & & & & \frac{\sqrt{5}}{2} & 0 \\
+    \end{pmatrix}.
+\end{equation}
+
+To calculate the Larmor frequency of the cat state of $^{173}$Yb, we consider the $2^{nd}$-order perturbation on the two populated stretched states $\left\vert5/2,\pm5/2\right\rangle_g$:
+
+\begin{equation}\label{E+5/2}
+    \delta E_{+5/2}^{(2)} = \theta^2\cdot\dfrac{5}{4}\cdot\dfrac{\Omega_{\mathrm B}^2}{\Omega_{\mathrm B}+4\Omega_{\mathrm T}},
+\end{equation}
+
+\begin{equation}\label{E-5/2}
+    \delta E_{-5/2}^{(2)} = \theta^2\cdot\dfrac{5}{4}\cdot\dfrac{\Omega_{\mathrm B}^2}{-\Omega_{\mathrm B}+4\Omega_{\mathrm T}}.
+\end{equation}
+Subtracting the two energy shifts yields Eq.~(\ref{perturbation2nd}).
+
+
+\subsection*{Calibration of $\Omega_{\mathrm B}/\Omega_{\mathrm T}$ }\label{BtoT}
+
+We perform precession measurements on $^{173}$Yb to calibrate the $\Omega_{\mathrm B}/\Omega_{\mathrm T}$ values. Since the cat state is immune to tensor shifts ($\Omega_{\mathrm T}$), we employ a coherent spin state instead, whose spin is fully polarized along a transverse direction. As a result, it encompasses all $m_F$ states.
+
+While keeping the lattice linearly polarized along the z-axis, its power is reduced to 8 W to mitigate decoherence effects due to tensor shifts. Meanwhile, a bias magnetic field of 23.5 mG is applied along the x-direction. The $^{173}$Yb atoms are first pumped into $\left\vert5/2,+5/2\right\rangle_g$, then allowed to precess under the influence of both the Zeeman and tensor shifts, $\mathscr{H}_{calib} = \Omega_{\mathrm B}\sigma_x + \Omega_{\mathrm T}\sigma_z^2$. After a variable precession duration (0 – 2,500 ms), the population signal $S_z$ is measured along the z-axis (Extended Data Fig.~\ref{Exfig1}).
+
+We simulate the precession process of $^{173}$Yb using the calibration Hamiltonian ($\mathscr{H}_{calib}$) and compare the results with experimental data. In the simulation, the contribution of each $m_F$ state to the population signal is weighted by both the Clebsch-Gordan coefficient and the probe beam detuning for the relevant transition (Extended Data Fig.~\ref{Exfig2}b). Specifically, when intending to probe the population in $\lvert5/2,+5/2\rangle_g$, the detection probabilities for all $\lvert5/2,m_F\rangle_g$ states are: 1.00, 0.58, 0.31, 0.16, 0.08, and 0.03 ($m_F$ from +5/2 to -5/2). Furthermore, the spatial distribution of the tensor field across the optical trap is incorporated in the model. By comparing simulated results with the experimental data, we extract $\Omega_{\mathrm B}/\Omega_{\mathrm T}=3.5$ under the given magnetic field and lattice intensity condition.
+
+It should be noted that the detection issue described above, involving all $m_F$ states, is specific to the coherent spin state used for the calibration. In contrast, the cat states prepared elsewhere in the experiment involve only $\left\vert5/2,\pm5/2\right\rangle_g$ states, which have maximally different detection probabilities (Extended Data Fig.~\ref{Exfig2}b), and are thus clearly resolvable.
+
+
+\subsection*{Atom sample detection}\label{readout}
+
+A circularly polarized laser probe beam along the Z-direction runs through the cold atom ensemble and is detected by a CMOS camera. Absorption images are taken on the atoms for population measurements. The state readout of atoms is performed via differential detection of two stretched states. For $^{171}$Yb atoms, the probe beam resonantly excites the cycling transition $\left\vert1/2,+1/2\right\rangle_g \rightarrow \left\vert{3/2},+3/2\right\rangle_e$ (Extended Data Fig.~\ref{Exfig2}a). Meanwhile, the $\left\vert1/2,-1/2\right\rangle_g \rightarrow \left\vert3/2,+1/2\right\rangle_e$ transition is off resonance by 10 times the natural linewidth ($10\ \Gamma$) due to tensor shifts on the excited states. As a result, the cycling transition can be repeated 1,200 times on average before a spin flip occurs. This spin selectivity ensures that the spin state is detected with an efficiency approaching $100\%$. For $^{173}$Yb atoms, the relevant transitions are $\left\vert5/2,+5/2\right\rangle_g \rightarrow \left\vert7/2,+7/2\right\rangle_e$ and $\left\vert5/2,-5/2\right\rangle_g \rightarrow \left\vert3/2,-3/2\right\rangle_e$ (Extended Data Fig.~\ref{Exfig2}b). In addition to a comparable difference of tensor shifts ($\sim20\ \Gamma$), the branching ratios of these two transitions differ by a factor of 21, thus further enhancing the spin selectivity.
+
+\renewcommand{\figurename}{Extended Data Fig.}
+\setcounter{figure}{0}
+
+\begin{figure}[htbp!]
+    \centering
+    %\includegraphics[width=0.8\textwidth]{Fig4.eps}
+    \caption {Precession of a coherent spin state of $^{173}$Yb under $\mathrm B_{\mathit x}$ = 23.5 mG and 8 W lattice power. Error bars: one standard deviation (1-$\sigma$) derived from 3 repeated measurements. The solid curve represents simulation results.}
+    \label{Exfig1}
+\end{figure}
+
+\begin{figure}[htbp!]
+    \centering
+    %\includegraphics[width=1\textwidth]{Fig5.eps}
+    \caption{
+     Transitions used to measure spin-state populations in $^{171}$Yb (a) and $^{173}$Yb (b). The green solid arrows indicate cycling transitions used for population measurements. The green dashed arrows indicate spin-flip transitions suppressed by large detunings. The gray dashed lines indicate transitions absent in cat-state measurements due to the lack of atomic population in corresponding $m_F$ states. Values adjacent to all transition lines denote the squares of the corresponding Clebsch-Gordan coefficients.
+     }
+     \label{Exfig2}
+\end{figure}
+
+
+\bmhead{Data availability}
+Source data are provided in Fig.~\ref{fig1}c, Fig.~\ref{fig2}b, Fig.~\ref{fig2}d, Fig.~\ref{fig3}, Extended Data Fig.~\ref{Exfig1} and available via Figshare at https://doi.org/10.6084/m9.figshare.32043486. \cite{figshare}
+
+%\input{outputbbl_method}
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\burl{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}
+\bibcommenthead
+
+\bibitem[38]{figshare}
+\bibinfo{author}{Zhang, J.-L.} \emph{et~al.}
+%\bibinfo{author}{Luo, W.-T.}, \bibinfo{author}{Yang, Y. A.}, \bibinfo{author}{Wang, Y.-Q.}, \bibinfo{author}{Xia, T.} \& \bibinfo{author}{Lu, Z.-T.}
+\newblock \bibinfo{title}{Cold-atom comagnetometry via optical control of spin states}.
+\newblock \emph{\bibinfo{journal}{Nat. Photon.}} (\bibinfo{year}{2026}).
+\newblock \urlprefix\url{https://doi.org/10.6084/m9.figshare.32043486}.
+\end{thebibliography}
+
+\end{document}
