@@ -27,14 +27,14 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = ;   % 第一个文件夹序号
-last = ;   % 最后一个文件夹序号
+first = 131;   % 第一个文件夹序号
+last = 143;   % 最后一个文件夹序号
 
 delete = 0;
 delete_num = [5];   % 必须从小到大
 
 % 设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 12;   % 第一组数据的自变量`
+intercept = 10.5;   % 第一组数据的自变量`
 coeff = 1.5;   % 各组数据自变量间隔
 
 
