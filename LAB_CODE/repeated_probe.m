@@ -4,13 +4,13 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-07-16' ...
+maindir=['\\ARTEMIS-PC\Data\2026-07-22' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
 photo = 2*repeat;
-species = 171;
-mag = 10;   % 磁场和10mG的比值
+species = 173;
+mag = 9.7;   % 磁场和10mG的比值
 
 plotnumber = 1;   % 是否画原子数
 plotradius = 0;   % 是否画原子团半径
@@ -27,8 +27,8 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 77;   % 第一个文件夹序号
-last = 89;   % 最后一个文件夹序号
+first = 322;   % 第一个文件夹序号
+last = 334;   % 最后一个文件夹序号
 
 delete = 0;
 delete_num = [5];   % 必须从小到大
@@ -48,7 +48,7 @@ end
 %% read data
 datalength=last-first+1;
 xaxis = (0:last-first)*coeff+intercept;
-%xaxis = [0:100:1000 1400:400:2200 3000:800:8000];
+%xaxis = [0:1.8:27 27.5:2.5:50];
 
 % Preallocation
 OD = zeros(photo,datalength);
@@ -199,19 +199,19 @@ if plotprecession==1
             [xData, yData] = prepareCurveData(xaxis,relaOD(k,:));
             weight = ones(length(xData),1);
             if offset == 1
-                ft = fittype( 'a*sin(2*pi*x/T+b)+c', 'independent', 'x', 'dependent', 'y' );
+                ft = fittype( 'a*sin(2*pi*(x/T+b))+c', 'independent', 'x', 'dependent', 'y' );
                 opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
                 opts.Display = 'Off';
-                opts.Lower = [70*species_coeff/mag 0.15 -2*pi -5];   % T a b c
-                opts.Upper = [130*species_coeff/mag 1 2*pi 5];   % T a b c
-                opts.StartPoint = [107*species_coeff/mag 0.7 0 0];   % T a b c
+                opts.Lower = [70*species_coeff/mag 0.15 0 -5];   % T a b c
+                opts.Upper = [130*species_coeff/mag 1 1 5];   % T a b c
+                opts.StartPoint = [107*species_coeff/mag 0.7 0.5 0];   % T a b c
             elseif offset == 0
-                ft = fittype( 'a*sin(2*pi*x/T+b)', 'independent', 'x', 'dependent', 'y' );
+                ft = fittype( 'a*sin(2*pi*(x/T+b))', 'independent', 'x', 'dependent', 'y' );
                 opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
                 opts.Display = 'Off';
-                opts.Lower = [60*species_coeff/mag 0.15 -2*pi];   % T a b c
-                opts.Upper = [140*species_coeff/mag 1 2*pi];   % T a b c
-                opts.StartPoint = [107*species_coeff/mag 0.7 0];   % T a b c
+                opts.Lower = [60*species_coeff/mag 0.15 0];   % T a b c
+                opts.Upper = [140*species_coeff/mag 1 1];   % T a b c
+                opts.StartPoint = [107*species_coeff/mag 0.7 0.5];   % T a b c
 
             end
             opts.Weights = weight;
@@ -220,9 +220,11 @@ if plotprecession==1
             [fitresult, gof] = fit(xData, yData, ft, opts);
             amp(k) = fitresult.a;
             T(k) = fitresult.T;
+            phi_vs_2pi(k) = fitresult.b;
             interval = confint(fitresult);
             a_sigma(k) = (interval(2,2)-interval(1,2))/4;
             T_sigma(k) = (interval(2,1)-interval(1,1))/4;
+            phi_vs_2pi_sigma(k) = (interval(2,3)-interval(1,3))/4;
 
             if offset == 1
                 c(k) = fitresult.c;
