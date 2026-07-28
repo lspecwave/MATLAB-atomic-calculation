@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-07-24' ...
+maindir=['\\ARTEMIS-PC\Data\2026-07-28' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
@@ -27,14 +27,14 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 136;   % 第一个文件夹序号
-last = 148;   % 最后一个文件夹序号
+first = 700;   % 第一个文件夹序号
+last = 712;   % 最后一个文件夹序号
 
 delete = 0;
 delete_num = [5];   % 必须从小到大
 
 % 设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 135;   % 第一组数据的自变量`
+intercept = 15;   % 第一组数据的自变量`
 coeff = 1.5;   % 各组数据自变量间隔
 
 
