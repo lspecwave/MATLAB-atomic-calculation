@@ -4,13 +4,13 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-07-28' ...
+maindir=['\\ARTEMIS-PC\Data\2026-08-07' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
 photo = 2*repeat;
-species = 173;
-mag = 9.7;   % 磁场和10mG的比值
+species = 171;
+mag = 9.6;   % 磁场和10mG的比值
 
 plotnumber = 1;   % 是否画原子数
 plotradius = 0;   % 是否画原子团半径
@@ -27,15 +27,21 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 700;   % 第一个文件夹序号
-last = 712;   % 最后一个文件夹序号
+first = 753;   % 第一个文件夹序号
+last = 773;   % 最后一个文件夹序号
+
+knowT = 0;
+if knowT == 1
+    T = (14020+46+4*2+18.7)/1733.75;   % 是否已知周期
+    T_sigma = 5/1733.75;
+end
 
 delete = 0;
 delete_num = [5];   % 必须从小到大
 
 % 设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
 intercept = 15;   % 第一组数据的自变量`
-coeff = 1.5;   % 各组数据自变量间隔
+coeff = 2.5;   % 各组数据自变量间隔
 
 
 if ramsey == 1
@@ -48,7 +54,13 @@ end
 %% read data
 datalength=last-first+1;
 xaxis = (0:last-first)*coeff+intercept;
-%xaxis = [0:1.8:27 27.5:2.5:50];
+%xaxis = [27 43.5 34.5 16.5 21 19.5 36 24 40.5 39 22.5 28.5 15 42 31.5 33 25.5 37.5 18 45 30];
+xaxis = [39 49 27 31 29 17 53 35 47 33 51 25 43 24 41 45 19 15 21 37 55];
+%xaxis = zeros(1,length(temp)*2);
+%xaxis(1:2:length(temp)*2-1) = temp;
+%xaxis(2:2:length(temp)*2) = temp;
+%xaxis = [18:3:27 21.1:0.2:23.1 17.5:0.1:18 18.2 18.4 30:3:48 29.7:0.2:30.3];
+%xaxis = [21.5:0.1:22.5 25:3:40 14.5:0.2:15.9 18:0.2:18.4 32.5:0.2:33.5 43:3:46];
 
 % Preallocation
 OD = zeros(photo,datalength);
@@ -187,51 +199,90 @@ if plotprecession==1
             end
         end
         ylabel('S_z');
-        axis([min(xaxis) max(xaxis) -1 1]);
+
         % 进动曲线 %
         if ramsey == 1 && phase == 0
-            % 拟合 %
-            if species == 171
-                species_coeff = 1;
-            elseif species == 173
-                species_coeff = 0.726076;
-            end
-            [xData, yData] = prepareCurveData(xaxis,relaOD(k,:));
-            weight = ones(length(xData),1);
-            if offset == 1
-                ft = fittype( 'a*sin(2*pi*(x/T+b))+c', 'independent', 'x', 'dependent', 'y' );
+            % 进动周期未知 %
+            if knowT == 0
+                axis([min(xaxis) max(xaxis) -1 1]);
+                % 拟合 %
+                if species == 171
+                    species_coeff = 1;
+                elseif species == 173
+                    species_coeff = 0.726076;
+                end
+                [xData, yData] = prepareCurveData(xaxis,relaOD(k,:));
+                weight = ones(length(xData),1);
+
+                if offset == 1
+                    ft = fittype( 'a*sin(2*pi*(x/T+b))+c', 'independent', 'x', 'dependent', 'y' );
+                    opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
+                    opts.Display = 'Off';
+                    opts.Lower = [90*species_coeff/mag 0.15 0 -5];   % T a b c
+                    opts.Upper = [130*species_coeff/mag 1 1 5];   % T a b c
+                    opts.StartPoint = [107*species_coeff/mag 0.7 0.5 0];   % T a b c
+                elseif offset == 0
+                    ft = fittype( 'a*sin(2*pi*(x/T+b))', 'independent', 'x', 'dependent', 'y' );
+                    opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
+                    opts.Display = 'Off';
+                    opts.Lower = [90*species_coeff/mag 0.7 -0.5];   % T a b
+                    opts.Upper = [130*species_coeff/mag 1 0.5];   % T a b
+                    opts.StartPoint = [108*species_coeff/mag 0.9 2];   % T a b
+
+                end
+                opts.Weights = weight;
+
+                % 对数据进行模型拟合 %
+                [fitresult, gof] = fit(xData, yData, ft, opts);
+                amp(k) = fitresult.a;
+                T(k) = fitresult.T;
+                phi_vs_2pi(k) = fitresult.b;
+                interval = confint(fitresult);
+                a_sigma(k) = (interval(2,2)-interval(1,2))/4;
+                T_sigma(k) = (interval(2,1)-interval(1,1))/4;
+                phi_vs_2pi_sigma(k) = (interval(2,3)-interval(1,3))/4;
+
+                if offset == 1
+                    c(k) = fitresult.c;
+                    c_sigma(k) = (interval(2,4)-interval(1,4))/4;
+                end
+
+                l = plot(fitresult, xData, yData);
+
+                % 已知进动周期 %
+            elseif knowT == 1
+                %xaxis(5) = [];
+                %relaOD(5) = [];
+                axis([min(xaxis-0.2*T)*(2*pi/T) max(xaxis+0.2*T)*(2*pi/T) -1 1]);
+
+                [xData, yData] = prepareCurveData(xaxis,relaOD(k,:));
+                weight = ones(length(xData),1);
+
+                ft = fittype( 'a*sin(x+b)', 'independent', 'x', 'dependent', 'y' );
                 opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
                 opts.Display = 'Off';
-                opts.Lower = [70*species_coeff/mag 0.15 0 -5];   % T a b c
-                opts.Upper = [130*species_coeff/mag 1 1 5];   % T a b c
-                opts.StartPoint = [107*species_coeff/mag 0.7 0.5 0];   % T a b c
-            elseif offset == 0
-                ft = fittype( 'a*sin(2*pi*(x/T+b))', 'independent', 'x', 'dependent', 'y' );
-                opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
-                opts.Display = 'Off';
-                opts.Lower = [60*species_coeff/mag 0.15 0];   % T a b c
-                opts.Upper = [140*species_coeff/mag 1 1];   % T a b c
-                opts.StartPoint = [107*species_coeff/mag 0.7 0.5];   % T a b c
+                opts.Lower = [0.15 -pi];   % a b
+                opts.Upper = [1 pi];   % a b
+                opts.StartPoint = [0.7 0];   % a b
+                opts.Weights = weight;
+
+                % 对数据进行模型拟合 %
+                [fitresult, gof] = fit(xData*(2*pi/T), yData, ft, opts);
+                amp(k) = fitresult.a;
+                phi_vs_2pi(k) = fitresult.b;
+                interval = confint(fitresult);
+                a_sigma(k) = (interval(2,1)-interval(1,1))/4;
+                phi_vs_2pi_sigma(k) = (interval(2,2)-interval(1,2))/4;
+
+                x_tick = round(gca().XTick/(2*pi/T))*(2*pi/T);
+                xticks([]);
+                %xticks(x_tick);
+                %xticklabels(x_tick/(2*pi/T));
+
+                l = plot(fitresult, xData*(2*pi/T), yData);
 
             end
-            opts.Weights = weight;
 
-            % 对数据进行模型拟合 %
-            [fitresult, gof] = fit(xData, yData, ft, opts);
-            amp(k) = fitresult.a;
-            T(k) = fitresult.T;
-            phi_vs_2pi(k) = fitresult.b;
-            interval = confint(fitresult);
-            a_sigma(k) = (interval(2,2)-interval(1,2))/4;
-            T_sigma(k) = (interval(2,1)-interval(1,1))/4;
-            phi_vs_2pi_sigma(k) = (interval(2,3)-interval(1,3))/4;
-
-            if offset == 1
-                c(k) = fitresult.c;
-                c_sigma(k) = (interval(2,4)-interval(1,4))/4;
-            end
-
-            l = plot(fitresult, xData, yData);
             l(1).Marker = '.';
             l(1).MarkerSize = 16;
             l(1).Color = colors(k,:);
@@ -281,9 +332,17 @@ end
 
 if save_data == 1
     clear main_dir_0
-    save([maindir,'Abs-',num2str(last),'\repeat_probe.mat']);
+    if knowT == 1
+        save([maindir,'Abs-',num2str(last),'\repeat_probe_Tknow.mat']);
+    elseif knowT == 0
+        save([maindir,'Abs-',num2str(last),'\repeat_probe.mat']);
+    end
     if ramsey == 1 && phase == 0
-        save([maindir,'Abs-',num2str(last),'\repeat_amp.mat'],'amp','T','a_sigma','T_sigma');
+        if knowT == 1
+            save([maindir,'Abs-',num2str(last),'\repeat_amp_Tknow.mat'],'amp','T','a_sigma','T_sigma');
+        elseif knowT == 0
+            save([maindir,'Abs-',num2str(last),'\repeat_amp.mat'],'amp','T','a_sigma','T_sigma');
+        end
     elseif phase == 1 && ramsey == 0
         save([maindir,'Abs-',num2str(last),'\repeat_phase.mat'],'mean_sz');
     end

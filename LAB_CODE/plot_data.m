@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-07-28' ...
+maindir=['\\ARTEMIS-PC\Data\2026-08-1' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -23,8 +23,10 @@ dual_species = 0; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-first = 501; %第一个文件夹序号
-last = 660; %最后一个文件夹序号
+save_data = 1;   % 始终保存s1,n1等
+
+first = 343; %第一个文件夹序号
+last = 646; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
 intercept = 1; %第一组数据的自变量`
@@ -65,7 +67,7 @@ end
 %% read data
 datalength=(last-first+1);
 %datalength=100;
-xaxis=(0:last-first)*coeff+intercept;
+xaxis=(0:1:(last-first))*coeff+intercept;
 %xaxis=xaxis.*(320); % 399 Scan (+320MHz/V)
 %xaxis=[0.18:0.01:0.26, 0.32:0.01:0.42];
 %xaxis=[0.01 0.03 0.05 0.1 0.3 0.5 0.7 1 2 3 5 7 10]*1e3;
@@ -106,7 +108,7 @@ SNRGain=zeros(datalength,1);
 Timelist=datetime(zeros(datalength,6));
 
 tic
-parfor i=1:datalength % parallel computing
+parfor i=1:1:datalength % parallel computing
     filestr=[maindir,'Abs-',num2str(i+first-1),'\Output.txt'];
     filestr;
     datafile=fopen(filestr);
@@ -221,7 +223,11 @@ if plotnumber==1
     end
 
     set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
-    saveas(h1,[maindir,'Abs-',num2str(last),'\Numberofatoms.png']);
+    if save_data == 1
+        saveas(h1,[maindir,'Abs-',num2str(last),'\Numberofatoms.png']);
+    else
+        set(h1,'visible','off');
+    end
 end
 
 
@@ -250,8 +256,12 @@ if plotODsum==1
 
     %set(gca,'XScale','log');
     %set(gca,'YScale','log');
-    saveas(h2,[maindir,'Abs-',num2str(last),'\ODsum.png'])
-    saveas(h2,[maindir,'Abs-',num2str(last),'\ODsum.fig'])
+    if save_data == 1
+        saveas(h2,[maindir,'Abs-',num2str(last),'\ODsum.png']);
+        saveas(h2,[maindir,'Abs-',num2str(last),'\ODsum.fig']);
+    else
+        %set(h2,'visible','off');
+    end
 
     h2_0=figure('Name','OD Sum 1+2');
     ODsum12_mod=ODsum1_mod+ODsum2_mod;
@@ -274,15 +284,22 @@ if plotODsum==1
     %set(gca,'YScale','log');
 
     set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
-    saveas(h2_0,[maindir,'Abs-',num2str(last),'\ODsum12.png'])
+    if save_data == 1
+        saveas(h2_0,[maindir,'Abs-',num2str(last),'\ODsum12.png']);
+    else
+        set(h2_0,'visible','off');
+    end
 
     %% Plot time
-    figure
-    h3_0=plot(Timelist,ODsum1,'.','Color',colors(1,:),'MarkerSize',20);
+    h3_0=figure;
+    plot(Timelist,ODsum1,'.','Color',colors(1,:),'MarkerSize',20);
     grid off
     set(gca,'FontSize',16)
-    saveas(h3_0,[maindir,'Abs-',num2str(last),'\time.png'])
-
+    if save_data == 1
+        saveas(h3_0,[maindir,'Abs-',num2str(last),'\time.png']);
+    else
+        set(h3_0,'visible','off');
+    end
 end
 %% plot radius
 if plotradius==1
@@ -293,6 +310,7 @@ if plotradius==1
     xlabel(setXlabel);
     grid off
     set(gca,'FontSize',16)
+    set(h3,'visible','off');
 end
 %% plot SNRGain
 if plotSNRGain==1
@@ -303,6 +321,7 @@ if plotSNRGain==1
     xlabel(setXlabel);
     grid off
     set(gca,'FontSize',16)
+    set(h4,'visible','off');
 end
 %% plot noise_FR
 if plotnoise_FR==1
@@ -313,6 +332,7 @@ if plotnoise_FR==1
     xlabel(setXlabel);
     grid off;
     set(gca,'FontSize',16);
+    set(h5,'visible','off');
 end
 
 %% plot countperpixel
@@ -324,9 +344,11 @@ if plotcountperpixel==1
     xlabel(setXlabel);
     grid off;
     set(gca,'FontSize',16);
+    set(h55,'visible','off');
 
-    saveas(h55,[maindir,'Abs-',num2str(last),'\CountPerPixel.png']);
-
+    if save_data == 1
+        saveas(h55,[maindir,'Abs-',num2str(last),'\CountPerPixel.png']);
+    end
 end
 
 %% plot precession
@@ -339,7 +361,7 @@ if plotprecession==1
 
         relativeOD=ODsum2_mod./ODsum1_mod;
         %relativeOD=ODsum1_mod./ODsum2_mod;
-        
+
         plot(xaxis,relativeOD,'.','Color',colors(8,:),'MarkerSize',16);
 
         %plot(xaxis,relativeOD./relativeOD(1),'.-','Color',colors(8,:),'MarkerSize',16);
@@ -355,7 +377,7 @@ if plotprecession==1
         %set(gca,'XScale','log','YScale','log');
 
 
-    % 差分探测 %
+        % 差分探测 %
     elseif differential_detection == 1 && normalized_detection == 0
 
         relativeOD=(ODsum1_mod-ODsum2_mod)./(ODsum1_mod+ODsum2_mod);
@@ -363,8 +385,8 @@ if plotprecession==1
         ylabel('S_z');
         axis([min(xaxis) max(xaxis) -1 1]);
 
-    
-    % 其它情况 %
+
+        % 其它情况 %
     else
 
         relativeOD=ODsum1_mod./ODsum2_mod;
@@ -421,26 +443,28 @@ if plotprecession==1
     %axis([min(xaxis) max(xaxis) 0 max(relativeOD)+0.1])
     %axis([min(xaxis) max(xaxis) min(relativeOD)*0.9 max(relativeOD)*1.1])
 
-
-    saveas(h6,[maindir,'Abs-',num2str(last),'\precession.png']);
-    saveas(h6,[maindir,'Abs-',num2str(last),'\precession.fig']);
-
+    if save_data == 1
+        saveas(h6,[maindir,'Abs-',num2str(last),'\precession.png']);
+        saveas(h6,[maindir,'Abs-',num2str(last),'\precession.fig']);
+    end
 
 
     relativeOD_2=ODsum2./ODsum1;
     %relativeOD_2=ODsum1./ODsum2;
     %relativeOD=(ODsum1-ODsum2)./(ODsum1+ODsum2);
-    
+
     h7=figure('Name','ODsum2 versus OD sum1');
     plot(xaxis,relativeOD_2,'.','Color',colors(8,:),'MarkerSize',16);
     axis([min(xaxis) max(xaxis) 0.6 1.2])
     title(' ');
     xlabel(setXlabel);
-    ylabel('S_z')
-    grid off
-    set(gca,'FontSize',16)
-    saveas(h7,[maindir,'Abs-',num2str(last),'\population.png'])
-
+    ylabel('S_z');
+    grid off;
+    set(gca,'FontSize',16);
+    set(h7,'visible','off');
+    if save_data == 1
+        saveas(h7,[maindir,'Abs-',num2str(last),'\population.png'])
+    end
 
 
 end
@@ -493,11 +517,12 @@ end
 
 %% Plot 2D
 if plot2D==1
-    first_para = [-0.35:0.02:-0.25];
-    second_para = [0.1 0.09 0.07 0.05 0.03 0.02 0.01 0];
+    first_para = [0.05:-0.02:0];
+    second_para = [0.19:0.005:0.23];
     xlabel_2D= 'GMOT\_173\_ODT\_F (V)'; % first_para
     %xlabel_2D= 'MOT\_556\_Freq (V)'; % first_para
-    ylabel_2D='ShimC\_ODT (V)'; % second_para
+    %ylabel_2D='ShimC\_ODT (V)'; % second_para
+    ylabel_2D='RampPow\_173 (V)'; % second_para
 
     data_2D=reshape(numberofatoms1,length(second_para),length(first_para));% 数据竖列重排
 
@@ -519,8 +544,10 @@ if plot2D==1
     xlabel(xlabel_2D);
     ylabel(ylabel_2D);
     view([0 90]);
-    saveas(fig2d,[maindir,'Abs-',num2str(last),'\Compare2D.fig']);
-    saveas(fig2d,[maindir,'Abs-',num2str(last),'\Compare2D.png']);
+    if save_data == 1
+        saveas(fig2d,[maindir,'Abs-',num2str(last),'\Compare2D.fig']);
+        saveas(fig2d,[maindir,'Abs-',num2str(last),'\Compare2D.png']);
+    end
 end
 
 %% Plot Cat State Ratio
@@ -539,12 +566,14 @@ if plotCatRatio == 1 && dual_species == 0
     ylabel('Ratio of Stretched States');
     grid on;
     set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
-%     legend(['mean = ',num2str(roundn(ratio_mean,-4)),...
-%         newline 'std = ',num2str(roundn(ratio_std,-4))],...
-%         'Location','best');
+    %     legend(['mean = ',num2str(roundn(ratio_mean,-4)),...
+    %         newline 'std = ',num2str(roundn(ratio_std,-4))],...
+    %         'Location','best');
 
-    saveas(h10,[maindir,'Abs-',num2str(last),'\ratio.png']);
-    save([maindir,'Abs-',num2str(last),'\ratio.mat'],'ratio_mean','ratio_std');
+    if save_data == 1
+        saveas(h10,[maindir,'Abs-',num2str(last),'\ratio.png']);
+        save([maindir,'Abs-',num2str(last),'\ratio.mat'],'ratio_mean','ratio_std');
+    end
 
 elseif plotCatRatio == 1 && dual_species == 1
 
@@ -561,18 +590,21 @@ elseif plotCatRatio == 1 && dual_species == 1
     ylabel('Ratio of Stretched States');
     grid on;
     set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
-%     legend(['mean = ',num2str(roundn(ratio_mean,-4)),...
-%         newline 'std = ',num2str(roundn(ratio_std,-4))],...
-%         'Location','best');
+    %     legend(['mean = ',num2str(roundn(ratio_mean,-4)),...
+    %         newline 'std = ',num2str(roundn(ratio_std,-4))],...
+    %         'Location','best');
 
-    saveas(h10,[maindir,'Abs-',num2str(last),'\ratio.png']);
-    save([maindir,'Abs-',num2str(last),'\ratio.mat'],'ratio_mean','ratio_std');
-
+    if save_data == 1
+        saveas(h10,[maindir,'Abs-',num2str(last),'\ratio.png']);
+        save([maindir,'Abs-',num2str(last),'\ratio.mat'],'ratio_mean','ratio_std');
+    end
 end
 
 %% Save results
 
 clear main_dir_0
-save([maindir,'Abs-',num2str(last),'\result.mat'])
+if save_data == 1
+    save([maindir,'Abs-',num2str(last),'\result.mat']);
+end
 save([maindir,'Abs-',num2str(last),'\population.mat'],'s1','s2','s3','s4','s5','s6','n1','n2','n3','n4','n5','n6');
 clear Timelist
