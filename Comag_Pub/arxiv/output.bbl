@@ -1,0 +1,220 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\burl{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}
+\bibcommenthead
+
+\bibitem{Luca2018QMetrologyRev}
+\bibinfo{author}{Pezz\`e, L.}, \bibinfo{author}{Smerzi, A.}, \bibinfo{author}{Oberthaler, M.~K.}, \bibinfo{author}{Schmied, R.} \& \bibinfo{author}{Treutlein, P.}
+\newblock \bibinfo{title}{Quantum metrology with nonclassical states of atomic ensembles}.
+\newblock \emph{\bibinfo{journal}{Reviews of Modern Physics}} \textbf{\bibinfo{volume}{90}}, \bibinfo{pages}{035005} (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/RevModPhys.90.035005}.
+
+\bibitem{Budker2007Mag}
+\bibinfo{author}{Budker, D.} \& \bibinfo{author}{Romalis, M.}
+\newblock \bibinfo{title}{Optical magnetometry}.
+\newblock \emph{\bibinfo{journal}{Nature Physics}} \textbf{\bibinfo{volume}{3}}, \bibinfo{pages}{227–234} (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1038/nphys566}.
+
+\bibitem{Lei2025SpinExoticRMP}
+\bibinfo{author}{Cong, L.} \emph{et~al.}
+\newblock \bibinfo{title}{Spin-dependent exotic interactions}.
+\newblock \emph{\bibinfo{journal}{Reviews of Modern Physics}} \textbf{\bibinfo{volume}{97}}, \bibinfo{pages}{025005} (\bibinfo{year}{2025}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/RevModPhys.97.025005}.
+
+\bibitem{Kominis2003SERF}
+\bibinfo{author}{Kominis, I.~K.}, \bibinfo{author}{Kornack, T.~W.}, \bibinfo{author}{Allred, J.~C.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{A subfemtotesla multichannel atomic magnetometer}.
+\newblock \emph{\bibinfo{journal}{Nature}} \textbf{\bibinfo{volume}{422}}, \bibinfo{pages}{596–599} (\bibinfo{year}{2003}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1038/nature01484}.
+
+\bibitem{Zheng2022YbEDM}
+\bibinfo{author}{Zheng, T.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{Measurement of the \rm{E}lectric \rm{D}ipole \rm{M}oment of $^{171}\rm{Yb}$ atoms in an \rm{O}ptical \rm{D}ipole \rm{T}rap}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{129}}, \bibinfo{pages}{083001} (\bibinfo{year}{2022}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.129.083001}.
+
+\bibitem{Terrano2022ComagNewPhys}
+\bibinfo{author}{Terrano, W.~A.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{Comagnetometer probes of dark matter and new physics}.
+\newblock \emph{\bibinfo{journal}{Quantum Science and Technology}} \textbf{\bibinfo{volume}{7}}, \bibinfo{pages}{014001} (\bibinfo{year}{2021}).
+\newblock \urlprefix\url{https://dx.doi.org/10.1088/2058-9565/ac1ae0}.
+
+\bibitem{Vasilakis2009ComagSpinDependent}
+\bibinfo{author}{Vasilakis, G.}, \bibinfo{author}{Brown, J.~M.}, \bibinfo{author}{Kornack, T.~W.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{Limits on \rm{N}ew \rm{L}ong \rm{R}ange \rm{N}uclear \rm{S}pin-\rm{D}ependent \rm{F}orces \rm{S}et with a $\mathrm{K}\mathrm{\text{\ensuremath{-}}}^{3}\mathrm{He}$ \rm{C}omagnetometer}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{103}}, \bibinfo{pages}{261801} (\bibinfo{year}{2009}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.103.261801}.
+
+\bibitem{Kimball2013ComagSpinGravity}
+\bibinfo{author}{Kimball, D. F.~J.} \emph{et~al.}
+\newblock \bibinfo{title}{A dual‐isotope rubidium comagnetometer to search for anomalous long‐range spin‐mass (spin‐gravity) couplings of the proton}.
+\newblock \emph{\bibinfo{journal}{Annalen der Physik}} \textbf{\bibinfo{volume}{525}}, \bibinfo{pages}{514–528} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1002/andp.201300036}.
+
+\bibitem{Almasi2020ComagSpinSpin}
+\bibinfo{author}{Almasi, A.}, \bibinfo{author}{Lee, J.}, \bibinfo{author}{Winarto, H.}, \bibinfo{author}{Smiciklas, M.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{New \rm{L}imits on \rm{A}nomalous \rm{S}pin-\rm{S}pin \rm{I}nteractions}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{125}}, \bibinfo{pages}{201802} (\bibinfo{year}{2020}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.125.201802}.
+
+\bibitem{Cane2004ComagLorentz&CPT}
+\bibinfo{author}{Can\`e, F.} \emph{et~al.}
+\newblock \bibinfo{title}{Bound on \rm{L}orentz and $\rm{CPT}$ \rm{V}iolating \rm{B}oost \rm{E}ffects for the \rm{N}eutron}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{93}}, \bibinfo{pages}{230801} (\bibinfo{year}{2004}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.93.230801}.
+
+\bibitem{Allmendinger2014ComagLorentz&CPT}
+\bibinfo{author}{Allmendinger, F.} \emph{et~al.}
+\newblock \bibinfo{title}{New \rm{L}imit on \rm{L}orentz-\rm{I}nvariance- and $\rm{CPT}$-\rm{V}iolating \rm{N}eutron \rm{S}pin \rm{I}nteractions \rm{U}sing a \rm{F}ree-\rm{S}pin-\rm{P}recession $^{3}\mathrm{He}$-$^{129}\mathrm{Xe}$ \rm{C}omagnetometer}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{112}}, \bibinfo{pages}{110801} (\bibinfo{year}{2014}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.112.110801}.
+
+\bibitem{Bulatowicz2013ComagAxionlike}
+\bibinfo{author}{Bulatowicz, M.} \emph{et~al.}
+\newblock \bibinfo{title}{Laboratory \rm{S}earch for a \rm{L}ong-\rm{R}ange $\rm{T}$-odd, $\rm{P}$-odd \rm{I}nteraction from \rm{A}xionlike \rm{P}articles \rm{U}sing \rm{D}ual-\rm{S}pecies \rm{N}uclear \rm{M}agnetic \rm{R}esonance with \rm{P}olarized $^{129}\mathrm{Xe}$ and $^{131}\mathrm{Xe}$ \rm{G}as}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{111}}, \bibinfo{pages}{102001} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.111.102001}.
+
+\bibitem{Feng2022XeComagM-N}
+\bibinfo{author}{Feng, Y.-K.}, \bibinfo{author}{Ning, D.-H.}, \bibinfo{author}{Zhang, S.-B.}, \bibinfo{author}{Lu, Z.-T.} \& \bibinfo{author}{Sheng, D.}
+\newblock \bibinfo{title}{Search for \rm{M}onopole-\rm{D}ipole \rm{I}nteractions at the \rm{S}ubmillimeter \rm{R}ange with a $^{129}\mathrm{Xe}\text{\ensuremath{-}}^{131}\mathrm{Xe}\text{\ensuremath{-}}\mathrm{Rb}$ \rm{C}omagnetometer}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{128}}, \bibinfo{pages}{231803} (\bibinfo{year}{2022}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.128.231803}.
+
+\bibitem{Lamoreaux1986ComagLorentz}
+\bibinfo{author}{Lamoreaux, S.~K.}, \bibinfo{author}{Jacobs, J.~P.}, \bibinfo{author}{Heckel, B.~R.}, \bibinfo{author}{Raab, F.~J.} \& \bibinfo{author}{Fortson, E.~N.}
+\newblock \bibinfo{title}{New limits on spatial anisotropy from optically-pumped $^{201}\mathrm{Hg}$ and $^{199}\mathrm{Hg}$}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{57}}, \bibinfo{pages}{3125--3128} (\bibinfo{year}{1986}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.57.3125}.
+
+\bibitem{Kornack2005ComagGyroscope}
+\bibinfo{author}{Kornack, T.~W.}, \bibinfo{author}{Ghosh, R.~K.} \& \bibinfo{author}{Romalis, M.~V.}
+\newblock \bibinfo{title}{Nuclear \rm{S}pin \rm{G}yroscope \rm{B}ased on an \rm{A}tomic \rm{C}omagnetometer}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{95}}, \bibinfo{pages}{230801} (\bibinfo{year}{2005}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.95.230801}.
+
+\bibitem{Rosenberry2001ComagEDM}
+\bibinfo{author}{Rosenberry, M.~A.} \& \bibinfo{author}{Chupp, T.~E.}
+\newblock \bibinfo{title}{Atomic \rm{E}lectric \rm{D}ipole \rm{M}oment \rm{M}easurement \rm{U}sing \rm{S}pin \rm{E}xchange \rm{P}umped \rm{M}asers of ${}^{129}\mathrm{Xe}$ and ${}^{3}\mathrm{He}$}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{86}}, \bibinfo{pages}{22–25} (\bibinfo{year}{2001}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1103/PhysRevLett.86.22}.
+
+\bibitem{Sachdeva2019ComagEDM}
+\bibinfo{author}{Sachdeva, N.} \emph{et~al.}
+\newblock \bibinfo{title}{New \rm{L}imit on the \rm{P}ermanent \rm{E}lectric \rm{D}ipole \rm{M}oment of $^{129}\mathrm{Xe}$ using $^{3}\mathrm{He}$ \rm{C}omagnetometry and \rm{SQUID} \rm{D}etection}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{123}}, \bibinfo{pages}{143003} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.123.143003}.
+
+\bibitem{Abel2020ComagnEDM}
+\bibinfo{author}{Abel, C.} \emph{et~al.}
+\newblock \bibinfo{title}{Measurement of the \rm{P}ermanent \rm{E}lectric \rm{D}ipole \rm{M}oment of the \rm{N}eutron}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{124}}, \bibinfo{pages}{081803} (\bibinfo{year}{2020}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.124.081803}.
+
+\bibitem{Tullney2013SpinDependent}
+\bibinfo{author}{Tullney, K.} \emph{et~al.}
+\newblock \bibinfo{title}{Constraints on \rm{S}pin-\rm{D}ependent \rm{S}hort-\rm{R}ange \rm{I}nteraction between \rm{N}ucleons}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{111}}, \bibinfo{pages}{100801} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.111.100801}.
+
+\bibitem{Venema1992HgComagSpinGravity}
+\bibinfo{author}{Venema, B.~J.}, \bibinfo{author}{Majumder, P.~K.}, \bibinfo{author}{Lamoreaux, S.~K.}, \bibinfo{author}{Heckel, B.~R.} \& \bibinfo{author}{Fortson, E.~N.}
+\newblock \bibinfo{title}{Search for a coupling of the \rm{E}arth's gravitational field to nuclear spins in atomic mercury}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{68}}, \bibinfo{pages}{135--138} (\bibinfo{year}{1992}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.68.135}.
+
+\bibitem{Zhang2023ComagSpinGravity}
+\bibinfo{author}{Zhang, S.-B.} \emph{et~al.}
+\newblock \bibinfo{title}{Search for \rm{S}pin-\rm{D}ependent \rm{G}ravitational \rm{I}nteractions at \rm{E}arth \rm{R}ange}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{130}}, \bibinfo{pages}{201401} (\bibinfo{year}{2023}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.130.201401}.
+
+\bibitem{Wu2019ComagDarkMatter}
+\bibinfo{author}{Wu, T.} \emph{et~al.}
+\newblock \bibinfo{title}{Search for \rm{A}xionlike \rm{D}ark \rm{M}atter with a \rm{L}iquid-\rm{S}tate \rm{N}uclear \rm{S}pin \rm{C}omagnetometer}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{122}}, \bibinfo{pages}{191302} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.122.191302}.
+
+\bibitem{Alonso2019ComagDarkMatter}
+\bibinfo{author}{Alonso, R.}, \bibinfo{author}{Blas, D.} \& \bibinfo{author}{Wolf, P.}
+\newblock \bibinfo{title}{Exploring the ultra-light to sub-\rm{M}ev dark matter window with atomic clocks and co-magnetometers}.
+\newblock \emph{\bibinfo{journal}{Journal of High Energy Physics}} \textbf{\bibinfo{volume}{2019}} (\bibinfo{year}{2019}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1007/JHEP07(2019)069}.
+
+\bibitem{Pau2020BECComag}
+\bibinfo{author}{Gomez, P.} \emph{et~al.}
+\newblock \bibinfo{title}{Bose-\rm{E}instein \rm{C}ondensate \rm{C}omagnetometer}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{124}}, \bibinfo{pages}{170401} (\bibinfo{year}{2020}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevLett.124.170401}.
+
+\bibitem{Thekkeppatt2025ComaggFactor}
+\bibinfo{author}{Thekkeppatt, P.}, \bibinfo{author}{Digvijay}, \bibinfo{author}{Urech, A.}, \bibinfo{author}{Schreck, F.} \& \bibinfo{author}{van Druten, K.}
+\newblock \bibinfo{title}{Measurement of the $g$ \rm{F}actor of \rm{G}round-\rm{S}tate $^{87}\mathrm{Sr}$ at the \rm{P}arts-per-\rm{M}illion \rm{L}evel \rm{U}sing \rm{C}o-\rm{T}rapped \rm{U}ltracold \rm{A}toms}.
+\newblock \emph{\bibinfo{journal}{Physical Review Letters}} \textbf{\bibinfo{volume}{135}}, \bibinfo{pages}{193001} (\bibinfo{year}{2025}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/cjks-9hlp}.
+
+\bibitem{Zheng2020Magic}
+\bibinfo{author}{Zheng, T.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{Magic wavelengths of the \rm{Y}b $(6{s}^{2}$ $^{1}\mathrm{S}_{0}--6s6p$ $^{3}\mathrm{P}_{1})$ intercombination transition}.
+\newblock \emph{\bibinfo{journal}{Physical Review A}} \textbf{\bibinfo{volume}{102}}, \bibinfo{pages}{062805} (\bibinfo{year}{2020}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevA.102.062805}.
+
+\bibitem{Yang2025Cat}
+\bibinfo{author}{Yang, Y.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{Minute-scale \rm{S}chr\"{o}dinger-cat state of spin-5/2 atoms}.
+\newblock \emph{\bibinfo{journal}{Nature Photonics}} \textbf{\bibinfo{volume}{19}}, \bibinfo{pages}{89–94} (\bibinfo{year}{2025}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1038/s41566-024-01555-3}.
+
+\bibitem{LeKien2013Polarizability}
+\bibinfo{author}{Le~Kien, F.}, \bibinfo{author}{Schneeweiss, P.} \& \bibinfo{author}{Rauschenbeutel, A.}
+\newblock \bibinfo{title}{Dynamical polarizability of atoms in arbitrary light fields: general theory and application to cesium}.
+\newblock \emph{\bibinfo{journal}{The European Physical Journal D}} \textbf{\bibinfo{volume}{67}} (\bibinfo{year}{2013}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1140/epjd/e2013-30729-x}.
+
+\bibitem{Gossard1964RefNMR}
+\bibinfo{author}{Gossard, A.~C.}, \bibinfo{author}{Jaccarino, V.} \& \bibinfo{author}{Wernick, J.~H.}
+\newblock \bibinfo{title}{Ytterbium \rm{NMR}:${\mathrm{yb}}^{171}$ \rm{N}uclear \rm{M}oment and \rm{Y}b \rm{M}etal \rm{K}night \rm{S}hift}.
+\newblock \emph{\bibinfo{journal}{Physical Review}} \textbf{\bibinfo{volume}{133}}, \bibinfo{pages}{A881--A884} (\bibinfo{year}{1964}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRev.133.A881}.
+
+\bibitem{Olschewski1972Ref}
+\bibinfo{author}{Olschewski, L.}
+\newblock \bibinfo{title}{Messung der magnetischen \rm{K}erndipolmomente an freien $^{43}\mathrm{Ca}$-, $^{87}\mathrm{Sr}$-, $^{135}\mathrm{Ba}$-, $^{137}\mathrm{Ba}$-, $^{171}\mathrm{Yb}$- und$^{173}\mathrm{Yb}$-\rm{A}tomen mit optischem \rm{P}umpen}.
+\newblock \emph{\bibinfo{journal}{Zeitschrift f\"{u}r Physik}} \textbf{\bibinfo{volume}{249}}, \bibinfo{pages}{205–227} (\bibinfo{year}{1972}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1007/BF01400226}.
+
+\bibitem{Stone2005Ref}
+\bibinfo{author}{Stone, N.}
+\newblock \bibinfo{title}{Table of nuclear magnetic dipole and electric quadrupole moments}.
+\newblock \emph{\bibinfo{journal}{Atomic Data and Nuclear Data Tables}} \textbf{\bibinfo{volume}{90}}, \bibinfo{pages}{75–176} (\bibinfo{year}{2005}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1016/j.adt.2005.04.001}.
+
+\bibitem{Safronova2018NewPhys}
+\bibinfo{author}{Safronova, M.~S.} \emph{et~al.}
+\newblock \bibinfo{title}{Search for new physics with atoms and molecules}.
+\newblock \emph{\bibinfo{journal}{Reviews of Modern Physics}} \textbf{\bibinfo{volume}{90}}, \bibinfo{pages}{025008} (\bibinfo{year}{2018}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/RevModPhys.90.025008}.
+
+\bibitem{Moody1984M-N}
+\bibinfo{author}{Moody, J.~E.} \& \bibinfo{author}{Wilczek, F.}
+\newblock \bibinfo{title}{New macroscopic forces?}
+\newblock \emph{\bibinfo{journal}{Physcal Review D}} \textbf{\bibinfo{volume}{30}}, \bibinfo{pages}{130--138} (\bibinfo{year}{1984}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevD.30.130}.
+
+\bibitem{Guigue2015Spin3HePRD}
+\bibinfo{author}{Guigue, M.}, \bibinfo{author}{Jullien, D.}, \bibinfo{author}{Petukhov, A.~K.} \& \bibinfo{author}{Pignol, G.}
+\newblock \bibinfo{title}{Constraining short-range spin-dependent forces with polarized $^{3}\mathrm{He}$}.
+\newblock \emph{\bibinfo{journal}{Physcal Review D}} \textbf{\bibinfo{volume}{92}}, \bibinfo{pages}{114001} (\bibinfo{year}{2015}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevD.92.114001}.
+
+\bibitem{Bishof2016RaEDM}
+\bibinfo{author}{Bishof, M.} \emph{et~al.}
+\newblock \bibinfo{title}{Improved limit on the $^{225}\mathrm{Ra}$ electric dipole moment}.
+\newblock \emph{\bibinfo{journal}{Physcal Review C}} \textbf{\bibinfo{volume}{94}}, \bibinfo{pages}{025501} (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{https://link.aps.org/doi/10.1103/PhysRevC.94.025501}.
+
+\end{thebibliography}

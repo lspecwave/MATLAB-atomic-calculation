@@ -1,12 +1,12 @@
 clear all
 close all
 %% Input Area
-dir_TOF='\\Artemis-pc\Data\2026-05-12\';%文件路径
+dir_TOF='\\Artemis-pc\Data\2026-08-10\';%文件路径
 TOF_start = 0.05;    % TOF起始时间
 TOF_interval = 0.05;   % TOF时间间隔
 hold_time = 0;
-first = 172;   % 第一个文件夹的序号
-last = 181;   % 第二个文件夹的序号
+first = 43;   % 第一个文件夹的序号
+last = 43;   % 第二个文件夹的序号
 
 pixelsize = 6.5/2.5;   % um
 yposition = 75;   % 水平方向为y方向

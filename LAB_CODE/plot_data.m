@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-08-1' ...
+maindir=['\\ARTEMIS-PC\Data\2026-08-14' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -17,20 +17,20 @@ plotprecession = 1; %是否画进动
 plot2D = 0; %二维形式比较数据，常用于二维扫描
 plotCatRatio = 0; %是否画cat state占比，并计算平均值
 
-rabi = 0; %是否为Rabi曲线
+rabi = 1; %是否为Rabi曲线
 ramsey = 0; %是否为Ramsey曲线
 dual_species = 0; %是否有两种同位素
-normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
-differential_detection = 1; %是否差分探测
+normalized_detection = 1; %是否归一化探测，默认OD_2/OD_1
+differential_detection = 0; %是否差分探测
 
-save_data = 1;   % 始终保存s1,n1等
+save_data = 0;   % 始终保存s1,n1等
 
-first = 343; %第一个文件夹序号
-last = 646; %最后一个文件夹序号
+first = 338; %第一个文件夹序号
+last = 347; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 1; %第一组数据的自变量`
-coeff = 1; %各组数据自变量间隔
+intercept = 4000; %第一组数据的自变量`
+coeff = 40; %各组数据自变量间隔
 
 
 if rabi == 1
