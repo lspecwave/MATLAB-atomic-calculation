@@ -4,13 +4,13 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-08-14' ...
+maindir=['\\ARTEMIS-PC\Data\2026-08-19' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
 photo = 2*repeat;
-species = 173;
-mag = 9.6;   % 磁场和10mG的比值
+species = 171;
+mag = 9.7;   % 磁场和10mG的比值
 
 plotnumber = 1;   % 是否画原子数
 plotradius = 0;   % 是否画原子团半径
@@ -27,8 +27,8 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 308;   % 第一个文件夹序号
-last = 318;   % 最后一个文件夹序号
+first = ;   % 第一个文件夹序号
+last = ;   % 最后一个文件夹序号
 
 knowT = 0;
 if knowT == 1
@@ -45,7 +45,8 @@ coeff = 1.5;   % 各组数据自变量间隔
 
 
 if ramsey == 1
-    setXlabel='Precession Time ms';%横坐标label
+    setXlabel='Precession Time (ms)';%横坐标label
+    %setXlabel='ROT (\mus)';%横坐标label
 else
     setXlabel='No.';%横坐标label
 end
@@ -54,7 +55,7 @@ end
 %% read data
 datalength=last-first+1;
 xaxis = (0:last-first)*coeff+intercept;
-%xaxis = [27 43.5 34.5 16.5 21 19.5 36 24 40.5 39 22.5 28.5 15 42 31.5 33 25.5 37.5 18 45 30];
+xaxis = [18 25.5 28.5 30 19.5 16.5 27 22.5 31.5 24 21 33 15];
 %xaxis = [39 49 27 31 29 17 53 35 47 33 51 25 43 24 41 45 19 15 21 37 55];
 %xaxis = zeros(1,length(temp)*2);
 %xaxis(1:2:length(temp)*2-1) = temp;
@@ -225,9 +226,9 @@ if plotprecession==1
                     ft = fittype( 'a*sin(2*pi*(x/T+b))', 'independent', 'x', 'dependent', 'y' );
                     opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
                     opts.Display = 'Off';
-                    opts.Lower = [90*species_coeff/mag 0.7 -0.5];   % T a b
+                    opts.Lower = [90*species_coeff/mag 0.3 -0.5];   % T a b
                     opts.Upper = [130*species_coeff/mag 1 0.5];   % T a b
-                    opts.StartPoint = [108*species_coeff/mag 0.9 2];   % T a b
+                    opts.StartPoint = [108*species_coeff/mag 0.9 0.1];   % T a b
 
                 end
                 opts.Weights = weight;

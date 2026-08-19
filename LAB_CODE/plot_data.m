@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-08-14' ...
+maindir=['\\ARTEMIS-PC\Data\2026-08-19' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -17,20 +17,20 @@ plotprecession = 1; %是否画进动
 plot2D = 0; %二维形式比较数据，常用于二维扫描
 plotCatRatio = 0; %是否画cat state占比，并计算平均值
 
-rabi = 1; %是否为Rabi曲线
-ramsey = 0; %是否为Ramsey曲线
+rabi = 0; %是否为Rabi曲线
+ramsey = 1; %是否为Ramsey曲线
 dual_species = 0; %是否有两种同位素
-normalized_detection = 1; %是否归一化探测，默认OD_2/OD_1
-differential_detection = 0; %是否差分探测
+normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
+differential_detection = 1; %是否差分探测
 
-save_data = 0;   % 始终保存s1,n1等
+save_data = 1;   % 始终保存s1,n1等
 
-first = 338; %第一个文件夹序号
-last = 347; %最后一个文件夹序号
+first = 1; %第一个文件夹序号
+last = 1; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 4000; %第一组数据的自变量`
-coeff = 40; %各组数据自变量间隔
+intercept = 1; %第一组数据的自变量`
+coeff = 1; %各组数据自变量间隔
 
 
 if rabi == 1
@@ -65,9 +65,10 @@ end
 
 
 %% read data
-datalength=(last-first+1);
+filelist = (first):1:last;
+datalength = length(filelist);
 %datalength=100;
-xaxis=(0:1:(last-first))*coeff+intercept;
+xaxis=(0:1:datalength-1)*coeff+intercept;
 %xaxis=xaxis.*(320); % 399 Scan (+320MHz/V)
 %xaxis=[0.18:0.01:0.26, 0.32:0.01:0.42];
 %xaxis=[0.01 0.03 0.05 0.1 0.3 0.5 0.7 1 2 3 5 7 10]*1e3;
@@ -108,15 +109,15 @@ SNRGain=zeros(datalength,1);
 Timelist=datetime(zeros(datalength,6));
 
 tic
-parfor i=1:1:datalength % parallel computing
-    filestr=[maindir,'Abs-',num2str(i+first-1),'\Output.txt'];
+parfor i=1:datalength % parallel computing
+    filestr=[maindir,'Abs-',num2str(filelist(i)),'\Output.txt'];
     filestr;
     datafile=fopen(filestr);
     data_out=textscan(datafile,'%f');
     totaldata=data_out{1};
     fclose(datafile);
 
-    filestr_time=[maindir,'Abs-',num2str(i+first-1),'\time.txt'];
+    filestr_time=[maindir,'Abs-',num2str(filelist(i)),'\time.txt'];
     time_hd=fopen(filestr_time);
     data_time=textscan(time_hd,'%s %s');
     Timelist(i)=datetime([cell2mat(data_time{1,1}),' ',cell2mat(data_time{1,2})],'InputFormat','yyyy-MM-dd HH:mm:ss'); %转成时间序列
@@ -517,12 +518,12 @@ end
 
 %% Plot 2D
 if plot2D==1
-    first_para = [0.05:-0.02:0];
-    second_para = [0.19:0.005:0.23];
-    xlabel_2D= 'GMOT\_173\_ODT\_F (V)'; % first_para
+    first_para = [-0.03:0.02:0.03];
+    second_para = [0.19:0.01:0.23];
+    %xlabel_2D= 'ShimC\_ODT (V)'; % first_para
     %xlabel_2D= 'MOT\_556\_Freq (V)'; % first_para
-    %ylabel_2D='ShimC\_ODT (V)'; % second_para
-    ylabel_2D='RampPow\_173 (V)'; % second_para
+    xlabel_2D='RampPow\_173 (V)'; % second_para
+    ylabel_2D='GMOT\_173\_ODT\_F (V)'; % second_para
 
     data_2D=reshape(numberofatoms1,length(second_para),length(first_para));% 数据竖列重排
 
