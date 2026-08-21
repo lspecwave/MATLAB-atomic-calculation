@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-08-20' ...
+maindir=['\\ARTEMIS-PC\Data\2026-08-21' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
@@ -27,8 +27,8 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 45;   % 第一个文件夹序号
-last = 57;   % 最后一个文件夹序号
+first = 893;   % 第一个文件夹序号
+last = 905;   % 最后一个文件夹序号
 
 knowT = 0;
 if knowT == 1
@@ -55,7 +55,7 @@ end
 %% read data
 datalength=last-first+1;
 xaxis = (0:last-first)*coeff+intercept;
-%xaxis = [18 25.5 28.5 30 19.5 16.5 27 22.5 31.5 24 21 33 15];
+%xaxis = [16.5 15 18 30 33 21 22.5 25.5 24 19.5 28.5 31.5 27];
 %xaxis = [39 49 27 31 29 17 53 35 47 33 51 25 43 24 41 45 19 15 21 37 55];
 %xaxis = zeros(1,length(temp)*2);
 %xaxis(1:2:length(temp)*2-1) = temp;
