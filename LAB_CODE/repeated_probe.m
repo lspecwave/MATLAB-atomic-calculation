@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-08-21' ...
+maindir=['\\ARTEMIS-PC\Data\2026-08-27' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
@@ -27,8 +27,8 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 893;   % 第一个文件夹序号
-last = 905;   % 最后一个文件夹序号
+first = 789;   % 第一个文件夹序号
+last = 801;   % 最后一个文件夹序号
 
 knowT = 0;
 if knowT == 1
@@ -219,9 +219,9 @@ if plotprecession==1
                     ft = fittype( 'a*sin(2*pi*(x/T+b))+c', 'independent', 'x', 'dependent', 'y' );
                     opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
                     opts.Display = 'Off';
-                    opts.Lower = [90*species_coeff/mag 0.15 0 -5];   % T a b c
-                    opts.Upper = [130*species_coeff/mag 1 1 5];   % T a b c
-                    opts.StartPoint = [107*species_coeff/mag 0.7 0.5 0];   % T a b c
+                    opts.Lower = [90*species_coeff/mag 0.15 -0.5 -5];   % T a b c
+                    opts.Upper = [130*species_coeff/mag 1 0.5 5];   % T a b c
+                    opts.StartPoint = [107*species_coeff/mag 0.7 0 0];   % T a b c
                 elseif offset == 0
                     ft = fittype( 'a*sin(2*pi*(x/T+b))', 'independent', 'x', 'dependent', 'y' );
                     opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
