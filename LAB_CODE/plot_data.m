@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-08-28' ...
+maindir=['\\ARTEMIS-PC\Data\2026-09-03' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -23,14 +23,14 @@ dual_species = 0; %是否有两种同位素
 normalized_detection = 0; %是否归一化探测，默认OD_2/OD_1
 differential_detection = 1; %是否差分探测
 
-save_data = 0;   % 始终保存s1,n1等
+save_data = 1;   % 始终保存s1,n1等
 
-first = 3; %第一个文件夹序号
-last = 1; %最后一个文件夹序号
+first = 753; %第一个文件夹序号
+last = 809; %最后一个文件夹序号
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 0; %第一组数据的自变量`
-coeff = 100; %各组数据自变量间隔
+intercept = 1; %第一组数据的自变量`
+coeff = 1; %各组数据自变量间隔
 
 
 if rabi == 1
