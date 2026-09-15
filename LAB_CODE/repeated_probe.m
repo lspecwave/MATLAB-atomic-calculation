@@ -4,12 +4,12 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-09-03' ...
+maindir=['\\ARTEMIS-PC\Data\2026-09-15' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
 photo = 2*repeat;
-species = 173;
+species = 171;
 mag = 9.7;   % 磁场和10mG的比值
 
 plotnumber = 1;   % 是否画原子数
@@ -23,12 +23,12 @@ if phase == 1
     load('\\Artemis-pc\Data\2026-06-02\Abs-\repeat_amp.mat');
 end
 ramsey = 1;   % 是否为Ramsey进动曲线
-offset = 0;   % 是否考虑曲线上下不对称
+offset = 1;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 564;   % 第一个文件夹序号
-last = 576;   % 最后一个文件夹序号
+first = 118;   % 第一个文件夹序号
+last = 130;   % 最后一个文件夹序号
 step = 1;   % 文件间隔
 
 knowT = 0;
