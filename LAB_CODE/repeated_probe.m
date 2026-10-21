@@ -4,13 +4,13 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-09-17' ...
+maindir=['\\ARTEMIS-PC\Data\2026-10-21' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
 photo = 2*repeat;
-species = 173;
-mag = 108/11.2;   % 磁场和10mG的比值
+species = 171;
+mag = 9.7;   % 磁场和10mG的比值
 
 plotnumber = 1;   % 是否画原子数
 plotradius = 0;   % 是否画原子团半径
@@ -23,12 +23,12 @@ if phase == 1
     load('\\Artemis-pc\Data\2026-06-02\Abs-\repeat_amp.mat');
 end
 ramsey = 1;   % 是否为Ramsey进动曲线
-offset = 0;   % 是否考虑曲线上下不对称
+offset = 1;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 31;   % 第一个文件夹序号
-last = 41;   % 最后一个文件夹序号
+first = 415;   % 第一个文件夹序号
+last = 427;   % 最后一个文件夹序号
 step = 1;   % 文件间隔
 
 knowT = 0;
@@ -41,7 +41,7 @@ delete = 0;
 delete_num = [5];   % 必须从小到大
 
 % 设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
-intercept = 20;   % 第一组数据的自变量`
+intercept = 15;   % 第一组数据的自变量`
 coeff = 1.5;   % 各组数据自变量间隔
 
 
