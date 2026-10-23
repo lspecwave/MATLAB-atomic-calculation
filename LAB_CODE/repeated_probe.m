@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-08-27' ...
+maindir=['\\ARTEMIS-PC\Data\2026-10-23' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
@@ -27,8 +27,9 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 789;   % 第一个文件夹序号
-last = 801;   % 最后一个文件夹序号
+first = 383;   % 第一个文件夹序号
+last = 395;   % 最后一个文件夹序号
+step = 1;   % 文件间隔
 
 knowT = 0;
 if knowT == 1
@@ -53,7 +54,8 @@ end
 
 
 %% read data
-datalength=last-first+1;
+filelist = [first:step:last];
+datalength = length(filelist);
 xaxis = (0:last-first)*coeff+intercept;
 %xaxis = [16.5 15 18 30 33 21 22.5 25.5 24 19.5 28.5 31.5 27];
 %xaxis = [39 49 27 31 29 17 53 35 47 33 51 25 43 24 41 45 19 15 21 37 55];
@@ -72,14 +74,13 @@ Timelist=datetime(zeros(datalength,6));
 
 tic
 parfor i=1:datalength % parallel computing
-    filestr=[maindir,'Abs-',num2str(i+first-1),'\Output.txt'];
-    filestr;
+    filestr=[maindir,'Abs-',num2str(filelist(i)),'\Output.txt'];
     datafile=fopen(filestr);
     data_out=textscan(datafile,'%f');
     totaldata=data_out{1};
     fclose(datafile);
 
-    filestr_time=[maindir,'Abs-',num2str(i+first-1),'\time.txt'];
+    filestr_time=[maindir,'Abs-',num2str(filelist(i)),'\time.txt'];
     time_hd=fopen(filestr_time);
     data_time=textscan(time_hd,'%s %s');
     Timelist(i)=datetime([cell2mat(data_time{1,1}),' ',cell2mat(data_time{1,2})],'InputFormat','yyyy-MM-dd HH:mm:ss'); %转成时间序列
