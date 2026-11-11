@@ -4,13 +4,13 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-11-03' ...
+maindir=['\\ARTEMIS-PC\Data\2026-11-11' ...
     '\'];%数据来源路径
 
 repeat = 1;   % 探测组数,照片数的一半
 photo = 2*repeat;
 species = 173;
-mag = 9.7;   % 磁场和10mG的比值
+mag = 9.75;   % 磁场和10mG的比值
 
 plotnumber = 1;   % 是否画原子数
 plotradius = 0;   % 是否画原子团半径
@@ -27,8 +27,8 @@ offset = 0;   % 是否考虑曲线上下不对称
 
 save_data = 1;   % 是否保存
 
-first = 496;   % 第一个文件夹序号
-last = 508;   % 最后一个文件夹序号
+first = 407;   % 第一个文件夹序号
+last = 419;   % 最后一个文件夹序号
 step = 1;   % 文件间隔
 
 knowT = 0;
@@ -220,16 +220,16 @@ if plotprecession==1
                     ft = fittype( 'a*sin(2*pi*(x/T+b))+c', 'independent', 'x', 'dependent', 'y' );
                     opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
                     opts.Display = 'Off';
-                    opts.Lower = [90*species_coeff/mag 0.15 -0.5 -5];   % T a b c
-                    opts.Upper = [130*species_coeff/mag 1 0.5 5];   % T a b c
+                    opts.Lower = [90*species_coeff/mag 0.15 -0.55 -5];   % T a b c
+                    opts.Upper = [130*species_coeff/mag 1 0.55 5];   % T a b c
                     opts.StartPoint = [107*species_coeff/mag 0.7 0 0];   % T a b c
                 elseif offset == 0
                     ft = fittype( 'a*sin(2*pi*(x/T+b))', 'independent', 'x', 'dependent', 'y' );
                     opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
                     opts.Display = 'Off';
-                    opts.Lower = [90*species_coeff/mag 0.3 -0.5];   % T a b
-                    opts.Upper = [130*species_coeff/mag 1 0.5];   % T a b
-                    opts.StartPoint = [108*species_coeff/mag 0.9 0.1];   % T a b
+                    opts.Lower = [90*species_coeff/mag 0.3 -0.55];   % T a b
+                    opts.Upper = [130*species_coeff/mag 1 0.55];   % T a b
+                    opts.StartPoint = [108*species_coeff/mag 0.9 0];   % T a b
                     c = 0;
                 end
                 opts.Weights = weight;

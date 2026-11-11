@@ -4,7 +4,7 @@ colors=npg(10); % Ten basic colors
 
 %% Input Area
 
-maindir=['\\ARTEMIS-PC\Data\2026-11-03' ...
+maindir=['\\ARTEMIS-PC\Data\2026-11-11' ...
     '\'];%数据来源路径
 
 plotnumber = 1; %是否画原子数
@@ -25,8 +25,8 @@ differential_detection = 1; %是否差分探测
 
 save_data = 0;   % 始终保存s1,n1等
 
-first = 667;   % 第一个文件夹序号
-last = 858;   % 最后一个文件夹序号
+first = 773;   % 第一个文件夹序号
+last = 803;   % 最后一个文件夹序号
 step = 1;   % 文件间隔
 
 %设置横坐标公式为: xaxis=(first-1:last-1)*coeff+intercept;
@@ -39,29 +39,29 @@ if rabi == 1
 elseif ramsey == 1
     setXlabel='Precession Time ms';%横坐标label
 else
-    % setXlabel='BusODT Hold s';%横坐标label
-    % setXlabel='MOT Hold s';%横坐标label
-    % setXlabel='MOT Lold s';%横坐标label
-    % setXlabel='Ramsey Interrogation Time ms';%横坐标label
-    % setXlabel='556 AM V';%横坐标label
-    % setXlabel='556 FM V';%横坐标label
-    % setXlabel='556 Freq kHz';%横坐标label
-    % setXlabel='399 FM V';%横坐标label
-    % setXlabel='399 Freq MHz';%横坐标label
-    % setXlabel='MOT Ramp s';%横坐标label
-    % setXlabel='Spin echo time s';%横坐标label
-    % setXlabel='Polar Pulse us';%横坐标label
-    % setXlabel='Probe Pulse us';%横坐标label
-    % setXlabel='Hold Time s';%横坐标label
-    % setXlabel='Ramp Time s';%横坐标label
-    % setXlabel='TOF s';%横坐标label
-    % setXlabel='Current V';%横坐标label
+    % setXlabel='BusODT Hold (s)';%横坐标label
+    % setXlabel='MOT Hold (s)';%横坐标label
+    % setXlabel='MOT Lold (s)';%横坐标label
+    % setXlabel='Ramsey Interrogation Time (ms)';%横坐标label
+    % setXlabel='556 AM (V)';%横坐标label
+    % setXlabel='556 FM (V)';%横坐标label
+    % setXlabel='556 Freq (kHz)';%横坐标label
+    % setXlabel='399 FM (V)';%横坐标label
+    % setXlabel='399 Freq (MHz)';%横坐标label
+    % setXlabel='MOT Ramp (s)';%横坐标label
+    % setXlabel='Spin echo time (s)';%横坐标label
+    setXlabel='Polar Pulse (ms)';%横坐标label
+    % setXlabel='Probe Pulse (us)';%横坐标label
+    % setXlabel='Hold Time (s)';%横坐标label
+    % setXlabel='Ramp Time (s)';%横坐标label
+    % setXlabel='TOF (s)';%横坐标label
+    % setXlabel='Current (V)';%横坐标label
     % setXlabel='power exponent';%横坐标label
-    % setXlabel='Shim V';%横坐标label
-    % setXlabel='Lattice AM V';%横坐标label
+    % setXlabel='Shim (V)';%横坐标label
+    % setXlabel='Lattice AM (V)';%横坐标label
     % setXlabel='MOT Freq (V)';%横坐标label
-    setXlabel='No.';%横坐标label
-    % setXlabel='173 Polar Pulse us';%横坐标label
+    % setXlabel='No.';%横坐标label
+    % setXlabel='173 Polar Pulse (us)';%横坐标label
 end
 
 
@@ -72,7 +72,7 @@ datalength = length(filelist);
 %datalength=100;
 xaxis=(0:1:datalength-1)*coeff+intercept;
 %xaxis=xaxis.*(320); % 399 Scan (+320MHz/V)
-%xaxis=[0.18:0.01:0.26, 0.32:0.01:0.42];
+%xaxis=[0.05 0.07 0.1 0.2 0.5 0.7 1 2 5 7 10 20 50 70 100 200];
 %xaxis=[0.01 0.03 0.05 0.1 0.3 0.5 0.7 1 2 3 5 7 10]*1e3;
 %xaxis=[0.1 0.5 1:1:20];
 %xaxis=floor(10.^(1.0:0.2:5));
@@ -284,7 +284,7 @@ if plotODsum==1
     end
 
     set(gca,'XScale','linear');
-    %set(gca,'YScale','log');
+    %set(gca,'XScale','log');
 
     set(gca,'FontSize',16,'FontName','times new roman','FontWeight','normal');
     if save_data == 1
@@ -371,7 +371,7 @@ if plotprecession==1
 
 
         axis([min(xaxis) max(xaxis) 0 1]);
-        %axis([min(xaxis) max(xaxis) 0.01 0.45]);
+        %axis([min(xaxis) max(xaxis) 0.05 0.5]);
 
         ylabel('OD_2/OD_1');
         %ylabel('OD_1/OD_2');
